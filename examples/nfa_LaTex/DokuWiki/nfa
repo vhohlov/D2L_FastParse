@@ -1,0 +1,163 @@
+===== Nondeterministic Automata =====
+
+==== Motivation ====
+
+In the previous lecture we have investigated the **semantics** of regular expressions and saw that we can determine the language accepted by, e.g. $math[(A\cup B)(a\cup b)*(0 \cup 1)*]. However, given a regular expression $math[e]. we are missing a **computational means** for determining if a given word $math[w] is a member of $math[L(e)], and this is precisely the task of the **lexical stage**.
+
+In more formal terms, we have a //generator// for languages, but we lack a means for //accepting// (the words for) languages.
+
+We shall informally illustrate an algorithm for verifying the membership $math[w \in L((A\cup B)(a\cup b)*(0 \cup 1)*)].
+  * **input:** a word ''w=c1c2 ... cn''.
+  * define a //set of integers// ''s'' . Set ''s={0}''
+  * for each ''ci'' in ''w'':
+    * if ''s=={0}'' and ''ci==A'' or ''ci==B'' then ''s=={1,2}''
+    * if ''1''$math[\in]''s'' and ''ci==a'' or ''ci==b'' then ''s=={1}''
+    * if ''1''$math[\in]''s'' and ''ci==0'' or ''ci==1'' then ''s=={2}''
+    * if ''2''$math[\in]''s'' and ''ci==0'' or ''ci==1'' then ''s=={2}''
+    * otherwise return ''false''
+  * if ''2''$math[\in]''s'' or ''1''$math[\in]''s'' then return ''true''
+    * otherwise return ''false''
+
+The idea underlying the algorithm is the //state variable// ''s''. 
+  * Initially, ''s={0}'', which means that we are at the beginning of the word. If this is so, the first symbol must be ''A'' or ''B'', otherwise the word is not accepted by the regexp. 
+  * After the correct first-symbol was read, we might expect a sequence of ''a''s and ''b''s or a sequence of ''0''s and ''1''s. We do not know that in advance, hence the state variable is ''{1,2}'', modelling this incomplete knowledge.
+  * If ''1'' is a possible current state and we have read ''a'' or ''b'' then the current state is surely ''1''. As long as this is so, we continue to process symbols.
+  * If ''2'' is a possible current state and we have read ''0'' or ''1'' then the current state is surely ''2''. As long as this is so, we continue to process symbols.
+  * If the end of the word has been found while on state ''2'', we stop and report ''true''. In any other situation, we report ''false''.
+
+==== Nondeterministic automata ====
+
+The key idea behind the previous algorithm can be generalised to **any** regular expression. In order to do that, we require the concept of **nondeterministic finite automaton** (NFA). We will soon discover some similarities between NFAs and the previous algorithm.
+
+$def[NFA]
+A **non-deterministic finite automaton** is a tuple $math[M=(K,\Sigma,\Delta,q_0,F)] where:
+  * $math[K] is a finite set of **states**
+  * $math[\Sigma] is an alphabet
+  * $math[\Delta] is a **subset** of $math[K \times \Sigma^* \times K] and is called a **transition relation**
+  * $math[q_0\in K] is **the initial state**
+  * $math[F\subseteq K] is **the set of final states**
+$end
+
+As an example, consider:
+  * $math[K=\{q_0,q_1,q_2\}]
+  * $math[\Sigma=\{0,1\}]
+  * $math[\Delta=\{(q_0,0,q_0),(q_0,1,q_0),(q_0,0,q_1),(q_1,1,q_2)\}]
+  * $math[F = \{q_2\}]
+
+Notice that the NFA gets stuck for certain inputs, i.e. it **does not accept**.
+
+**Graphical notation**
+
+$def[Configuration]
+A **configuration** of an NFA, is a **member** of $math[K\times \Sigma^*].
+$end
+Informally, configurations capture a **snapshot** of the execution of an NFA. The snapshot consists of the:
+  * **current state** of the automaton and
+  * **the rest of the word** from the input.
+
+For instance, $math[(q_0,0001)] is the **initial configuration** of the automaton from our example, on input $math[0001].
+
+$def[Transition]
+We call $math[\vdash_M \subseteq (K\times \Sigma^*) \times (K\times\Sigma^*)] a **one-step** move relation of automaton $math[M]. The relation describes how the automaton **must behave** to reach one configuration from another. Formally: 
+  * $math[(q,w) \vdash_M (q',w')] if and only if there exists $math[u\in\Sigma^*], such that $math[w=uw'] ($math[u] is a prefix of $math[w]) and $math[(q,u,q')\in\Delta]: from state $math[q] on input $math[u] we reach state $math[q'].
+
+We call $math[\vdash_M^*], the **reflexive and transitive closure of** $math[\vdash_M], i.e. the **zero-or-more step(s)** move of automaton $math[M].
+$end
+
+For instance, in our previous example, $math[(q_0,0001)\vdash_M(q_0,001)] and also $math[(q_0,0001)\vdash_M(q_1,001)]. At the same time, $math[(q_0,0001)\vdash_M^*(q_2,\epsilon)]. Can you figure out the sequence of steps?
+
+$prop[Acceptance]
+A word $math[w] is accepted by an NFA $math[M] iff $math[(q_0,w)\vdash_M^*(q,\epsilon)] and $math[q\in F]. In other words, after the word $math[w] was processed by the automaton, we reach a **final state**.
+$end
+
+Notice that the word $math[0001] is indeed accepted by the automaton $math[M] from our example.
+
+$def[Language accepted by an NFA]
+Given an NFA $math[M], we define $math[L(M) = \{w\mid w\text{ is accepted by} M\}] as the language **accepted** by $math[M]. We say $math[M] accepts the language $math[L(M)].
+$end
+
+=== Execution tree for Nondeterministic Finite Automata ===
+
+Illustration of an AFN for $math[(A\cup B)(a\cup b)*(0 \cup 1)*].
+
+There are two ways of writing this automaton:
+  * one that follows exactly our previous algorithm sketch.
+  * one that employs **epsilon transitions**.
+
+**Epsilon transitions** are a means for jumping from a state to another without consuming the input. It is a useful way of defining automata, because it empowers us to **combine** multiple automata procedures.
+
+
+==== Nondeterminism as imperfect information ====
+
+Notice that **nondeterminism** actually refers to our imperfect information regarding the current state of the automaton. **Nondeterminism** means that, after consuming some part (prefix) of a word, //several concrete states may be possible current states//.
+
+==== From Regular Expressions to NFAs ====
+
+While Regular Expressions are a natural instrument for declaring (or generating) tokens, NFAs are a **natural instrument for accepting** tokens (i.e. their respective language).
+
+The following theorem shows how this can be achieved.
+
+$justtheorem
+For every language $math[L(E)] defined by the regular expression $math[E], there exists an NFA $math[M], such that $math[L(M)=L(E)].
+$end
+
+This theorem is particularly important, because it also provides an **algorithm** for constructing NFAs from regular expressions.
+
+$proof
+Let $math[E] be a regular expression. We construct an NFA, with:
+  * **exactly one initial state**.
+  * **exactly one final state**.
+  * **no transitions from the final state**.
+
+The proof is by **induction** over the expression structure.
+
+**Basis case $math[E=\emptyset]**
+
+We construct the following automaton:
+{{:lfa:emptyset.jpg|}}
+
+It is clear that this automaton accepts no word, and obeys the three aforementioned conditions.
+
+**Basis case $math[E=\epsilon]**
+
+We construct the following automaton:
+{{:lfa:emptyword.jpg|}}
+
+hich only accepts the empty word.
+
+**Basis case $math[E=c]** where $math[c] is a symbol of the alphabet.
+
+We construct the following automaton:
+
+{{:lfa:char.jpg|}}
+
+Since regular expressions have three //inductive rules// for constructing regular expressions (union, concatenation and Kleene-star), we have to treat three induction steps:
+
+**Induction step $math[E=E_1E_2] (concatenation)**
+
+Suppose $math[E_1] and $math[E_2] are regular expressions for which NFAs can be built (**induction hypothesis**). We build the following NFA which accepts all words generated by the regular expression $math[E_1E_2].
+
+{{:lfa:concat.jpg|}}
+
+
+**Induction step $math[E=E_1\cup E_2] (union)**
+
+Suppose $math[E_1] and $math[E_2] are regular expressions for which NFAs can be built (**induction hypothesis**). We build the following NFA which accepts all words generated by the regular expression $math[E_1\cup E_2].
+
+{{:lfa:union.jpg|}}
+
+**Induction step $math[E^*] (union)**
+
+Suppose $math[E] is regular expression for which an NFA can be built (**induction hypothesis**). We build the following NFA which accepts all words generated by the regular expression $math[E*].
+
+{{:lfa:kleene.jpg|}}
+
+$end
+
+We illustrate the algorithmic procedure on our regular expression $math[(A\cup B)(a\cup b)*(0 \cup 1)*].
+The result is shown below:
+
+{{:lfa:slide4.jpg|}}
+
+
+

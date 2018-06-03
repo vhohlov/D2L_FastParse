@@ -1,0 +1,389 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[a4paper]{geometry}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{ulem}
+\usepackage{bookmark}
+\usepackage{hyperref}
+\usepackage[table]{xcolor}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{tcolorbox}
+\usepackage{listings}
+\usepackage{minted}
+\graphicspath{ {./media/} }
+\usepackage[export]{adjustbox}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\setlength{\parindent}{0in}
+\newtheorem*{theorem}{Definition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem*{lemma}{Preposition}
+
+\begin{document}
+\section{ Context-Free Grammars }
+
+\subsection{ Motivation }
+
+Regular expressions are \textbf{insufficient} in describing the structure of complicated languages (e.g. programming languages). We recall our previously-used example: \textit{simple arithmetic expressions with parentheses}. 
+
+
+\begin{minted}{text}
+
+<expr> ::= <atom> | <expr> + <expr> | (<expr>)
+
+\end{minted}
+
+
+This language is \textbf{not regular}, however it can be described via a \textit{generator object} called (context-free) \textbf{grammar} (short CFG). 
+
+\begin{theorem}[CFG]
+
+A \textbf{CFG} is a 4-tuple: $G=(V,\Sigma,R,S)$ where:
+  \begin{itemize}
+  	\item  $V$ is a finite set whose elements are called \textbf{non-terminals and terminals}
+  	\item  $\Sigma\subseteq V$ is the set of \textbf{terminals}
+  	\item  $R$ is a \textbf{relation} over $(V\setminus\Sigma)\times V^*$. Here $V\setminus\Sigma$ is the set of \textbf{non-terminals} and $V^*$ is the set of \textbf{words} over $V$. An element of $R$ is called \textbf{production rule}. We explain productions below. 
+  	\item  $S\in V\setminus\Sigma$ is the \textbf{start symbol}.
+  \end{itemize}
+
+
+\end{theorem}
+
+As an example, consider the following CFG $G$, where:
+  \begin{itemize}
+  	\item  $V=\{S\}$
+  	\item  $\Sigma=\{a,b\}$
+  	\item  $R=\{S\rightarrow aSb, S\rightarrow \epsilon\}$
+  \end{itemize}
+
+This grammar contains a \textbf{single} non-terminal $S$, which is also the start symbol. \textbf{Production rules} are written as follows:
+
+$\displaystyle X \rightarrow Y$
+
+where $X$ is a \textbf{non-terminal} and $Y$ is a string containing terminal and non-terminal symbols. Our grammar has two production rules:
+  \begin{itemize}
+  	\item  $S\rightarrow aSb$
+  	\item  $S\rightarrow \epsilon$
+  \end{itemize}
+
+We can also write production rules of the form:
+
+$\displaystyle X \rightarrow Y_1, \ldots X \rightarrow Y_n $
+
+in the more compact form:
+
+$\displaystyle X \rightarrow Y_1 \mid \ldots \mid Y_n $
+
+In our example, we can write:
+
+$S\rightarrow aSb \mid \epsilon$.
+
+As a general \textbf{convention}, we use \textbf{italic uppercase symbols} to designate \textbf{non-terminals}, and \textbf{lowercase symbols} (or occasionally, typewriter symbols e.g. $\texttt{A}$) - for \textbf{terminals}. At the same time, $S$ is always used to designate the \textbf{start-symbol}. Under this convention, we can completely define a grammar by giving the set of productions only. 
+
+For instance, we can define a CFG for expressions as follows:
+
+$S \rightarrow S + S \mid (S) \mid A$
+
+$A \rightarrow UVT$
+
+$U \rightarrow \texttt{A} \mid \ldots \mid \texttt{Z}$
+
+$V \rightarrow LV \mid \epsilon$
+
+$L \rightarrow \texttt{a} \mid \ldots \mid \texttt{z}$
+
+$T \rightarrow DT \mid \epsilon$
+
+$D \rightarrow \texttt{0} \mid \ldots \mid \texttt{1}$
+
+We have preserved the same convention for atoms: they must start with an uppercase, followed by zero-or-more lowercase symbols, and then zero-or-more digits.
+
+(Context-Free) Grammars are the \textbf{corner-stone} for writing parsers.
+
+\subsection{ The language of a CFG }
+
+Let $\alpha A\beta$ and $\alpha\gamma\beta$ be strings from $V^*$, where $A$ is a \textbf{non-terminal}. Also, suppose we have a production $A\rightarrow\gamma$ in a CFG $G$. Then we say:
+
+$\alpha A\beta \Rightarrow_G \alpha\gamma\beta$
+
+and read that $\alpha\gamma\beta$ is a \textbf{one-step derivation} of $\alpha A\beta$. The relation over strings $\Rightarrow_G$ is very similar in spirit to $\vdash_M$. We omit the subscript when the grammar $G$ is understood from context, and write $\Rightarrow^*$ to refer to the \textbf{reflexive and transitive closure of }$\Rightarrow$. $\Rightarrow^*$ is the \textbf{zero-or-more steps derivation} relation.
+
+As an example, consider the grammar for arithmetic expressions, and the following derivation:
+
+$S\Rightarrow (S)\Rightarrow(S+S)\Rightarrow(A+S)\Rightarrow(A+(S+S))\Rightarrow(A+(A+S))\Rightarrow(A+(A+A))$
+
+Hence, we have $S\Rightarrow^*(A+(A+A))$.
+
+Notice that the string $(A+(A+A))$ contains \textbf{non-terminals}.
+One possible derivation for $A$ is:
+
+$A\Rightarrow UVT\Rightarrow \texttt{X}VT\Rightarrow\texttt{X}T\rightarrow\texttt{X}DT\rightarrow\texttt{X0}T\rightarrow\texttt{X0}$
+
+Similarly, we may write derivations that witness:
+$A\Rightarrow^*\texttt{Y}$ and $A\Rightarrow^*\texttt{Z}$.
+
+and finally: $S\Rightarrow^*(A+(A+A))\Rightarrow^*(\texttt{X0}+(\texttt{Y}+\texttt{Z}))$. Notice that $(\texttt{X0}+(\texttt{Y}+\texttt{Z}))$ contains only \textbf{terminal symbols}.
+
+\begin{theorem}[Language of a grammar]
+
+For a CFG $G$, the \textbf{language generated by G} is defined as: $L(G)=\{w\in\Sigma^*\mid S\Rightarrow^*_G w\}$
+
+\end{theorem}
+
+Informally, $L(G)$ is the set of words that be obtained via \textbf{zero-or-more} derivations from $G$.
+
+If a language is generated by a CFG, then it is called a \textbf{context-free language}.
+
+\subsection{ Parse trees }
+
+Informally, a parse tree is an \textit{illustration} of \textit{sequences of derivations}. We illustrate a parse tree for $(A+(A+A))$ below:
+
+\begin{minted}{text}
+
+       S
+    /  |  \
+   (   S   )
+     / | \
+    S  +  S
+    |   / | \
+    A  (  S  )
+        / | \
+       S  +  S
+       |     |
+       A     A
+
+\end{minted}
+
+
+Notice that there is not a \textbf{one-to-one} correspondence between a sequence of derivations and a parse-tree. For instance, we may first derive the left-hand side of \texttt{+}, or the right-hand side. However, a parse-tree uniquely identifies the set of of productions used in the derivation and how they are applied.
+
+The construction rules for parse trees are as follows:
+  \begin{itemize}
+  	\item  \textbf{the root} of the tree is the \textbf{start symbol}
+  	\item  each \textbf{interior node} $X$ having as children nodes $Y_1, \ldots, Y_n$ corresponds to a \textbf{production rule} $X\rightarrow Y_1 \ldots Y_n$
+  	\item  if \textbf{each leaf} is a \textbf{terminal}, then the parse-tree \textbf{yields} a word of $L(G)$.
+  \end{itemize}
+
+For instance, the following parse-tree:
+
+
+\begin{minted}{text}
+
+    S
+  / | \
+ a  S  b
+  / | \
+ a  e  b
+
+\end{minted}
+
+yields the word $aabb$, which is obtained by concatenating each terminal leaf from left to right.
+
+Parse-trees are especially useful for parsing, because they reveal \textbf{the structure} of a parsed program (or word in general). 
+
+It is only natural that we require \textbf{the program structure to be //unique//}. However, it is quite easy to find grammars where \textbf{the same word} has \textbf{different} parse trees as yield.
+
+Consider the following CFG:
+$S \rightarrow S + S \mid S * S \mid \texttt{a}$
+
+and the word: $a+a*a$ has different parse trees:
+
+\begin{minted}{text}
+
+    S
+  / | \
+ S  +  S
+ |   / | \
+ a  S  *  S
+    |     |
+    a     a 
+
+\end{minted}
+
+and
+
+
+\begin{minted}{text}
+
+      S
+    / | \
+   S  *  S
+ / | \   |
+S  + S   a
+|    |
+a    a
+
+\end{minted}
+
+
+Incidentally, these two different \textit{structures} reflect different interpretations of our arithmetic expression. Thus, our grammar is \textbf{ambiguous}. In general, a grammar is ambiguous if there \textbf{exist two different parse trees for the same word}.
+
+To remove ambiguity in our example, it is sufficient to:
+  \begin{enumerate}
+  	\item  include \textbf{precedence-rules} in the grammar;
+  	\item  enforce parsing to proceed \textit{left-to-right};
+  \end{enumerate}
+
+The result is:
+
+$S\rightarrow M + S \mid M$
+
+$M\rightarrow T * M \mid T$
+
+$T\rightarrow a$
+
+The first production rule enforces \textit{left-to-right} parsing. Consider the alternative production:
+$S \rightarrow S + S \mid M$
+
+Via this production, a parse tree might unfold \textit{to the left} ad-infinitum, \textbf{depending on how the parser implementation works}:
+
+
+\begin{minted}{text}
+
+      S
+    / | \
+   S  +  S
+ / | \
+S  +  S
+... 
+
+\end{minted}
+
+
+By instead using:
+
+$S\rightarrow M + S \mid M$, we are requiring that a suitable \textbf{multiplication term} be found at the left of \texttt{+}, while any expression may occur at it's right.
+
+The second production describes \textbf{multiplication terms}. Note that, under this grammar, addition cannot appear within a multiplication term. If this is the case, we need a new production rule which includes parentheses. Can you figure how this modification should be done?
+
+\subsubsection{ Solving ambiguity in general }
+
+Consider another example:
+
+$L = \{a^nb^nc^md^m \mid n,m\geq 1\} \cup \{a^nb^mc^md^n \mid n,m\geq 1\}$
+
+This language contains strings in $L(aa^*bb^*cc^*dd^*)$ where (\texttt{number(a)=number(b)} and \texttt{number(c)=number(d)}) or (\texttt{number(a)=number(d)} and \texttt{number(b)=number(c)}).
+
+One possible CFG is:
+
+$S\rightarrow AB \mid C$
+
+$A\rightarrow aAb \mid ab$
+
+$B\rightarrow cBd \mid cd$
+
+$C\rightarrow aCd \mid aDc$
+
+$D\rightarrow bDc \mid bc$
+
+This CFG is \textbf{ambiguous}: the word $aabbccdd$ has two different parse trees:
+
+\begin{minted}{text}
+
+   S
+ /   \
+A     B
+...  ...
+
+\end{minted}
+
+
+and 
+
+
+\begin{minted}{text}
+
+   S
+   |
+   C
+ / | \
+...  ...
+
+\end{minted}
+
+
+The reason for ambiguity is that in $aabbccdd$ both conditions of the grammar hold (\texttt{number(a)=number(b)=number(c)=number(d)}).
+
+It is not straightforward how ambiguity can be lifted from this grammar. This particular example raises two interesting questions:
+  \begin{itemize}
+  	\item  can we \textbf{automatically} lift ambiguity from any CFG?
+  	\item  how to find an unambiguous grammar for a Context-Free Language?
+  \end{itemize}
+
+We cannot provide a general answer for any of the above questions. In fact:
+
+\textbf{The problem of establishing if a CFG is ambiguous is not decidable}.
+
+Also \textbf{there exist context-free languages for which no unambiguous grammar exists}. Our above example is such a language.
+
+\subsection{ Regular grammars }
+
+\begin{theorem}[Regular grammars]
+
+A grammar is called \textbf{regular} iff \textbf{all its production rules} have \textbf{one of} the following forms:
+
+\end{theorem}
+
+$ X \rightarrow aA$
+
+$ X \rightarrow A$
+
+$ X \rightarrow a$
+
+$ X \rightarrow \epsilon$
+
+where $A,X$ are nonterminals and $a$ is a terminal.
+
+Formally:
+
+$ R\subseteq (V\setminus\Sigma)\times(\Sigma^*((V\setminus\Sigma)\cup\{\epsilon\}))$
+
+Thus:
+  \begin{itemize}
+  	\item  each production rule contains \textbf{at most one non-terminal}
+  	\item  each non-terminal appears as \textit{the last symbol in the production body}
+  \end{itemize}
+
+As it turns out, regular grammars \textbf{precisely capture regular languages}:
+
+$theorem[Regular grammars capture regular languages]
+A language is **regular** iff it is generated by a regular grammar.
+$end
+
+\begin{proof}
+
+Direction $\implies$. Suppose $L$ is a regular language, i.e. it is accepted by a DFA $M=(K,\Sigma,\delta,q_0,F)$. We build a regular grammar $G$ from $M$. Informally, each production of $G$ mimics some transition of $M$. Formally, $G=(V,\Sigma,R,S)$ where:
+  \begin{itemize}
+  	\item  $V = K \cup \Sigma$ - the set of non-terminals is the set of states, and the set of terminals is the set of symbols;
+  	\item  $S = q_0$ - the start-symbol corresponds to the start state;
+  	\item  for each transition $\delta(q,\texttt{c})=p$, we build a production rule $q\rightarrow \texttt{c}p$. For each final state $q\in F$, we build a production rule $q\rightarrow \epsilon$
+  \end{itemize}
+
+The grammar is obviously regular.
+To prove $L(M)=L(G)$, we must show:
+
+for all $w=c_1\ldots c_n\in\Sigma^*$, $(q_0,c_1\ldots c_n)\vdash_M^* (p,\epsilon)$ with $p\in F$, \textbf{iff} $p_0\Rightarrow_G^* c_1\ldots c_np$, where we recall that $p$ is a non-terminal for which the production rule $p\rightarrow \epsilon$ exists.
+
+The above proposition can be easily proven by induction over the length of the word $w$.
+
+Direction $\Leftarrow$. Suppose $G=(V,\Sigma,R,S)$ is a regular grammar. We build an NFA $M=(K,\Sigma,\Delta,q_0,F)$ whose transitions \textit{mimic} production rules:
+  \begin{itemize}
+  	\item  $K = (V\setminus \Sigma) \cup \{p\}$: for each non-terminal in $G$, we build a state in $M$. Additionally, we build a final state.
+  	\item  $q_0 = S$
+  	\item  $F=\{p\}$
+  	\item  for each production rule $A\rightarrow cB$ in $G$, where $B$ is a non-terminal and $c\in\Sigma^*$, we build a transition $(A,c,B)\in\Delta$. Also, for each transition $A\rightarrow c$, with $c\in\Sigma^*$, we build a transition $(A,c,p)\in\Delta$.
+  \end{itemize}
+
+We must prove that:
+
+for all $w=c_1\ldots c_n\in\Sigma^*$, we have $S\Rightarrow_G^* c_1\ldots c_n$ \textbf{iff} $(q_0,c_1\ldots c_n)\vdash_M^*(p,\epsilon)$.
+
+The proof is similar to the above one.
+
+\end{proof}
+
+The theorem also shows that Context-Free Languages are a proper \textbf{superset} of Regular Languages.
+
+\end{document}

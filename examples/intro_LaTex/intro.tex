@@ -1,0 +1,202 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[a4paper]{geometry}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{ulem}
+\usepackage{bookmark}
+\usepackage{hyperref}
+\usepackage[table]{xcolor}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{tcolorbox}
+\usepackage{listings}
+\usepackage{minted}
+\graphicspath{ {./media/} }
+\usepackage[export]{adjustbox}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\setlength{\parindent}{0in}
+\newtheorem*{theorem}{Definition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem*{lemma}{Preposition}
+
+\begin{document}
+\subsection{ Introduction to Programming Paradigms }
+
+\subsubsection{ In how many different ways can we reverse a sequence of integers? }
+
+We start the lecture by looking at three different Java programs which reverse a sequence of integers.
+
+The \textit{C-programmer} style:
+
+\begin{minted}{java}
+
+public class Rev {
+	public static void show (Integer[] v){
+		for (Integer i:v)
+			System.out.println(i);
+	}
+	public static void main (String[] args) {
+		Integer[] v = new Integer[] {1,2,3,4,5,6,7,8,9};
+		int i=0;
+		while (i < v.length/2){
+			int t = v[i];
+			v[i] = v[v.length-1-i];
+			v[v.length-1-i] = t;
+			i++;
+		} 
+		show(v);
+	}
+}
+
+\end{minted}
+
+
+The first approach stores the sequence as an array, and performs reversal in-place, by swapping the first half of the array with the second. The code is \textbf{compact} and fairly \textbf{efficient} in terms of computational complexity. 
+
+The \textit{functional} style:
+
+\begin{minted}{java}
+
+class List {
+	Integer val;
+	List next;
+	public List(Integer val, List next){
+		this.val = val;
+		this.next = next;
+	}
+	@Override
+	public String toString(){
+		if (next == null)
+			return val.toString();
+		return val.toString()+" "+next.toString();
+	}
+}
+public class FuncRev {
+
+	private static List rev(List x, List y){
+		if (x == null)
+			return y;
+		return rev(x.next,new List(x.val,y));
+	}
+	public static List reverse (List l){
+		return rev(l,null);
+	}
+	public static void main (String[] args) {
+		List v = new List(1, new List(2, new List(3, new List(4, new List (5,null)))));
+		System.out.println(reverse(v));
+	}
+}
+
+\end{minted}
+
+
+Unlike the former approach, here the code focuses more on \textbf{input-output}: reversal takes a list (instead of an array), and produces another list. The strategy relies on an auxiliary function \texttt{rev} which uses an accumulator to reverse the list. Both \texttt{rev} and the display function are recursive. However, \texttt{rev} is \textbf{tail-recursive} hence quite efficient.
+
+The \textit{object-oriented} style:
+
+\begin{minted}{java}
+
+import java.util.Iterator;
+
+class RVList<T> implements Iterable<T> {
+	private T[] array;
+
+	public RVList(T[] array){
+		this.array = array;
+	}
+
+	@Override
+	public Iterator<T> iterator() {
+		return new Iterator<T>(){
+			private int crtIndex = array.length - 1;
+
+			@Override
+			public boolean hasNext(){
+				return crtIndex >= 0;
+			}
+
+			@Override
+			public T next(){
+				return array[crtIndex--];
+			} 
+
+			@Override
+			public void remove () {}
+		};
+	}
+}
+
+public class OORev {
+
+	public static void main (String[] args) {
+		String[] s = new String[]{"1", "2", "3", "4", "5", "6"};
+		
+		Iterator<String> r = (new RVList<String>(s)).iterator();
+		while (r.hasNext()){
+			System.out.println(r.next());
+		}
+	}
+}
+
+\end{minted}
+
+
+The final alternative relies on the Java concept of \textbf{iterator} of collections. Informally, a collection of elements has the property that its elements can be \textit{enumerated} or \textit{iterated}. Any such collection is an \texttt{Iterable} (extends the Java interface Iterable). Here, \texttt{RVList} is such an iterable collection, which takes its elements at construction, from an array. \texttt{RVList} is \textbf{generic}, hence its elements can be of any type \texttt{T}. 
+
+The fundamental trait of an \texttt{Iterable} object is that it implements the method \texttt{iterator}, which returns just that. An \textbf{iterator} is an object which allows enumerating all elements of the collection at hand, via the methods \texttt{hasNext} and \texttt{next}. Sometimes (as in the case of a \texttt{Set}) the order is unimportant. Here, the order matters - elements are explored in their reverse order. Technically, the iterator object is an \textbf{anonymous class}.
+
+This alternative focuses on \textbf{list traversal}, and on the \textbf{generality} of the approach. Basically, any Java collection (for which order makes sense) can be transformed to an array (via the \texttt{toArray} method) and subsequently - an \texttt{RVList} which can be traversed in reverse order via its iterator.
+
+\subsubsection{ Why so many reversals? }
+
+The reason for choosing reversal as a running example is that the task is algorithmically trivial: take the sequence of elements of the collection at hand, be it array of list (or anything else), in their \textbf{reverse} order.
+
+However, there are \textbf{many different ways} for implementing reversal, and each makes perfect sense in some setting. Moreover, some of these ways are: \textbf{subtle}, \textbf{conceptually challenging}, and require \textbf{higher skill/knowledge} in operating the programming language at hand. 
+
+Our point, and one of the major objectives of this lecture, is to emphasise that, apart from developing fast and correct algorithms, a task of equal challenge and importance is \textbf{writing down the code}, in the \textbf{suitable programming language}.
+
+We have clear metrics for choosing algorithms. Do we also have metrics for \textbf{code writing}? For instance:
+  \begin{itemize}
+  	\item  legibility
+  	\item  compactness (number of code lines)
+  	\item  ease of use (can other programmers use the code easily)
+  	\item  extensibility (can other programmers add modifications to the code easily)
+  	\item  good documentation
+  \end{itemize}
+
+is a plausible list. While some of these criteria overlap and are difficult to assess objectively, programmers more often than not agree that some programs are \textbf{well-written while others are poor} (w.r.t. some criteria).
+
+\subsubsection{ How many other ways? }
+
+There are many possible variations to our three examples, but a few elements do stand out:
+  \begin{itemize}
+  	\item  the functional style for \textbf{representing a list} in the second example - very akin to Abstract Datatypes
+  	\item  the functional style for reversal - relying on recursion, in the same example
+  	\item  the Object Oriented style for \textbf{traversing a list} in the third example - which although is tightly linked to Java Collections, can be migrated to any other object-oriented language.
+  \end{itemize}
+
+These \textbf{elements of style} are frequently called \textbf{design patterns} - generic ways of writing code, which can be deployed for different implementations. 
+
+Some elements of style may have some common ground, or rely on certain traits of the programming language. These latter are called programming \textbf{paradigms}. For instance, writing programs as recursive functions as well as representing data as ADTs (recall that constructors \textit{are} functions) are both styles of the \textbf{functional} paradigm.
+
+In this lecture, we shall go over the following paradigms:
+  \begin{itemize}
+  	\item  imperative
+  	\item  object oriented
+  	\item  \textbf{functional}
+  	\item  \textbf{logical} (or logic programming)
+  	\item  \textbf{associative} (or rule-based)
+  \end{itemize}
+
+\subsection{ Other questions }
+
+  \begin{itemize}
+  	\item  Is there a \textbf{right} programming language? How to people choose programming languages?
+  	\item  Who invented paradigms? (A history between Lisp vs C)
+  	\item  Relationship between paradigms and programs (one-to-one, one-to-many, many-to-many)
+  	\item  How \textbf{extensible} can programs be?
+  \end{itemize}
+
+\end{document}
