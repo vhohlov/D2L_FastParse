@@ -76,3 +76,13 @@ TODO:
 - Text To Image
 - De terminat media
 - Plugin-uri
+
+# Rulare aplicatie:
+- Build tool: sbt
+- comanda: run {DokuWiki URL}
+
+
+In fisierul "exemple" gasiti output-ul generat la aceasta etapa de implementare pentru urmatoarele pagini:
+http://ocw.cs.pub.ro/ppcarte/doku.php?id=lfa:cfg
+http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:intro
+http://ocw.cs.pub.ro/ppcarte/doku.php?id=lfa:nfa
