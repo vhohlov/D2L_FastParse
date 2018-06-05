@@ -4,7 +4,7 @@
 		module="d2l_fastparse$sources_2.12"
 		revision="1.0"
 		status="integration"
-		publication="20180526160450"
+		publication="20180606022042"
 	/>
 	<configurations>
 		<conf name="compile" visibility="public" description=""/>

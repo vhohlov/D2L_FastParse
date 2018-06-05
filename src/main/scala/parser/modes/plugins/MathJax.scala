@@ -9,12 +9,12 @@ class MathJax extends Plugin {
   override var enabled: Boolean = false
   override var group: Group = Protected
   override var order: Int = 65
-  override var allowedGroups: Array[Group] = Array(Container, Formatting, Protected, Substitution)
+  override var allowedGroups: Array[Group] = Array(Protected, Substitution, Formatting, Container)
   override var label: String = "Mathjax"
 
   override def parser: all.Parser[String] = P(math| mathJax) //log (label)
 
-  def math : Parser[String] = P(_def| prop | proof | theorem |mathLine)
+  def math : Parser[String] = P(_def| prop | proof | theorem | justTheorem |mathLine)
   def mathJax : Parser[String] = P(inline | newline | numberedEnv | unNumberedEnv)
 
 
@@ -61,8 +61,14 @@ class MathJax extends Plugin {
     }
   }
 
-  def theorem = P("$justtheorem" ~ text("$end") ~ "$end").map{
+  def justTheorem = P("$justtheorem" ~ text("$end") ~ "$end").map{
     case (content) => content
+  }
+
+  def theorem = P("$theorem[" ~ text("]") ~ "]" ~ text("$end") ~ "$end").map{
+    case (name, content) => {
+      "\\begin{theorem}[" + name + "]\n" + content + "\n\\end{theorem}"
+    }
   }
 
   def text(s:String) = P(!s ~ (math|content)).rep(1).map{

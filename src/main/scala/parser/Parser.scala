@@ -18,6 +18,7 @@ object Parser {
     "\\usepackage[utf8x]{inputenc}\n" +
     "\\usepackage{amsmath}\n" +
     "\\usepackage{amsthm}\n" +
+    "\\usepackage{amsfonts}\n" + //an extended set of fonts to be used in math
     "\\usepackage{ulem}\n" +
     "\\usepackage{bookmark}\n" +
     "\\usepackage{hyperref}\n" +

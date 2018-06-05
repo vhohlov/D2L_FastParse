@@ -12,10 +12,9 @@ object TextStyle extends Mode{
   var allowedGroups = Array(Formatting, Substitution, Disabled, Protected)
   var label = "TextStyle"
 
-  //content = falseParagraph|content
+  content = parser|content
 
-
-  var parser = P(bold|underline|monospaced|deleted|italic|subscript|suprascript).rep(1).map {
+  def parser = P(bold|underline|monospaced|deleted|italic|subscript|suprascript).map {
     ct => ct.mkString("")
   } //log("textStyle")
 
@@ -53,9 +52,13 @@ object TextStyle extends Mode{
     ct =>"\\textsuperscript{"+ ct + "}"
   }
 
-  def italic = P("//" ~ ctFormat("//") ~ disFormat("//").?) map{
+  def italic = P(enFormat("//", "//") ~ ctFormat("//") ~ disFormat("//")) map{
     ct => "\\textit{"+ ct + "}"
   }
+
+  //  def italic_bug = P("//" ~ ctFormat("//") ~ disFormat("//").?) map{
+  //    ct => "\\textit{"+ ct + "}"
+  //  }
 
 }
 

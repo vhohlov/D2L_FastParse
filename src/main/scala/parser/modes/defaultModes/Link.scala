@@ -128,7 +128,12 @@ object Link extends Mode {
   def linkBreak = P(" " | "\n" | "\t").rep(1)
 
 
-  def email = P("<" ~ (!">" ~ content).rep.! ~ ">").map {
+  def email = P("<" ~ (localPart ~ "@" ~domain).! ~ ">").map {
     case email => "\\href{mailto:" + email + "}{" + email + "}"
   }
+
+  def localPart = P(word|number|CharIn("!#$%&'*+/=?^_`{|}~-")).rep(min = 1, sep = ".")
+
+  def domain = P(((word|number|"-").rep(1) ~ ".").rep(1) ~ CharIn('a' to 'z').rep(min = 2, max = 63))
+
 }
