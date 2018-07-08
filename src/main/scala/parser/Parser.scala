@@ -47,7 +47,7 @@ object Parser {
     //    link = "http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:l02"
     //    link = "http://www.cfvbfbtlotto.com/test_docuwiki/dokuwiki/test"
     //    link = "http://ocw.cs.pub.ro/ppcarte/doku.php?id=aa:intro:rules"
-    //      link = "http://www.cfvbfbtlotto.com/dokuwiki/doku.php?id=wiki:welcome"
+          link = "http://www.cfvbfbtlotto.com/dokuwiki/doku.php?id=wiki:welcome"
     //    link = "http://ocw.cs.pub.ro/ppcarte/doku.php?id=lfa:nfa"
     //    link = "http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:intro"
 
@@ -63,11 +63,11 @@ object Parser {
 
       if (io(link) != None) {
         var input = io.getInput.get
- //       println(input)
+        println(input)
         var D2L = Config.getParser()
 
         D2L.parse(input) match {
-          case Parsed.Success(parsed, _) => io.writeTexSrc(initDoc + parsed + endDoc)
+          case Parsed.Success(parsed, _) => {println(initDoc + parsed + endDoc); io.writeTexSrc(initDoc + parsed + endDoc)}
           case Parsed.Failure(exp, i, extra) => println("Expected:" + exp + " at index " + i + " extra " + extra)
         }
       }
