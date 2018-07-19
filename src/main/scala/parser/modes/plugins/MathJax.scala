@@ -71,7 +71,7 @@ class MathJax extends Plugin {
     }
   }
 
-  def text(s:String) = P(!s ~ (math|content)).rep(1).map{
+  def text(s:String) = P(!s ~ (math|AnyChar)).rep(1).map{
     ctSeq=>ctSeq.mkString("")
   }
 

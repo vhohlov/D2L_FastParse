@@ -37,6 +37,7 @@ trait Mode {
         case "#" => "\\#"
         case "&" => "\\&"
         case "}" => "\\}"
+        case "\\" => "\\textbackslash "
         case _ => char
       }
     }

@@ -1,54 +1,3 @@
-run
-compile   
-run 
-compile   
-run 
-compile   
-run 
-compile   
-run 
-compile 
-run 
-compile 
-run 
-compile 
-run 
-compile 
-run 
-compile 
-run 
-compile 
-run 
-compile
-run 
-compile
-run 
-compile
-run 
-compile
-run 
-compile
-run 
-compile
-run 
-compile
-run 
-compile
-run 
-compile
-run 
-compile
-run 
-compile  
-run 
-compile  
-run 
-compile  
-run 
-compile  
-run 
-compile  
-run 
 compile  
 run 
 compile  
@@ -498,3 +447,54 @@ run http://www.cfvbfbtlotto.com/dokuwiki/doku.php?id=wiki:welcome
 run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:l02
 run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:l01
 compile
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:l02
+run http://www.cfvbfbtlotto.com/dokuwiki/doku.php?id=wiki:welcome
+run http://www.cfvbfbtlotto.com/test_docuwiki/dokuwiki/start
+compile
+run http://www.cfvbfbtlotto.com/test_docuwiki/dokuwiki/start
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:l02
+compile
+System.getProperty("file.encoding") 
+compile -encoding UTF-8
+System.getProperty("file.encoding")
+compile
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:l01
+compile
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:l01
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:l02
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:l03
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:l04
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:l05
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:l06
+compile
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:l07
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:l08
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:l09
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:l02
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=lfa:languages
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:lambda
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:l03
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:l04
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:l05
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:l06
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:l08
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:l09
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=lfa:cfl-prop
+run http://www.cfvbfbtlotto.com/dokuwiki/doku.php?id=wiki:welcome
+compile
+run http://www.cfvbfbtlotto.com/dokuwiki/doku.php?id=wiki:welcome
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:intro
+run http://www.cfvbfbtlotto.com/dokuwiki/doku.php?id=wiki:welcome
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:intro
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:rec
+compile
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:rec
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:l01
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:high
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:l02
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:l03
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:adt
+http://ocw.cs.pub.ro/ppcarte/doku.php?id=lfa:cfl-prop
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=lfa:cfl-prop
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:adt
+run http://www.cfvbfbtlotto.com/dokuwiki/doku.php?id=wiki:welcome

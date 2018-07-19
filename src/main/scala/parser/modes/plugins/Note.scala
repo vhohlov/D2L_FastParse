@@ -27,11 +27,11 @@ class Note extends Plugin {
       var noteConfig = "\\begin{tcolorbox}"
 
       if (noteImportant.contains(noteId))
-        noteConfig += "[colback=yellow!40, colframe=yellow!60]"
+        noteConfig += "[colback=yellow!40, colframe=yellow!60, breakable]"
       else if (noteTip.contains(noteId))
-        noteConfig += "[colback=cyan!5, colframe=cyan!10]"
+        noteConfig += "[colback=cyan!5, colframe=cyan!10, breakable]"
       else if (noteWarning.contains(noteId))
-        noteConfig += "[colback=red!15, colframe=red!30]"
+        noteConfig += "[colback=red!15, colframe=red!30, breakable]"
       else
       //noteClassic is used for a wrong attemp to define a note type
         noteConfig += "[colback=blue!10, colframe=blue!20]"

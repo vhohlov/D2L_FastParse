@@ -18,7 +18,9 @@ object Header extends Mode{
   }//log("header")
 
   //Titlul header-lui nu poate avea \n
-  def title = P(!("\n"|endHeader) ~ content).rep.!
+  def title = P(!("\n"|endHeader) ~ content).rep.map{
+    ctSeq=>ctSeq.mkString("")
+  }
 
   //Intoarce nr de = pentru a determina tipul header ului
   def startHeader = P("=").rep(min = 2).!.map(hType => hType.length)// log()
