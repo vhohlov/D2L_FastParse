@@ -36,16 +36,20 @@ object Parser {
     "\\usepackage{multirow}\n" +
     "\\usepackage{graphicx}\n" +
     "\\usepackage{tcolorbox}\n" +
-//    "\\usepackage{listings}\n" +
     "%loads listings package for general use\n" +
     "%and also avaiable this way inside tcolorbox\n" +
     "\\tcbuselibrary{listings}\n" +
     "%breaks a tcolorbox over pages\n" +
     "\\tcbuselibrary{breakable}\n" +
-    "%used for printing notes at the end of file-under test\n" +
-     "\\usepackage{pagenote}\n" + "" +
-     "\\makepagenote\n" +
-     "\\let\\footnote\\pagenote\n" +
+    "%used for printing notes at the end of file\n" +
+    "%continuous used for one numbering in the whole doc\n" +
+    "\\usepackage[continuous]{pagenote}\n" +
+    "\\makepagenote\n" +
+    "\\let\\footnote=\\pagenote\n" +
+    "%for not counting Notes as a new section\n" +
+    "%\\renewcommand*{\\notedivision}{\\section*{\\notesname}}\n" +
+    "%for not printing sections divisions in Notes\n" +
+    "\\renewcommand*{\\pagenotesubhead}[1]{}" +
     "\\graphicspath{ {./media/} }\n" +
     "\\usepackage[export]{adjustbox}\n" + // To resize images.
     "\\usepackage{graphicx}\n" +          // To import images.
@@ -55,7 +59,7 @@ object Parser {
     "\\newtheorem*{corollary}{Corollary}\n" +
     "\\newtheorem*{lemma}{Preposition}\n\n" +
     "%for warning Overfull \\hbox\n" +
-    "\\hfuzz=5.002pt\n" +
+    "\\hfuzz=50.002pt\n" +
     "%settings for listings env\n" +
     "\\lstset{" +
     "breaklines=true,\n" +
@@ -67,7 +71,7 @@ object Parser {
     "}\n"+
     "\\begin{document}\n"
 
-  var endDoc = "\\printnotes\n\\end{document}"
+  var endDoc = "\\newpage\n\\printnotes\n\\end{document}"
 
   def main(args: Array[String]): Unit = {
 
@@ -96,7 +100,7 @@ object Parser {
         var D2L = Config.getParser()
 
         D2L.parse(input) match {
-          case Parsed.Success(parsed, _) => {println(initDoc + parsed + endDoc); io.writeTexSrc(initDoc + parsed + endDoc)}
+          case Parsed.Success(parsed, _) => {/*println(initDoc + parsed + endDoc);*/ io.writeTexSrc(initDoc + parsed + endDoc)}
           case Parsed.Failure(exp, i, extra) => println("Expected:" + exp + " at index " + i + " extra " + extra)
         }
       }

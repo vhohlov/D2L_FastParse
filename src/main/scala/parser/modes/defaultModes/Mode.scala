@@ -37,6 +37,8 @@ trait Mode {
         case "#" => "\\#"
         case "&" => "\\&"
         case "}" => "\\}"
+        case "^" => "\\textasciicircum "
+        case "|" => "\\textbar"
         case "\\" => "\\textbackslash "
         case _ => char
       }

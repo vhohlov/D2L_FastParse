@@ -4,10 +4,21 @@ import fastparse.all._
 import parser.Group._
 import parser.Parser
 
-/**
-  * Created by vhohlov on 5/15/18.
-  */
-//use  package hyperref
+
+/*Used package:
+* -usepackage{hyperref}
+* -usepackage{pagenote}
+* --used for printing notes at the end of doc
+* --continous option
+* ---for not reseting counter at new sections
+* --makepagenote
+* ---for creating pagenote at the end
+* --\let\footnote=\pagenote
+* ---treat footnote as pagenote
+* --\renewcommand*{\pagenotesubhead}[1]{}
+* ---for not printing sections divisions in Notes
+**/
+
 object Link extends Mode {
   override var group: Group = Substitution
   override var order: Int = 290
@@ -16,15 +27,15 @@ object Link extends Mode {
 
 
   //The protocols supported by dokuwiki default configuration
-  var schemes = P("http" | "https" | "telnet" | "gopher" | "wais" | "ftp" | "ed2k" | "irc" | "ldap")
+  var schemes = P("https" | "http" | "telnet" | "gopher" | "wais" | "ftp" | "ed2k" | "irc" | "ldap")
 
-  //Default interwiki shortcuts
+  //Default interWikiSrc shortcuts
   var interMap = Map(
-    "wp" -> "https://en.wikipedia.org/wiki/",
-    "wpfr" -> "https://fr.wikipedia.org/wiki/",
-    "wpde" -> "https://de.wikipedia.org/wiki/",
-    "wpes" -> "https://es.wikipedia.org/wiki/",
-    "wpmeta" -> "https://meta.wikipedia.org/wiki/",
+    "wp" -> "https://en.wikipedia.org/internalWikiSrc/",
+    "wpfr" -> "https://fr.wikipedia.org/internalWikiSrc/",
+    "wpde" -> "https://de.wikipedia.org/internalWikiSrc/",
+    "wpes" -> "https://es.wikipedia.org/internalWikiSrc/",
+    "wpmeta" -> "https://meta.wikipedia.org/internalWikiSrc/",
     "doku" -> "https://www.dokuwiki.org/",
     "rfc" -> "rfc https://tools.ietf.org/html/rfc",
     "man" -> "http://man.cx/",
@@ -37,22 +48,14 @@ object Link extends Mode {
     "tel" -> "tel:"
   )
 
-  def parser: Parser[String] = P(namedAddress | rawWikiAddress | webLink | email)//.log(label)
-
-  //Parse Interwiki or currentWiki links that don't have adittional link text
-  def rawWikiAddress = P(rawInterWiki | rawWiki).map {
-    link => "\\url{" + link + "}"
-  }
-
-  def rawWiki = P("[[" ~ wiki("]]") ~ "]]")
-  def rawInterWiki = P("[[" ~ interWiki("]]") ~ "]]")
+  def parser: Parser[String] = P(email| namedAddress | rawAddress | autoWebLink)
 
   /*Parse links with aditional link text
   * Prints the link text and stores link in a footnote
   * to not loose the link when printing the pdf
   * Disregard	link descriptions with images -> prints the link directly
-  * */
-  def namedAddress = P(namedWebLink | namedInterWiki | namedWiki).map {
+  */
+  def namedAddress = P(namedWebLink | namedInterWiki | namedInternalWiki).map {
     case (link, description) => {
 
       //description is an image - is ignored and link is printed as raw
@@ -65,74 +68,131 @@ object Link extends Mode {
     }
   }
 
-  def namedWiki = P("[[" ~ wiki("|") ~ "|" ~ description ~ "]]")
+  //Web link that has set a link text
+  def namedWebLink = P("[[" ~ (" "|"\t").rep ~ namedLinkSrc ~ (" "|"\t").rep ~ "|" ~ description ~ "]]")
 
-  def namedInterWiki = P("[[" ~ interWiki("|") ~ "|" ~ description ~ "]]")
+  //link that has description after it
+  //a link is recongized if it has a specified at least the protocol or www
+  def namedLinkSrc = P((pc | www) ~ (!("|") ~ (\ | content)).rep).map{
+    case(linkStart, linkText) => linkStart + linkText.mkString("")
+  }
 
-  //Parse a wiki link from current doku source
-  def wiki(endLink: String) = P(wikiLink(endLink)).map {
+  //Interwiki link that has set a link text
+  def namedInterWiki = P("[[" ~ interWikiSrc("|") ~ "|" ~ description ~ "]]")
+
+  //Internalwiki link that has set a link text
+  def namedInternalWiki = P("[[" ~ internalWikiSrc("|") ~ "|" ~ description ~ "]]")
+
+
+
+  /*Parse links that are in [[ ]] but do not have set link text*/
+  def rawAddress = P(rawWebLink | rawInterWiki | rawInternalWiki).map {
+    link => "\\url{" + link + "}"
+  }
+
+  //a web link also is recognized when is included in [[]]
+  def rawWebLink = P("[[" ~ (" "|"\t").rep ~ rawLinkSrc ~ (" "|"\t").rep ~"]]")
+
+  //a web link is recongized if it has a specified at least the protocol or www
+  def rawLinkSrc = P((pc | www) ~ (!("]]") ~ (\ | content)).rep).map{
+    case(linkStart, linkText) => linkStart + linkText.mkString("")
+  }
+
+  //Interwiki link without link text
+  def rawInterWiki = P("[[" ~ interWikiSrc("]]") ~ "]]")
+
+  //Internalwiki link without link text
+  def rawInternalWiki = P("[[" ~ internalWikiSrc("]]") ~ "]]")
+ 
+
+
+  /*Parse the text that defines a link*/
+  //Parse a internalWikiSrc link from current doku source
+  def internalWikiSrc(endLink: String) = P(wikiLink(endLink)).map {
     //get the address of the current doku source from input
     link => Parser.io.getDokuAddress + link
   }
 
-  /* Parse an interWiki link.
-   * For unknown interWiki shortcut is created a google shearch url
+  /* Parse an interWikiSrc link.
+   * For unknown interWikiSrc shortcut is created a google shearch url
    * with the resource specified in the unknown shortcut
   **/
-  def interWiki(endLink: String) = P(wikiLink(">") ~ ">" ~ wikiLink(endLink)).map {
+  def interWikiSrc(endLink: String) = P(wikiLink(">") ~ ">" ~ wikiLink(endLink)).map {
     case (shortcut, page) => {
 
       //check if shortcut is defined
       if (interMap.contains(shortcut))
         interMap(shortcut) + page
       else
-      //shearch for wiki on google
+      //search for internalWikiSrc on google
         interMap("go") + page + "&btnI=lucky"
     }
   }
-  //links grammar allowed between interWiki and wiki sources
-  def wikiLink(s: String) = P(!(s | "]]") ~ content).rep.!
 
-  //Link description
-  //Returns None for description with image
-  //Reurns Some(description) for text
-  def description = P(image | text)
+  //grammar for interWiki and internalWiki links content
+  def wikiLink(s: String) = P(!(s | "]]") ~ (\ | content)).rep.map{
+    ctSeq => ctSeq.mkString("")
+  }
+
+
+  /*Link description
+  *Returns None for description with image
+  *Returns Some(description) for text
+  **/
+  def description = P(image | text) //.log("description")
 
   //Identify image format in link description
   def image = P("{{" ~ (!("}}") ~ content).rep ~ "}}" ~ &("]]")).map(_ => None)
   //Indentify text in link description
-  def text = P(!("]]") ~ content).rep.!.map(text => Some(text))
+  def text = P(!("]]") ~  content).rep.map(text => Some(text.mkString("")))
 
-  //URL specified with description
-  def namedWebLink = P("[[" ~ ((pc | www) ~ namedLink).! ~ "|" ~ description ~ "]]")
 
   //URL recognized automagically by dokuWiki
-  def webLink = P((pc | www) ~ link).map {
+  def autoWebLink = P((pc | www) ~ autoLinkSrc).map {
     case (prefix, link) => "\\url{" + prefix + link + "}"
   }
 
-  //link with protocol is specified -> www is optional
-  def pc = P(schemes ~ "://" ~ "www.".?).!
+  //Web link that does not have description after it
+  //must contain at least two strings separated by dots
+  def autoLinkSrc = P(!(" " | "\n" | "\t") ~ (\ | content)).rep(min = 2, sep = ".").map{
+    ctSeq => ctSeq.mkString("")}
+
+
+  //link with protocol specified -> www is optional
+  def pc = P(schemes ~ "://".log("://") ~ "www".?).! //.log("protocol")
 
   //www is specified -> protocol is optional
-  def www = P((schemes ~ "://").? ~ "www.").!
+  def www = P((schemes ~ "://").? ~ "www").!
 
-  //link that does not have description after it
-  //must contain at least two strings separated by dots
-  def link = P(!linkBreak ~ content).rep(min = 2, sep = ".").!
-
-  //link that has description after it
-  //must contain at least two strings separated by dots
-  def namedLink = P(!(linkBreak | "|" | "]]") ~ content).rep(min = 2, sep = ".").!
-
-  def linkBreak = P(" " | "\n" | "\t").rep(1)
+  //in links \ must be escaped with \\ and not \textbackslash
+  def \ = P("\\").map(_ => "\\\\")
 
 
-  def email = P("<" ~ (localPart ~ "@" ~domain).! ~ ">").map {
+  /*Identifies an mail link*/
+  def email = P(emailNote | emailDirect)
+
+  //email that has a description text
+  def emailNote = P("[[mailto:" ~ emailSrc ~ "|" ~ description ~ "]]").map{
+    case (email, description) => {
+
+    //description is an image - is ignored and email is printed directly
+    if (description.isEmpty)
+      "\\href{mailto:" + email + "}{" + email + "}"
+    //description is text
+    else
+      "\\texttt{" + description.get + "} \\footnote{\\href{mailto:" + email + "}{" + email + "}}"
+    }
+  }
+
+  //email defined betwween <>
+  def emailDirect = P("<" ~ emailSrc ~ ">").map {
     case email => "\\href{mailto:" + email + "}{" + email + "}"
   }
 
-  def localPart = P(word|number|CharIn("!#$%&'*+/=?^_`{|}~-")).rep(min = 1, sep = ".")
+  //the part of text defining the email address
+  def emailSrc = P(localPart ~ "@" ~ domain).!
+
+  def localPart = P(word|number|CharIn(".!#$%&'*+/=?^_`{|}~-")).rep(1)
 
   def domain = P(((word|number|"-").rep(1) ~ ".").rep(1) ~ CharIn('a' to 'z').rep(min = 2, max = 63))
 

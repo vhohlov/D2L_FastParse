@@ -6,6 +6,7 @@ import parser.Group._
 
 //use  amsmath for *env
 class MathJax extends Plugin {
+
   override var enabled: Boolean = false
   override var group: Group = Protected
   override var order: Int = 65

@@ -210,7 +210,7 @@ class RemoteIO extends IO {
     try {
 
       //main Src Directry
-      localRepoPath = ("./" + file + "_LaTex").toFile.createIfNotExists(true)
+      localRepoPath = ("./tests/" + file + "_LaTex").toFile.createIfNotExists(true)
 
       //create DokuWiki src directory
       (s"$localRepoPath/DokuWiki").toFile.createIfNotExists(true)

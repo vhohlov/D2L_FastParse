@@ -39,7 +39,7 @@ object Code extends Mode{
   //element on indented code
   def indentElem = P(("\n"|Start) ~ " ".rep(min = 2) ~ indentContent)
   //get all source chars that are found until the end of indented code element
-  def indentContent = P(!"\n" ~ srcCode).rep.map{
+  def indentContent = P(!"\n" ~ srcCode).rep(1).map{
     ctSeq=>ctSeq.mkString("")
   }
   def indentEnd = P("\n"|End)

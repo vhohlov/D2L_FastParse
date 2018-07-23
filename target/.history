@@ -1,39 +1,3 @@
-compile  
-run 
-compile  
-run 
-compile  
-run 
-compile   
-run 
-compile   
-run 
-compile   
-run 
-compile   
-compile
- 
-compile
-run 
-compile
-run 
-compile
-run 
-compile
-run 
-compile
-run 
-compile
-run 
-compile
-compile  
-compile 
-run 
-compile 
-run 
-compile 
-run 
-compile   
 run 
 compile   
 run 
@@ -498,3 +462,39 @@ http://ocw.cs.pub.ro/ppcarte/doku.php?id=lfa:cfl-prop
 run http://ocw.cs.pub.ro/ppcarte/doku.php?id=lfa:cfl-prop
 run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:adt
 run http://www.cfvbfbtlotto.com/dokuwiki/doku.php?id=wiki:welcome
+compile
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:adt
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=lfa:cfl-prop
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:l03
+run http://www.cfvbfbtlotto.com/dokuwiki/doku.php?id=wiki:welcome
+run http://www.cfvbfbtlotto.com/test_docuwiki/dokuwiki/wiki_inside_wiki/test
+compile
+run http://www.cfvbfbtlotto.com/test_docuwiki/dokuwiki/wiki_inside_wiki/test
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:team
+run http://www.cfvbfbtlotto.com/test_docuwiki/dokuwiki/wiki_inside_wiki/test
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:team
+compile
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:team
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:intro
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:l03
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:types
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:c06
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:polymorphism
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:c09
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:lambda
+compile
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:team
+run http://www.cfvbfbtlotto.com/dokuwiki/doku.php?id=wiki:welcome
+run http://www.cfvbfbtlotto.com/test_docuwiki/dokuwiki/wiki_inside_wiki/test
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:team
+run http://www.cfvbfbtlotto.com/test_docuwiki/dokuwiki/wiki_inside_wiki/test
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:team
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:intro
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:rec
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:l01
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:l03
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:types
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:adt
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:l04
+run http://ocw.cs.pub.ro/ppcarte/doku.php?id=pp:polymorphism
+run ocw.cs.pub.ro/ppcarte/doku.php?id=pp:c07

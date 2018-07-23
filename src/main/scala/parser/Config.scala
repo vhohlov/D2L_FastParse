@@ -11,7 +11,7 @@ import parser.modes.plugins._
 object Config {
 
   //modurile dokuwiki din care va fi creat parserul
-  var modeArray = ArrayBuffer(Code, Base, Header, TextStyle, List, Unformatted, Link, Quoting, Footnote, Media)
+  var modeArray = ArrayBuffer(Code, Base, Header, TextStyle, List, Unformatted, Link, Quoting, Footnote, Media, LineBreak)
 
   //var modeArray = ArrayBuffer(Base, Media)
 
