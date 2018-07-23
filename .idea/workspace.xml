@@ -1,30 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="03aab198-7cd1-462f-8e35-45417cefa10f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/scala-2.12/classes/parser/Config$.class" afterPath="$PROJECT_DIR$/target/scala-2.12/classes/parser/Config$.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/scala-2.12/classes/parser/IO/RemoteIO.class" afterPath="$PROJECT_DIR$/target/scala-2.12/classes/parser/IO/RemoteIO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/scala-2.12/classes/parser/Parser$.class" afterPath="$PROJECT_DIR$/target/scala-2.12/classes/parser/Parser$.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/scala-2.12/classes/parser/modes/defaultModes/Code$.class" afterPath="$PROJECT_DIR$/target/scala-2.12/classes/parser/modes/defaultModes/Code$.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/scala-2.12/classes/parser/modes/defaultModes/Code.class" afterPath="$PROJECT_DIR$/target/scala-2.12/classes/parser/modes/defaultModes/Code.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/scala-2.12/classes/parser/modes/defaultModes/Link$.class" afterPath="$PROJECT_DIR$/target/scala-2.12/classes/parser/modes/defaultModes/Link$.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/scala-2.12/classes/parser/modes/defaultModes/Link.class" afterPath="$PROJECT_DIR$/target/scala-2.12/classes/parser/modes/defaultModes/Link.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/scala-2.12/classes/parser/modes/defaultModes/Mode.class" afterPath="$PROJECT_DIR$/target/scala-2.12/classes/parser/modes/defaultModes/Mode.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/scala-2.12/classes/parser/modes/defaultModes/Unformatted$.class" afterPath="$PROJECT_DIR$/target/scala-2.12/classes/parser/modes/defaultModes/Unformatted$.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/scala-2.12/classes/parser/modes/plugins/MathJax.class" afterPath="$PROJECT_DIR$/target/scala-2.12/classes/parser/modes/plugins/MathJax.class" />
+    <list default="true" id="03aab198-7cd1-462f-8e35-45417cefa10f" name="Default" comment="  - added object for LineBreak&#10;  - repaired bugs in Links&#10;  - added emails with description&#10;  - added and configured pagenote package for showing notes at the end of document">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/scala/parser/modes/defaultModes/LineBreak.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/parser/Config.scala" afterPath="$PROJECT_DIR$/src/main/scala/parser/Config.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/parser/IO/RemoteIO.scala" afterPath="$PROJECT_DIR$/src/main/scala/parser/IO/RemoteIO.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/parser/Parser.scala" afterPath="$PROJECT_DIR$/src/main/scala/parser/Parser.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/parser/modes/defaultModes/Code.scala" afterPath="$PROJECT_DIR$/src/main/scala/parser/modes/defaultModes/Code.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/parser/modes/defaultModes/Link.scala" afterPath="$PROJECT_DIR$/src/main/scala/parser/modes/defaultModes/Link.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/parser/modes/defaultModes/Mode.scala" afterPath="$PROJECT_DIR$/src/main/scala/parser/modes/defaultModes/Mode.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/parser/modes/plugins/MathJax.scala" afterPath="$PROJECT_DIR$/src/main/scala/parser/modes/plugins/MathJax.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/.history" afterPath="$PROJECT_DIR$/target/.history" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/streams/compile/compileIncremental/$global/streams/export" afterPath="$PROJECT_DIR$/target/streams/compile/compileIncremental/$global/streams/export" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/streams/compile/compileIncremental/$global/streams/out" afterPath="$PROJECT_DIR$/target/streams/compile/compileIncremental/$global/streams/out" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/streams/compile/incCompileSetup/$global/streams/inc_compile_2.12" afterPath="$PROJECT_DIR$/target/streams/compile/incCompileSetup/$global/streams/inc_compile_2.12" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/streams/compile/run/$global/streams/out" afterPath="$PROJECT_DIR$/target/streams/compile/run/$global/streams/out" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -799,12 +778,18 @@
       <option name="project" value="LOCAL" />
       <updated>1532038801850</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="  - added object for LineBreak&#10;  - repaired bugs in Links&#10;  - added emails with description&#10;  - added and configured pagenote package for showing notes at the end of document">
+      <created>1532386660755</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1532386660755</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="0" width="1368" height="768" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -818,7 +803,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" show_stripe_button="true" weight="0.24517088" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="1170" y="1" width="196" height="767" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32886904" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36363637" sideWeight="0.49425286" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36363637" sideWeight="0.49425286" order="0" side_tool="false" content_ui="combo" />
       <window_info id="SOQL Query" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="ANTLR Preview" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -872,7 +857,8 @@
     <MESSAGE value=" - fixed bug with emails&#10;   - now an email must respect the mail format, not just be between tags &quot;&lt;&gt;&quot;&#10; - fixed bug with textStyle&#10; - added LaTex package asmfonts, for an extented set of fonts used in math" />
     <MESSAGE value="added support for note plugin" />
     <MESSAGE value="- added support for greek characters &#10;  - now can be printed in their raw form &#10;- code&#10;  - used tcblistings in place of minted(and verbatim)&#10;  - allows to print code in tcolorboxes that is formatted ok&#10;  - break the line in case it exceeds the \textwidth&#10;  - special chars(accents and greek letters) are excaped with &amp;&amp;&#10;  - moved all footnotes to last page (this way tcoloboxes inside tcolorboxes did not crash)&#10; -Unformatted&#10;   - \verb is not used anymore because it does not work inside other envs(that is widely used)&#10;   - now the chars are printed as they are, and latex special chars are escaped" />
-    <option name="LAST_COMMIT_MESSAGE" value="- added support for greek characters &#10;  - now can be printed in their raw form &#10;- code&#10;  - used tcblistings in place of minted(and verbatim)&#10;  - allows to print code in tcolorboxes that is formatted ok&#10;  - break the line in case it exceeds the \textwidth&#10;  - special chars(accents and greek letters) are excaped with &amp;&amp;&#10;  - moved all footnotes to last page (this way tcoloboxes inside tcolorboxes did not crash)&#10; -Unformatted&#10;   - \verb is not used anymore because it does not work inside other envs(that is widely used)&#10;   - now the chars are printed as they are, and latex special chars are escaped" />
+    <MESSAGE value="  - added object for LineBreak&#10;  - repaired bugs in Links&#10;  - added emails with description&#10;  - added and configured pagenote package for showing notes at the end of document" />
+    <option name="LAST_COMMIT_MESSAGE" value="  - added object for LineBreak&#10;  - repaired bugs in Links&#10;  - added emails with description&#10;  - added and configured pagenote package for showing notes at the end of document" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
