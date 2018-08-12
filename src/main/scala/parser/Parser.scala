@@ -41,6 +41,8 @@ object Parser {
     "\\tcbuselibrary{listings}\n" +
     "%breaks a tcolorbox over pages\n" +
     "\\tcbuselibrary{breakable}\n" +
+    "%for printing theorems\n" +
+    "\\tcbuselibrary{theorems}" +
     "%used for printing notes at the end of file\n" +
     "%continuous used for one numbering in the whole doc\n" +
     "\\usepackage[continuous]{pagenote}\n" +
@@ -55,9 +57,6 @@ object Parser {
     "\\usepackage{graphicx}\n" +          // To import images.
     "\\usepackage{wrapfig}\n" +
     "\\setlength{\\parindent}{0in}\n" +
-    "\\newtheorem*{theorem}{Definition}\n" +
-    "\\newtheorem*{corollary}{Corollary}\n" +
-    "\\newtheorem*{lemma}{Preposition}\n\n" +
     "%for warning Overfull \\hbox\n" +
     "\\hfuzz=50.002pt\n" +
     "%settings for listings env\n" +
@@ -69,6 +68,15 @@ object Parser {
     "xleftmargin=10pt,\n" +
     "escapeinside=&&\n" +
     "}\n"+
+    "\\newtcbtheorem{_def}{Definition}{breakable}{df}\n"+
+    "\\newtcbtheorem{prop}{Proposition}{breakable}{prp}\n" +
+    "\\newtcbtheorem{_proof}{Proof}{breakable}{prf}\n"+
+    "\\newtcbtheorem{remark}{Remark}{breakable}{rmk}\n" +
+    "\\newtcbtheorem{example}{Example}{breakable}{exp}\n" +
+    "\\newtcbtheorem{theorem}{Theorem}{breakable}{th}\n" +
+    "\\newtcbtheorem{exercise}{Exercise}{breakable}{exer}\n" +
+    "\\newtcbtheorem{solution}{Solution}{breakable}{sol}\n" +
+    "\\newtcbtheorem{algorithm}{Algorithm}{breakable}{alg}\n" +
     "\\begin{document}\n"
 
   var endDoc = "\\newpage\n\\printnotes\n\\end{document}"
@@ -96,11 +104,11 @@ object Parser {
 
       if (io(link) != None) {
         var input = io.getInput.get
-        //println(input)
+        println(input)
         var D2L = Config.getParser()
 
         D2L.parse(input) match {
-          case Parsed.Success(parsed, _) => {/*println(initDoc + parsed + endDoc);*/ io.writeTexSrc(initDoc + parsed + endDoc)}
+          case Parsed.Success(parsed, _) => {println(initDoc + parsed + endDoc); io.writeTexSrc(initDoc + parsed + endDoc)}
           case Parsed.Failure(exp, i, extra) => println("Expected:" + exp + " at index " + i + " extra " + extra)
         }
       }

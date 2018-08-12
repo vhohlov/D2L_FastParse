@@ -15,15 +15,16 @@ object Config {
 
   //var modeArray = ArrayBuffer(Base, Media)
 
-  var pluginEnable = ArrayBuffer("Color", "MathJax", "Note")
+  var pluginEnable = ArrayBuffer("Color", "MathJax", "Note", "Macros")
 
   def enablePlugins() = {
 
     for(plugin <- pluginEnable){
       plugin match {
-        case "Color" => modeArray.append(new Color)
-        case "MathJax" => modeArray.append(new MathJax)
-        case "Note" => modeArray.append(new Note)
+        case "Color"    => modeArray.append(new Color)
+        case "MathJax"  => modeArray.append(new MathJax)
+        case "Note"     => modeArray.append(new Note)
+        case "Macros"   => modeArray.append(new Macros)
       }
     }
   }
@@ -36,11 +37,11 @@ object Config {
     modeArray = modeArray.sortWith(_.order > _.order)
 
     for (mode <- modeArray) {
-//      println("Mode that is configured:" + mode.label)
+    //  println("Mode that is configured:" + mode.label)
       for (allowedMode <- modeArray) {
         if (mode.allowedGroups.contains(allowedMode.group)
               && mode.label != allowedMode.label) {
-//          println("Add accepted mode to " + mode.label +": " + allowedMode.label)
+         // println("Add accepted mode to " + mode.label +": " + allowedMode.label)
           mode.addMode(allowedMode.parser)
         }
       }

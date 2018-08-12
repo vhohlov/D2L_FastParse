@@ -18,8 +18,10 @@ object Media extends Mode {
 
   override def parser = image
 
-  def image = P("{{" ~ s ~ src ~ skipParams ~ title.? ~ "}}").map {
+  def image = P("{{" ~ s.? ~ src ~ skipParams ~ title.? ~ "}}").map {
     case (src, valid, _, title) => {
+  //    println("s:!" + src +"!end")
+  //    println("s:!" + valid +"!end")
       var latexMedia = ""
 
       if (valid == true) {
@@ -46,9 +48,9 @@ object Media extends Mode {
       latexMedia
     }
 
-  }
+  }//.log("image")
 
-  def skipParams = P(!("|" | "}}") ~ content).rep
+  def skipParams = P(!("|" | "}}") ~ content).rep//.log("skip")
 
   def params = P("?" ~ linking.? ~ "&".? ~ size.?)
 
@@ -59,18 +61,18 @@ object Media extends Mode {
   def title = P("|" ~ (!"}}" ~ content).rep.!)
 
 
-  def src = P((!"." ~ content).rep(1).! ~ "." ~ (!srcEnd ~ content).rep(1).!).map {
+  def src = P((!"." ~ content).rep(1).! ~ "." ~ (!(srcEnd|s) ~ content).rep(1).!).map {
     case (name, format) => {
       if (allowedMedia.contains(format))
         (name + "." + format, true)
       else
         (name + "." + format, false)
     }
-  }
+  }//.log("src")
 
   def srcEnd = P("}}" | "?" | "|")
 
-  def s = P(" " | "\t").rep
+  def s = P(" " | "\t").rep(1)
 
 
   //pentru fisierele care nu pot fi afisate, se creaza link unde pot fi gasite

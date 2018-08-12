@@ -40,10 +40,10 @@ object List extends Mode {
   def indent = P(spaceIndent | tabIndent)
 
   //un element de lista e indentat cu minim 2 spatii
-  def spaceIndent = P(" ").rep(min = 2).!.map(indent => indent.length)
+  def spaceIndent = P(" ").rep(min = 2).!.map(indent => indent.length - 2)
 
   //Un tab e considerat echivalent cu 2 spatii
-  def tabIndent = P("\t").rep(min = 1).!.map(indent => indent.length * 2)
+  def tabIndent = P("\t").rep(min = 1).!.map(indent => indent.length * 2 - 2)
 
   //tipul listei
   def tag = P("*" | "-").!
@@ -151,7 +151,7 @@ object List extends Mode {
 
 
   def item(indent: Int, content: String): String = {
-    " " * indent + "\t\\item" + " " + content + "\n"
+    " " * indent  + "\t\\item" + " " + content + "\n"
   }
 
 }

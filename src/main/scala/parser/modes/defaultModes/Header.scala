@@ -7,7 +7,7 @@ import parser.Group._
 object Header extends Mode{
 
   var group = BaseOnly
-  var allowedGroups = Array()
+  var allowedGroups = Array(Substitution, Protected)
   var order = 50
   var label ="Header"
   var toc = 0

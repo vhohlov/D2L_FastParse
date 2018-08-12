@@ -172,7 +172,7 @@ object Link extends Mode {
   def email = P(emailNote | emailDirect)
 
   //email that has a description text
-  def emailNote = P("[[mailto:" ~ emailSrc ~ "|" ~ description ~ "]]").map{
+  def emailNote = P("[[" ~ "mailto:".? ~ emailSrc ~ "|" ~ description ~ "]]").map{
     case (email, description) => {
 
     //description is an image - is ignored and email is printed directly
@@ -184,7 +184,7 @@ object Link extends Mode {
     }
   }
 
-  //email defined betwween <>
+  //email defined between <>
   def emailDirect = P("<" ~ emailSrc ~ ">").map {
     case email => "\\href{mailto:" + email + "}{" + email + "}"
   }

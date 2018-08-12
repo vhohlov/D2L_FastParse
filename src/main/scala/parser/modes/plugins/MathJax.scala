@@ -13,23 +13,19 @@ class MathJax extends Plugin {
   override var allowedGroups: Array[Group] = Array(Protected, Substitution, Formatting, Container)
   override var label: String = "Mathjax"
 
-  override def parser: all.Parser[String] = P(math| mathJax) //log (label)
-
-  def math : Parser[String] = P(_def| prop | proof | theorem | justTheorem |mathLine)
-  def mathJax : Parser[String] = P(inline | newline | numberedEnv | unNumberedEnv)
-
+  override def parser: all.Parser[String] = P(inline | newline | numberedEnv | unNumberedEnv)//.log("Mathjax")
 
   def inline = P(inline_$ | inline_p)
 
-  def inline_$ = P("$" ~ (!"$" ~ content).rep ~ "$").!
+  def inline_$ = P("$" ~ mathText("$")~ "$").!
 
-  def inline_p = P("\\(" ~ (!"\\)" ~ content).rep ~ "\\)").!
+  def inline_p = P("\\(" ~ mathText("\\)") ~ "\\)").!
 
   def newline = P(newline_$$ | newline_p)
 
-  def newline_$$ = P("$$" ~ (!"$" ~ content).rep ~ "$$").!
+  def newline_$$ = P("$$" ~ mathText("$") ~ "$$").!
 
-  def newline_p = P("\\[" ~ (!"\\]" ~ content).rep ~ "\\]").!
+  def newline_p = P("\\[" ~ mathText("\\]") ~ "\\]").!
 
 
   def numberedEnv = env("align") | env("alignat") | env("eqnarray") | env("equation") |
@@ -38,42 +34,13 @@ class MathJax extends Plugin {
   def unNumberedEnv = env("align*") | env("alignat*") | env("eqnarray*") | env("equation*") |
     env("flalign*") | env("gather*") | env("multline*")
 
-  def env(envType: String) = P(s"\\begin{$envType}" ~ (!"\\end" ~ content).rep ~ s"\\end{$envType}").!
+  def env(envType: String) = P(s"\\begin{$envType}" ~ mathText("\\end") ~ s"\\end{$envType}").!
+
+  def mathText(s:String) = P(!s ~ AnyChar).rep(1)
 
 
-  def mathLine = P("$math[" ~ (!"]" ~ content).rep.! ~ "]").map(math => "$" + math + "$")
-
-
-  def _def = P("$def[" ~ text("]") ~ "]" ~ text("$end") ~ "$end").map{
-    case (name, content) => {
-      "\\begin{theorem}[" + name + "]\n" + content + "\n\\end{theorem}"
-    }
-  }
-
-  def prop = P("$prop[" ~ text("]") ~ "]" ~ text("$end") ~ "$end").map{
-    case (name, content) => {
-      "\\begin{lemma}[" + name + "]\n" + content + "\n\\end{lemma}"
-    }
-  }
-
-  def proof = P("$proof" ~ text("$end") ~ "$end").map{
-    case (content) => {
-      "\\begin{proof}\n" + content + "\n\\end{proof}"
-    }
-  }
-
-  def justTheorem = P("$justtheorem" ~ text("$end") ~ "$end").map{
-    case (content) => content
-  }
-
-  def theorem = P("$theorem[" ~ text("]") ~ "]" ~ text("$end") ~ "$end").map{
-    case (name, content) => {
-      "\\begin{theorem}[" + name + "]\n" + content + "\n\\end{theorem}"
-    }
-  }
-
-  def text(s:String) = P(!s ~ (math|AnyChar)).rep(1).map{
-    ctSeq=>ctSeq.mkString("")
-  }
-
+//  def mathText(s:String) = P(!s ~ (supraAsterix|content)).rep(1).!.map{
+//    ctSeq=>ctSeq.mkString("")
+//  }
+//  def supraAsterix = P("^∗").map(_=>"^{∗}")
 }

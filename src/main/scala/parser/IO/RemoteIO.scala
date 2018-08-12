@@ -227,7 +227,7 @@ class RemoteIO extends IO {
   }
 
   def writeMedia(file: String) = {
-
+    println("file to get: " + serverPath.get + media + file);
     try {
       val resp: HttpResponse[Array[Byte]] = Http(serverPath.get + media + file).asBytes
       var path: File = (s"$localRepoPath/media/$file").toFile.createIfNotExists()
