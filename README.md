@@ -65,17 +65,10 @@ In momentul de fata urmatoarele moduri functioneaza :
   - identifica toate tipurile de linkuri(www, wiki curent, wiki shortcuts)
   - Pentru linkuri cu text descriptiv,  afiseaza in pagina textul si creaza un footnote cu linkul specificat 
 - Media
-  - Nu e functional 100%
 - Color Plugin
 - MathJax plugin
 - Math plugin
   -Pentru teoreme, definitii, si proof va fi folosit package-ul tcolorbox pentru afisarea placuta a acestor elemente
-
-TODO:
-- Tabele
-- Text To Image
-- De terminat media
-- Plugin-uri
 
 # Rulare aplicatie:
 - Build tool: sbt
