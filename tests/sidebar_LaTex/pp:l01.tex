@@ -1,0 +1,363 @@
+\section*{ Haskell: Introducere }
+
+Scopul acestui laborator este a de familiariza studenții cu limbajul Haskell.
+
+\subsection*{ Introducere }
+
+Haskell este un limbaj de programare \texttt{pur-funcțional} \footnote{\url{https://en.wikipedia.org/wiki/Functional\_programming}}. În limbajele imperative, programele sunt secvențe de instrucțiuni pe care calculatorul le execută ținând cont de stare, care se poate modifica în execuție. În limbajele funcționale nu există o stare, iar funcțiile nu au efecte secundare (e.g. nu pot modifica o variabilă globală), garantând că rezultatul depinde doar de argumentele date: aceeași funcție apelată de două ori cu aceleași argumente, întoarce același rezultat. Astfel, demonstrarea corectitudinii unui program este mai facilă.
+
+\subsection*{ Platforma Haskell }
+
+Pentru început, avem nevoie de un mod de a compila cod. Puteți descărca platforma Haskell de \texttt{aici} \footnote{\url{https://www.haskell.org/platform}} (Windows/OS X/Linux) sau puteți instala pachetul "ghc".
+
+Vom lucra în modul interactiv, care ne permite să apelăm funcții din consolă și să vedem rezultatul lor. Putem să încărcăm și fișiere cu fragmente de cod din care să apelăm funcții definite de noi. 
+
+Pentru modul interactiv, rulați "ghci". Ar trebui să vedeți ceva asemănător:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+GHCi, version 7.10.3: http://www.haskell.org/ghc/  :? for help
+Prelude> 
+
+\end{tcblisting}
+
+
+\textasciicircum  Comenzi folositoare în ghci: \textasciicircum \textasciicircum 
+\textasciicircum  Comandă \textasciicircum  Efect \textasciicircum 
+\textbar:l \textit{filename} \textbar încarcă un fișier din directorul din care e rulat ghci \textbar
+\textbar:r \textbar reîncarcă ultimului fișier încărcat \textbar
+\textbar:t \textit{expresie} \textbar afișează tipul expresiei \textbar
+\textbar:? \textbar afișează meniul de help cu comenzile disponibile \textbar
+\textbar:q \textbar închide ghci \textbar
+
+\subsection*{ Tipuri de date în Haskell }
+
+Haskell este un limbaj tipat static (\texttt{statically typed} \footnote{\url{http://wiki.c2.com/?StaticTyping}}) care poate face inferență de tip (\texttt{type inference} \footnote{\url{https://en.wikipedia.org/wiki/Type\_inference}}). Asta înseamnă că tipul expresiilor este cunoscut la \textit{compilare}; dacă nu este explicit, compilatorul îl \textit{deduce}. Deasemenea, Haskell este tare tipat (\texttt{strongly typed} \footnote{\url{https://en.wikipedia.org/wiki/Strong\_and\_weak\_typing}}), ceea ce înseamnă că trebuie să existe conversii explicite între diferite tipuri de date.
+
+\subsubsection*{ Tipuri de bază }
+
+Haskell are tipuri asemănătoare celor din alte limbaje studiate până acum, ca C, Java etc: Int, Integer (întregi de dimensiune arbitrară), Float, Double, Char (cu apostrofuri, e.g. 'a'), Bool.
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+Prelude> :t 'a'
+'a' :: Char
+Prelude> :t True
+True :: Bool
+Prelude> :t 0 == 1
+0 == 1 :: Bool
+Prelude> :t 42
+42 :: Num a => a
+
+\end{tcblisting}
+
+
+\begin{tcolorbox}[colback=blue!10, colframe=blue!20]
+"::" se citește ca "are tipul". Deci, de exemplu, "True are tipul Bool".
+\end{tcolorbox}
+
+Tipul lui \texttt{42} nu pare să fie ceva intuitiv, ca \texttt{Int}. Deocamdată e suficient să menționăm faptul că, în Haskell, constantele numerice pot să se comporte ca diferite tipuri, în funcție de context. \texttt{42} poate să fie considerat întreg, în expresii ca \texttt{42 + 1}, sau numărul în virgulă mobilă \texttt{42.0} în expresii ca \texttt{42 * 3.14}.
+
+\subsubsection*{ Liste }
+
+Listele sunt structuri de date omogene (i.e. pot conține doar elemente de același tip). O listă este delimitată de paranteze pătrate, cu elementele sale separate prin virgulă:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}[1, 2, 3, 4]
+\end{tcblisting}
+
+
+Lista vidă este \texttt{[]}.
+
+Tipul unei liste este dat de tipul elementelor sale; o listă de întregi are tipul \texttt{[Int]}. Putem avea liste de liste de liste de liste ... atâta timp cât respectăm condiția de a avea același tip.
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+[['H', 'a'], ['s'], ['k', 'e', 'l', 'l']] -- corect, are tipul [[Char]]
+[['N', 'u'], [True, False], ['a', 's', 'a']] -- gre&ș&it, con&ț&ine &ș&i elemente de tipul [Bool] &ș&i de tipul [Char]
+
+\end{tcblisting}
+
+
+\begin{tcolorbox}[colback=blue!10, colframe=blue!20]
+Pentru a reprezenta șiruri de caractere, putem folosi tipul \texttt{String} care este un alias peste \texttt{[Char]}.\\Astfel, \texttt{"String"} este doar un mod mai lizibil de a scrie\\ \texttt{['S', 't', 'r', 'i', 'n', 'g']}, care, la rândul său, este un mod mai lizibil de a scrie\\\texttt{'S':'t':'r':'i':'n':'g':[]}
+\end{tcolorbox}
+
+\subsubsection*{ Tupluri }
+
+Tuplurile sunt structuri de date eterogene (i.e. pot conține elemente de diferite tipuri). Un tuplu este delimitat de paranteze rotunde, cu elementele sale separate prin virgulă:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}(1, 'a', True)
+\end{tcblisting}
+
+
+Tipul unui tuplu este dat de numărul, ordinea și tipul elementelor sale:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+Prelude> :t (True, 'a')
+(True, 'a') :: (Bool, Char)
+Prelude> :t ('a', True)
+('a', True) :: (Char, Bool)
+Prelude> :t ("sir", True, False)
+("sir", True, False) :: ([Char], Bool, Bool)
+
+\end{tcblisting}
+
+
+\subsection*{ Funcții în Haskell }
+
+\subsubsection*{ Apelare }
+
+În Haskell, funcțiile pot fi prefixate sau infixate. Cele prefix sunt mai comune, au un nume format din caractere alfanumerice și sunt apelate prin numele lor și lista de argumente, toate separate prin spații (fără paranteze sau virgule):
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+<Prelude> max 1 2
+2
+
+\end{tcblisting}
+
+
+Funcțiile infixate sunt cele cu nume formate din caractere speciale, de forma \textit{operand1 operator operand2}
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+Prelude> 1 + 2
+3
+
+\end{tcblisting}
+
+
+\begin{tcolorbox}[colback=blue!10, colframe=blue!20]
+În anumite situații ne-am dori să schimbăm modul de afixare al funcțiilor (e.g. din motive de claritate).\\Pentru a prefixa o funcție infixată, folosim operatorul \texttt{()}. Astfel, următoarele expresii sunt echivalente:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+3 * 23
+(*) 3 23
+
+\end{tcblisting}
+
+
+Dacă o funcție are două argumente, putem să o infixăm cu operatorul \texttt{``} (\textit{backticks} - dacă nu aveți un layout exotic, ar trebui să fie pe tasta de dinainte de 1). Astfel, următoarele două expresii sunt echivalente:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+mod 10 3
+10 `mod` 3
+
+\end{tcblisting}
+
+\end{tcolorbox}
+
+\subsubsection*{ Definirea unei funcții }
+
+Creați, în editorul de text preferat, un fișier cu extensia \texttt{.hs} în care vom defini prima funcție:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+-- intoarce modulul dublului celui mai mare dintre cele doua argumente
+myFunc x y = abs (2 * max x y)
+
+\end{tcblisting}
+
+
+\begin{tcolorbox}[colback=yellow!40, colframe=yellow!60, breakable]
+Rolul parantezelor aici este de a forța ordinea dorită de a efectua operațiilor. Altfel funcția ar înmulți 2 (modulul lui 2) cu cel mai mare dintre numere, pentru că aplicarea funcției are precedență mai mare.
+\end{tcolorbox}
+
+Puteți testa funcția din ghci:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+Prelude> :l first.hs
+[1 of 1] Compiling Main             ( first.hs, interpreted )
+Ok, modules loaded: Main.
+*Main> myFunc 10 11
+22
+*Main> myFunc (-10) (-11)
+20
+*Main> myFunc 3.14 2.71
+6.28
+
+\end{tcblisting}
+
+
+\begin{tcolorbox}[colback=cyan!5, colframe=cyan!10, breakable]
+Dacă folosiți o versiune mai veche de ghci, aveți nevoie de cuvântul cheie "let" pentru a defini o funcție direct în interpretor:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+Prelude>let myFunc x y = abs (2 * max x y)
+
+\end{tcblisting}
+
+\end{tcolorbox}
+
+Observăm că funcția noastră merge și pentru numere întregi și pentru numere în virgulă mobilă. Am precizat mai devreme că orice expresie trebuie să aibă un tip, cunoscut la \textbf{compilare}. Cum noi nu am precizat tipul funcției noastre, compilatorul l-a dedus ca fiind:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+Prelude> :t myFunc
+myFunc :: (Num a, Ord a) => a -> a -> a
+
+\end{tcblisting}
+
+
+Fără a intra în detalii, funcția noastră ia ca argumente două numere de același tip care pot fi ordonate și întoarce un rezultat de același tip. Metoda prin care se realizează această deducție va fi studiată în continuare la PP.
+
+\begin{tcolorbox}[colback=blue!10, colframe=blue!20]
+Deși nu e întotdeauna necesar, specificarea manuală a tipului unei funcții e considerată "good practice". Editați fișierul de mai devreme astfel încât să arate așa:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+-- intoarce modulul dublului celui mai mare dintre cele doua argumente
+myFunc :: Int -> Int -> Int
+myFunc x y = abs (2 * max x y)
+
+\end{tcblisting}
+
+
+Observați că, acum, tipul arătat de \texttt{:t} este cel specificat și primiți o eroare dacă încercați să pasați ca argumente numere în virgulă mobilă.
+\end{tcolorbox}
+
+
+\subsubsection*{ Pattern matching }
+
+Vom scrie acum o altă funcție prin care ne propunem să calculăm, în mod recursiv, suma tuturor elementelor dintr-o listă. Pentru o listă vidă aceasta este 0, altfel este capul listei plus suma celorlalte elemente.
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+{-
+ - if este o expresie; cum toate expresiile
+ - trebuie sa intoarca o valoare, ramura else
+ - este necesara
+ -
+ - exista deja o functie "sum" predefinita si
+ - vrem sa evitam ambiguitatea apelului, motiv
+ - pentru care folosim un nume nou.
+ - (e interesat de mentionat ca, in Haskell,
+ - apostroful este un caracter valid in numele
+ - unei functii, i.e. am putea defini o functie
+ - sum'; din pacate, aici, pe wiki, aces lucru
+ - nu este suportat).
+ -}
+mySum l = if length l /= 0
+	  then head l + mySum (tail l)
+	  else 0
+
+\end{tcblisting}
+
+
+Deși funcționează, implementarea de mai sus nu este foarte elegantă. Putem să ne folosim de pattern matching (ca la TDA-uri).
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+mySum2 [] = 0
+mySum2 (x:xs) = x + mySum2 xs
+
+\end{tcblisting}
+
+
+\begin{tcolorbox}[colback=yellow!40, colframe=yellow!60, breakable]
+Ordinea din fișier este importantă. Patternurile sunt evaluate de sus în jos și ar trebui scrise de la cel mai particular la cel mai general (ultimul fiind un "catch-all").
+\end{tcolorbox}
+
+Dacă lista dată ca argument e vidă, atunci se face match pe primul pattern și rezultatul este 0. Altfel, se trece la pattern-ul următor; aici se fac două legări - capul listei este legat de numele \texttt{x}, iar restul de numele \texttt{xs} (parantezele din jurul \texttt{x:xs} sunt necesare) și este apelată funcția în mod recursiv.
+
+
+\subsubsection*{ Tail recursion }
+
+Pentru a știi unde să întoarcă execuția după apelul unei funcții, un program ține adresele apelanților pe o stivă.
+Astfel, după ce execuția funcției se termină, programul se întoarce la apelant pentru a continua secvența de instrucțiuni.
+
+În exemplul nostru, apelul \texttt{mySum2 [1, 2, 3, 4, 5]} se va evalua în felul următor:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+mySum2 [1, 2, 3, 4, 5]
+1 + mySum2 [2, 3, 4, 5]
+1 + (2 + mySum2 [3, 4, 5])
+1 + (2 + (3 + mySum2 [4, 5]))
+1 + (2 + (3 + (4 + mySum2 [5])))
+1 + (2 + (3 + (4 + (5 + mySum2 []))))
+1 + (2 + (3 + (4 + (5 + 0))))
+15
+
+\end{tcblisting}
+
+
+Astfel, pentru a aduna capul listei la suma cozii, trebuie mai întâi calculată această sumă, iar apoi să se revină în funcția apelantă.
+
+Putem folosi un acumulator transmis ca parametru la funcția apelată, eliminând nevoia de a mai ține pe stivă informați despre apelant.
+
+\begin{tcolorbox}[colback=yellow!40, colframe=yellow!60, breakable]
+Folosirea unui acumulator în acest scop este un tipar des întâlnit, util pentru că poate permite reducerea spațiului de stivă necesar de la O(n) la O(1). Unele limbaje (e.g. C) nu garantează această optimizare, care depinde de compilator.\\
+Modul în care Haskell asigură tail-recursion o să fie mai clar când vom discuta despre modul de evaluare al funcțiilor. Tot atunci vom vedea și \textbf{capcanele} acestuia.
+\end{tcolorbox}
+
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+-- Folosim sintaxa "let ... in" pentru a ascunde functia
+-- auxiliara folosita si a pastra forma functiei sum (un singur
+-- argument)
+mySum3 l = let
+           sumAux [] acc = acc
+           sumAux (x:xs) acc = sumAux xs (x + acc)
+           in
+           sumAux l 0
+
+\end{tcblisting}
+
+
+\subsection*{ Exerciții }
+
+1. Scrieți o funcție cu care să determinați factorialul unui număr. Scrieți o implementare straight-forward, fără restricții, apoi încercați să o faceți tail-recursive.
+
+
+2. Scrieți o funcție care primește un număr \texttt{n} și întoarce al \texttt{n}-lea număr din șirul lui Fibonacci (\texttt{1, 1, 2, 3, 5...} unde primul \texttt{1} are indexul \texttt{0}). Scrieți o implementare straight-forward, fără restricții, apoi încercați să o faceți tail-recursive.
+
+
+3. a) Scrieți o funcție \texttt{cat} care primește două liste de același tip și returnează concatenarea lor. Funcția ar trebui să funcționeze exact ca operatorul \texttt{++} deja existent în Haskell.
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+Prelude> :t (++)
+(++) :: [a] -> [a] -> [a]
+Prelude> [1, 2, 3] ++ [4, 5, 6]
+[1,2,3,4,5,6]
+
+\end{tcblisting}
+
+
+b) Scrieți o funcție \texttt{inv} care primește o listă și întoarce inversul ei. Funcția ar trebui să funcționeze exact ca funcția \texttt{reverse} deja existentă în Haskell.
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+Prelude> :t reverse
+reverse :: [a] -> [a]
+Prelude> reverse [1, 2, 3]
+[3,2,1]
+
+\end{tcblisting}
+
+
+
+4. Implementați o funcție care primește o listă și o sortează folosind algoritmul:
+
+a) \texttt{merge sort} \footnote{\url{https://en.wikipedia.org/wiki/Merge\_sort}}. Ajutați-vă, în implementare, de metodele \texttt{take}, \texttt{drop} și \texttt{div}.
+
+b) \texttt{insert sort} \footnote{\url{https://en.wikipedia.org/wiki/Insertion\_sort}}.
+
+c) \texttt{quick sort} \footnote{\url{https://en.wikipedia.org/wiki/Quicksort}}.
+
+
+5. Scrieți o funcție care întoarce numărul de inversiuni dintr-o listă.
+
+\begin{tcolorbox}[colback=cyan!5, colframe=cyan!10, breakable]
+Într-o listă \texttt{L} cu \texttt{n} elemente, o inversiune este o pereche de elemente \texttt{(L[i], L[j])} astfel încât \texttt{L[i] \textgreater  L[j] ∧ i \textless  j;   i, j = [0, 1, ... n-1]}
+\end{tcolorbox}
+
+\subsubsection*{ Linkuri utile }
+\begin{itemize}
+	\item  \texttt{Learn you a Haskell for Great Good} \footnote{\url{http://learnyouahaskell.com/}}
+	\item  \texttt{Why Functional Programming Matters} \footnote{\url{http://worrydream.com/refs/Hughes-WhyFunctionalProgrammingMatters.pdf}}
+	\item  \texttt{Why Haskell Matters} \footnote{\url{https://wiki.haskell.org/Why\_Haskell\_matters}}
+	\item  \texttt{Real World Haskell} \footnote{\url{http://book.realworldhaskell.org/}}
+	\item  \texttt{Haskell in industry} \footnote{\url{https://wiki.haskell.org/Haskell\_in\_industry}}
+	\item  \texttt{Tutorials and more} \footnote{\url{https://wiki.haskell.org/Tutorials}}
+\end{itemize}

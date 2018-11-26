@@ -1,0 +1,179 @@
+\subsection*{ Laborator 7 - Prolog: Introducere }
+\subsubsection*{ Despre Prolog }
+
+Prolog este un limbaj de programare centrat pe un set mic de mecanisme de baza(e.g. pattern-matching, backtracking). Desi setul de mecanisme de baza este limitat, Prolog este un limbaj foarte puternic si flexibil.
+
+\subsubsection*{ Structura unui program Prolog }
+
+Un program Prolog contine (doar) trei constructii:
+ \begin{itemize}
+ 	\item  fapte
+ 	\item  reguli
+ 	\item  interogari
+ \end{itemize}
+
+\subsubsection*{ Fapte }
+
+Folosim faptele pentru a exprima un adevar. De exemplu vrem sa "definim" ca Gigel este barbat. Pentru a defini o regula este suficient sa ii definim numele(de preferat sugestiv) si sa ne hotaram care este "actorul".
+In cazul de fata Gigel este actorul iar numele regulii este barbat =\textgreater  \textbf{barbat(gigel).}  \\Observati \textbf{numele regulii} - barbat - \textbf{numele actorului} - gigel(cu litera mica!) - si \textbf{punctul} de la sfarsitul regulii(echivalent ";")
+
+\subsubsection*{ Interogari }
+
+Interogarile sunt metodele prin care noi putem sa ii cerem ceva programului. Pentru a "intreba" ceva este suficient sa scriem in interpretor ce vrem sa aflam. \\De exemplu vrem sa aflam daca Gigel este barbat, pur si simplu "intrebam" in interpretor \textbf{barbat(gigel).} (observati numele regulii, actorul si punctul de la final!).\\Raspunsul dat de programul nostru este \textbf{true}.  Raspunsul este afirmativ deoarece acest fapt exista in cadrul programului nostru in setul de fapte si reguli (denumit in continuare baza de cunostinte). \\\\Ce va raspunde programul la urmatoarea interogare: \textbf{copil(gigel).}*? \\Raspunsul este \textbf{false} (nu avem nicio informatie in baza de cunostinte legata de varsta lui Gigel). \\\\Dar la intrebarea \textbf{femeie(andreea)}? De ce?\\
+\subsubsection*{ Reguli }
+
+Regulile ne permit sa exprimam o legatura intre anumite fapte si reguli. De exemplu, pentru ca Gigel sa fie sot el trebuie sa fie insurat si sa fie barbat.\\barbat(gigel).\\insurat(gigel).\\\textbf{sot(gigel):- barbat(gigel),insurat(gigel)}. Ce spune aceasta regula? Ce inseamna \textbf{","}? \\Tocmai am definit o regula care spune ca Gigel este sot daca Gigel este barbat \textbf{si} daca Gigel este insurat. Virgula este modul in care se exprima conjunctia logica in Prolog \\Care este raspunsul la urmatoarea interogare: \textbf{sot(gigel).} ?
+
+\subsubsection*{ Exemplu }
+Fie urmatoarea baza de cunostinte:
+\begin{tcblisting}{arc=0pt, outer arc=0pt, listing only, breakable}femeie(ioana).
+barbat(mihai).
+barbat(andrei). 
+casatorit(mihai,ioana).
+parinte(ioana,andrei).
+parinte(mihai,andrei).
+\end{tcblisting}
+
+Observam ca am definit fapte cu aritate doi(nu suntem limitati la fapte/reguli cu aritate 1!).
+Care este raspunsul la urmatoarea interogare: \textbf{casatorit(ioana,mihai).}? \\
+Vrem sa definim o regula care sa ne spuna daca Mihai este tata: \textbf{tata(mihai):- barbat(mihai), parinte(mihai,andrei).}(Mihai este barbat si este tatal lui Andrei).\\Problema cu aceasta abordare este ca Mihai poate sa fie parintele mai multor copii, nu doar al lui Andrei, ceea ce nu il invalideaza ca si tata. Cum rezolvam aceasta problema? Ne trebuie o "generalizare" a lui Andrei.
+Aceasta generalizare o vom "implementa" folosind \textbf{variabile}. 
+\subsubsection*{ Variabile }
+Variabilele in Prolog sunt stringuri care incep cu litera mare.\\Noua regula devine: \textbf{tata(mihai):- barbat(mihai), parinte(mihai,Copil).}\\Prolog va incerca(prin backtracking) sa lege variabile Copil la orice actor care respecta faptul parinte(mihai,Copil) (in cazul nostru doar andrei). \\Ce se intampla daca baza noastra de cunostinte contine (mult) mai multe fapte si reguli si vrem sa aflam care sunt toate mamele.?\\\textbf{mama(Mama):- femeie(Mama), parinte(Mama,Copil).} Interogand \textbf{mama(Mama).} variabila Mama va lua, pe rand, totii actorii care satisfac cele doua reguli.(Interogarea intoarce cate o valoare pe rand. Pentru e trece la urmatoarea valoare folositi \textbf{;}) \\
+Cum procedam daca vrem sa aflam un rezultat in urma unei interogari? Vom folosi variabile. Pentru a exemplifica acest lucru vom recurge la aritmetica.\\
+Aritmetica in Prolog are o particularitate legate de sintaxa: 7 + 2 = 9 (in limbaj natural) se traduce in 9 is 7 + 2 (in Prolog). \\Pentru a obtine un rezultat putem forma urmatoarea interogare: \textbf{ R is 2+3.} (R va unifica cu 5). \\
+Sa observam urmatoarea regula: \textbf{compute\_sum(A,B,Sum):- Sum is A+B.}. Avem o regula care calculeaza suma primelor doua variabile si "salveaza" rezultatul in ultima variabila. Cand avem de scris reguli cu input si output este important sa fiti consecventi in alegerea unei conventii(in exemplul oferit variabilele de intrare sunt pozitionate la inceputul regulii pe cand cele de iesire sunt la sfarsitul cererii).
+
+\subsubsection*{ Liste }
+Un concept extrem de util in Prolog este cel de lista. In Prolog, o lista se declara in felul urmator:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+[1, 2, 3].
+[1 | [2 | [3 | []]]]. ([1,2,3])
+[mihai, ioana, andrei].
+[mihai, parinte(ioana), X].
+[1, [2, copil(andrei)], [], [X, Y, Z]].
+
+
+\end{tcblisting}
+
+
+Din penultimul exemplu se poate vedea ca o lista poate contine atat variabile, cat si constante sau itemi complecsi. Din ultimul exemplu se poate vedea ca o lista poate contine ca element o alta lista. \\Ne propunem in continuare sa obtinem primul element dintr-o lista, precum si restul listei(\textbf{head} si \textbf{tail} din Haskell). Pentru aceasta, se va folosi unificarea din Prolog.
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+?- [H|L] = [1, 2, 3].
+H = 1,
+L = [2,3].
+
+\end{tcblisting}
+
+In urma comenzii, capul listei va fi legat la variabila \textbf{X}, iar restul listei va fi legata la variabila \textbf{Y}.
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+?- [H1,H2|_] = [1, 2, 3].
+H1 = 1,
+H2 = 2.
+
+\end{tcblisting}
+
+In urma comenzii, primele doua elemente ale liste vor fi legate la variabilele \textbf{H1} si \textbf{H2}. Simbolul \textbf{'\_'} (underscore) are un comportament similar cu cel din Haskell si anume cel de variabila anonima. Folosim acest simbol cand nu dorim sa legam ceva la o variabila.
+
+Incercam in continuare sa calculam lungimea unei liste. \\Incepem prin a defini o regula prin care determinam daca ceva reprezinta o lista.
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+empty(L) :- L = [].
+isList(L) :- empty(L).
+isList([H|T]) :- isList(T).
+
+\end{tcblisting}
+
+
+Ne dam seama ca putem simplifica codul.
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+isList([]).
+isList([_|T]) :- isList(T).
+
+\end{tcblisting}
+
+
+Calculam acum lungimea unei liste.
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+len(L, R) :- empty(L), R = 0.
+len([H|T], R) :- isList(L), len(T, R1), R = R1 + 1.
+
+\end{tcblisting}
+
+Observati ca secventa nu functioneaza cum ar trebui pentru ca unificarea previne evaluarea lui R. Varianta finala a codului este:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+len([], 0). (unificare implicita)
+len([_|T], R) :- len(T, R1), R is R1+1.
+
+\end{tcblisting}
+
+
+Cum determinam daca un element apartine unei liste?
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+contains(E, [E|_]).
+contains(E, [X |T]) :- E \= X, contains(E, T). 
+
+?- contains(1, [1,2,3]).
+true;
+false.
+
+\end{tcblisting}
+
+De ce prima data obtinem \textbf{true}, iar dupa aceea \textbf{false}?
+\subsubsection*{ Exercitii liste \& diverse }
+\begin{enumerate}
+	\item  Definiti predicatul \texttt{firstTwo(X,Y,L)} care leaga variabilele \texttt{X}, \texttt{Y} la primele doua elemente din lista \texttt{L}, daca acestea exista.
+	\item  Definiti predicatul \texttt{notContains(E,L)} care verifica daca elementul la care este legat \texttt{E} nu exista in lista \texttt{L}.
+
+   \begin{itemize}
+   	\item  Poate acest predicat sa fie folosit pentru a genera toate elementele care nu sunt in \texttt{L}? Justificati raspunsul.
+   \end{itemize}
+	\item  Definiti predicatul \texttt{unique(L1,L2)}. \texttt{L2} este lista \texttt{L1} fara elemente duplicate.
+	\item  Definiti predicatul \texttt{listOnly(L1,L2)}. \texttt{L2} este lista \texttt{L1} care contine doar elementele de tip lista. Exemplu: \texttt{listOnly([1,[2,3],4,[5],6], [ [2,3],[5]]).}
+	\item  Implementati \texttt{insertionSort} in Prolog.
+
+    \begin{itemize}
+    	\item  Idenficati predicatele necesare, aritatea fiecaruia, variabilele care reprezinta input-ul, respectiv output-ul.
+    \end{itemize}
+\end{enumerate}
+
+\subsubsection*{ Arbori }
+\begin{enumerate}
+	\item  Stabiliti o conventie de reprezentare pentru arbori. Ilustrati conventia in Prolog. Exemplu: \texttt{T=...}.
+	\item  Implementati predicatele \texttt{size(T,S)} si \texttt{height(T,H)}.
+	\item  Definiti predicatul \texttt{flatten(T,L)} unde \texttt{T} este un arbore.
+\end{enumerate}
+
+\subsubsection*{ Reprezentarea datelor in Prolog }
+\begin{enumerate}
+	\item  Stabiliti o conventie de reprezentare pentru expresii generate de gramatica de mai jos, urmarind acceeasi abordare ca la arbori:
+\end{enumerate}
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+   <expr> ::= <valoare> | <variabila> | <expr> + <expr> | <expr> * <expr> 
+   <variabila> ::= string
+   <valoare> ::= orice
+
+\end{tcblisting}
+
+\begin{enumerate}
+	\item  Scrieti un predicat \texttt{eval(Expr,R)} unde \texttt{R} este rezultatul evaluarii lui \texttt{Expr}. \texttt{Expr} \textbf{nu contine} variabile.
+	\item  Scrieti un predicat care permite evaluarea unei expresii ce contine variabile.
+\end{enumerate}
+
+
+\subsubsection*{ Resurse (functii matematice) }
+\begin{itemize}
+	\item  \texttt{Functii utile in Prolog} \footnote{\url{http://www.swi-prolog.org/man/arith.html}}
+	\item  \texttt{ Tutorial Prolog} \footnote{\url{http://www.learnprolognow.org/lpnpage.php?pageid=online}}
+\end{itemize}

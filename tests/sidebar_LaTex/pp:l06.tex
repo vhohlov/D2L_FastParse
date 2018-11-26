@@ -1,0 +1,104 @@
+\subsection*{ Întârzierea evaluării }
+  \begin{itemize}
+  	\item  \texttt{ The PP team } \footnote{\url{http://www.cfvbfbtlotto.com/dokuwiki/doku.php?id=pp:team }}
+  	\item  \texttt{ C01: Introduction } \footnote{\url{http://www.cfvbfbtlotto.com/dokuwiki/doku.php?id=pp:intro }}
+  	\item  \texttt{ C02: Side-effects and recursive functions } \footnote{\url{http://www.cfvbfbtlotto.com/dokuwiki/doku.php?id=pp:rec }}
+  	\item  \texttt{ L01: Introduction to Haskell} \footnote{\url{http://www.cfvbfbtlotto.com/dokuwiki/doku.php?id=pp:l01 }}
+  	\item  \texttt{ C03: Higher-order functions} \footnote{\url{http://www.cfvbfbtlotto.com/dokuwiki/doku.php?id=pp:high}}
+  	\item  \texttt{ L02: Higher-order functions} \footnote{\url{http://www.cfvbfbtlotto.com/dokuwiki/doku.php?id=pp:l02 }} 
+  	\item  \texttt{ C04: Types in functional programming} \footnote{\url{http://www.cfvbfbtlotto.com/dokuwiki/doku.php?id=pp:types }}
+  	\item  \texttt{ C05: Abstract datatypes} \footnote{\url{http://www.cfvbfbtlotto.com/dokuwiki/doku.php?id=pp:adt }}
+  	\item  \texttt{ L04: Abstract datatypes} \footnote{\url{http://www.cfvbfbtlotto.com/dokuwiki/doku.php?id=pp:l04 }}
+  	\item  \texttt{ C06: Polymorphism in functional languages} \footnote{\url{http://www.cfvbfbtlotto.com/dokuwiki/doku.php?id=pp:polymorphism }}
+  	\item  \texttt{ L05: Haskell type-classes} \footnote{\url{http://www.cfvbfbtlotto.com/dokuwiki/doku.php?id=pp:l05 }}
+  	\item  \texttt{ C06: Parameter passing in Programming Languages} \footnote{\url{http://www.cfvbfbtlotto.com/dokuwiki/doku.php?id=pp:c06 }}
+  	\item  \texttt{ C07: Lazy evaluation in Haskell} \footnote{\url{http://www.cfvbfbtlotto.com/dokuwiki/doku.php?id=pp:c07 }}
+  	\item  \texttt{ L06: Haskell and Scheme evaluation} \footnote{\url{http://www.cfvbfbtlotto.com/dokuwiki/doku.php?id=pp:l06 }}
+  	\item  \texttt{ C08: The Lambda Calculus} \footnote{\url{http://www.cfvbfbtlotto.com/dokuwiki/doku.php?id=pp:lambda }}
+  	\item  \texttt{ H01: Haskell Lazy Dynamic Programming} \footnote{\url{http://www.cfvbfbtlotto.com/dokuwiki/doku.php?id=pp:h01 }}
+  \end{itemize}
+
+
+     
+\subsection*{Moduri de evaluare a unei expresii: }
+  \begin{itemize}
+  	\item  \textbf{evaluare aplicativă} - argumentele funcțiilor sunt evaluate înaintea aplicării funcției asupra lor.
+  	\item  \textbf{evaluare lenesa} - întârzie evaluarea parametrilor până în momentul când aceasta este folosită efectiv.
+  \end{itemize}
+
+\subsubsection*{Evaluare aplicativă vs. evaluare normală}
+
+Fie urmatoarea expresie, scrisă într-o variantă relaxată a Calculului Lambda (în care valori numerice și operații pe acestea sunt permise, iar funcțiile sunt în formă uncurried):
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}(&λ&x.&λ&y.(x + y) 1 2)
+\end{tcblisting}
+
+
+Evident, în urma aplicării funcției de mai sus, expresia se va evalua la 3.
+Să observăm, însă, cazul în care parametrii funcției reprezintă aplicații de funcții:
+ 
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}(&λ&x.&λ&y.(x + y) 1 (&λ&z.(z + 2) 3))
+\end{tcblisting}
+
+
+Desigur, evaluarea expresiei \texttt{(λz.(z + 2) 3)} va genera valoarea \texttt{5}, de unde deducem că rezultatul final al expresiei va fi \texttt{6} ( adunarea lui 1 cu rezultatul anterior ). În cadrul acestui raționament, am presupus că parametrii sunt evaluați înaintea aplicării funcției asupra acestora. Vom vedea, în cele ce urmează, că evaluarea se poate realiza și in alt mod.
+
+\subsubsection*{Evaluare aplicativă}
+
+Evaluarea aplicativă (eager evaluation) este cea în care fiecare expresie este evaluată imediat. În exemplul de mai sus, evaluarea aplicativă va decurge astfel:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}(&λ&x.&λ&y.(x + y) 1 (&λ&z.(z + 2) 3))
+(&λ&x.&λ&y.(x + y) 1 5)
+6
+\end{tcblisting}
+
+
+
+\subsubsection*{Evaluare normală}
+
+Spre deosebire de evaluarea aplicativă, evaluarea normală va întarzia evaluarea unei expresii, până când aceasta este folosită efectiv. Exemplu:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}(&λ&x.&λ&y.(x + y) 1 (&λ&z.(z + 2) 3))
+(1 + (&λ&z.(z + 2) 3))
+(1 + 5)
+6
+\end{tcblisting}
+
+
+
+\subsubsection*{Exerciții:}
+
+
+\paragraph{ I. Șiruri }\hfill\\
+
+\begin{enumerate}
+	\item  Construiți șirul numerelor naturale\\  - Construiți șirul numerelor pare\\  - Construiți șirul numerelor lui Fibonacci 
+\end{enumerate}
+
+\paragraph{ II. Aproximații }\hfill\\
+
+1. definiți o funcție \texttt{build :: (a -\textgreater  a) -\textgreater  a -\textgreater  [a]} care primeste o funcție 'generator' (pe care o numim \texttt{g} în continuare), o valoare inițială (\texttt{a0}), și generază lista: \texttt{[a0, g a0, g (g a0), g (g (g a0)), ... }
+  
+\begin{tcolorbox}[colback=cyan!5, colframe=cyan!10, breakable]
+Comportamentul funcției ar trebui să fie identic cu cel al funcției \texttt{iterate}, deja existentă în Haskell.
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+Prelude> :t iterate
+iterate :: (a -> a) -> a -> [a]
+
+\end{tcblisting}
+
+\end{tcolorbox}
+
+2. definiți o funcție \texttt{select} care primește o toleranță \texttt{e}, o listă, și întoarce valoarea $a_n$ din listă care satisface proprietatea: $abs(a_n - a_{n+1}) < e$
+
+3. Aproximație pentru $\sqrt{k}$:\\ a) Scrieți o funcție care calculează $\sqrt{k}$ cu toleranța \texttt{0.01}, exploatând faptul că șirul: $a_n = 1/2(a_{n-1} + k/a_{n-1})$ converge către $\sqrt{k}$ când \texttt{n} tinde la infinit.
+      
+4. Aproximație pentru derivata unei funcții \texttt{f} într-un punct \texttt{a}:\\ a) Scrieți o funcție care generează lista: \texttt{[h\_0, h\_0/2, h\_0/4, h\_0/8, ...]}\\ b) Scrieți o funcție care calculează lista aproximarilor lui \texttt{f'(a)}, calculate astfel: $\displaystyle f'(a)=\lim_{h \rightarrow 0} \frac{f(a+h)-f(a)}{h}$\\ c) Scrieți o funcție care calculează derivata in \texttt{a} a unei funcții \texttt{f}, cu toleranța \texttt{0.01}
+
+5. Aproximație pentru integrala unei funcții pe intervalul \texttt{[a,b]}:\\ a) Scrieți o funcție care aproximează valoarea integralei unei funcții \texttt{f} între \texttt{a} și \texttt{b}, cu toleranța \texttt{0.01}. Strategia de îmbunătățire a unei aproximări constă în spargerea intervalului \texttt{[a,b]} în două sub-intervale de dimensiune egală \texttt{[a,m]} si \texttt{[m,b]}, calculul integralei pe fiecare, și adunarea rezultatului.

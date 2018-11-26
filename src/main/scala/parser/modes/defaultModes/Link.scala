@@ -159,7 +159,7 @@ object Link extends Mode {
 
 
   //link with protocol specified -> www is optional
-  def pc = P(schemes ~ "://".log("://") ~ "www".?).! //.log("protocol")
+  def pc = P(schemes ~ "://" ~ "www".?).! //.log("protocol")
 
   //www is specified -> protocol is optional
   def www = P((schemes ~ "://").? ~ "www").!

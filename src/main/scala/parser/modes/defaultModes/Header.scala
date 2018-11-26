@@ -34,12 +34,27 @@ object Header extends Mode{
     if (hType > 3)
       toc += 1
 
+//    hType match {
+//        case 2 => "\\subparagraph{"  + content + "}\\hfill\\\\"
+//        case 3 => "\\paragraph{"     + content + "}\\hfill\\\\"
+//        case 4 => "\\subsubsection{" + content + "}"
+//        case 5 => "\\subsection{"  + content + "}"
+//        case _ => "\\section{"  + content + "}"
+//      }
+//    hType match {
+//      case 2 => "{\\large"  + content + "}\\hfill\\\\"
+//      case 3 => "{\\Large" + content + "}\\hfill\\\\"
+//      case 4 => "{\\LARGE" + content + "}\\\\"
+//      case 5 => "{\\huge"  + content + "}\\\\"
+//      case _ => "{\\Huge"  + content + "}\\\\"
+//    }
+
     hType match {
-        case 2 => "\\subparagraph{"  + content + "}\\hfill\\\\"
-        case 3 => "\\paragraph{"     + content + "}\\hfill\\\\"
-        case 4 => "\\subsubsection{" + content + "}"
-        case 5 => "\\subsection{"  + content + "}"
-        case _ => "\\section{"  + content + "}"
-      }
+      case 2 => "\\subparagraph{"  + content + "}\\hfill\\\\"
+      case 3 => "\\paragraph{"     + content + "}\\hfill\\\\"
+      case 4 => "\\subsubsection*{" + content + "}"
+      case 5 => "\\subsection*{"  + content + "}"
+      case _ => "\\section*{"  + content + "}"
+    }
   }
 }

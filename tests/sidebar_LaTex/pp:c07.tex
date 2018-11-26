@@ -1,0 +1,184 @@
+\section*{ Lazy Evaluation in Haskell }
+
+\subsubsection*{ Introduction }
+\textbf{Lazy evaluation} means that:
+\begin{enumerate}
+	\item  an expression (function application) will be evaluated \textbf{only when it is needed} (precisely as in the Lambda Calculus's normal evaluation)
+	\item  an expression is evaluated \textbf{only once}
+\end{enumerate}
+
+ We illustrate point 1. via the following example:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+nats = 0:(map (+1) nats)
+test = foldr (\x y-> if x > 2 then 0 else x+y) 10 nats
+
+\end{tcblisting}
+
+
+\begin{itemize}
+	\item  First, note that \texttt{nats} is a recursive non-terminating expression, which will produce the list of natural numbers, until memory is depleted. To examine this, it is sufficient to call \texttt{nats} in the interpreter
+	\item  Second, \texttt{test} is an expression which evaluates to \texttt{3}, \textbf{although it relies on \texttt{nats}} for the computation:
+
+  \begin{itemize}
+  	\item  let \texttt{op = \textbackslash x y-\textgreater  if x \textgreater  2 then 0 else x+y}. Then, in effect, \texttt{test} attempts to compute the expression:
+  \end{itemize}
+\end{itemize}
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+0 op (1 op (2 op (3 op (4 op .... 
+
+\end{tcblisting}
+
+  \begin{itemize}
+  	\item  however, in the expression \texttt{(3 `op` (4 `op` .... } the value of the second operand is not used (since \texttt{x\textgreater 3}), hence \texttt{(4 `op` .... } is not evaluated. The result is 0. Thus, \texttt{test} actually computes
+  \end{itemize}
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+0 op (1 op (2 op 0)) 
+
+\end{tcblisting}
+
+  \begin{itemize}
+  	\item  note that the value of the accumulator (\texttt{10}) is not actually used.
+  \end{itemize}
+
+To illustrate point 2. consider:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+evens = zipWith (+) nats nats
+some = take 2 evens
+
+\end{tcblisting}
+
+
+We also recall that:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+take 0 _ = []
+take n (h:t) = h:(take (n-1) t)
+
+zipWith op (x:xs) (y:ys) = (op x y):(zipWith xs ys)
+zipWith _ _ _ = []
+
+\end{tcblisting}
+
+
+No expression is evaluated until we call \texttt{some}, in the interpreter. Thus, we start with the following un-evaluated expressions:
+
+\textasciicircum  Variable \textasciicircum  Expression \textasciicircum  Value \textasciicircum 
+\textbar evens \textbar ? \textbar unevaluated \textbar
+\textbar some \textbar ? \textbar unevaluated \textbar
+\textbar nats \textbar ? \textbar unevaluated \textbar
+
+
+
+Upon calling \texttt{some} we obtain the following result which requires us to evaluate \texttt{evens}. This happens due to the pattern-matching definition of \texttt{take}, which requires a value of the form \texttt{(x:xs)}.
+
+\textbar evens \textbar ? \textbar unevaluated \textbar
+\textbar some \textbar \texttt{take 2 evens} \textbar unevaluated \textbar
+\textbar nats \textbar ? \textbar unevaluated \textbar
+
+
+To evaluate \texttt{evens}, as before, the pattern-matching definition of \texttt{zipWith} requires the first element of \texttt{nats}:
+
+\textbar evens \textbar \texttt{zipWith (+) nats nats} \textbar unevaluated \textbar
+\textbar some \textbar \texttt{take 2 evens} \textbar unevaluated \textbar
+\textbar nats \textbar ? \textbar unevaluated \textbar
+
+
+Note that we only require \texttt{x} and \texttt{y} to evaluate zipWith in one step, hence \texttt{(map (+1) nats)} is not (yet) evaluated. 
+\textbar evens \textbar \texttt{zipWith (+) nats nats} \textbar unevaluated \textbar
+\textbar some \textbar \texttt{take 2 evens} \textbar unevaluated \textbar
+\textbar nats \textbar \texttt{0:(map (+1) nats)} \textbar unevaluated \textbar
+
+
+Thus, the evaluation of \texttt{zipWith} yields:
+\textbar evens \textbar \texttt{(0+0):zipWith (+) xs ys} \textbar unevaluated \textbar
+\textbar some \textbar \texttt{take 2 evens} \textbar unevaluated \textbar
+\textbar nats \textbar \texttt{0:(map (+1) nats)} \textbar unevaluated \textbar
+
+Although we have created additional column in the table, we stress that \textbf{the expressions \texttt{(map (+1) nats)}} which appear in the body of \texttt{nats}, \texttt{xs} and \texttt{ys} \textbf{are actually the same}, and not different identical expressions. The first-step evaluation of \texttt{take 2 evens} is now complete:
+
+\textbar evens \textbar \texttt{(0+0):zipWith (+) xs ys} \textbar unevaluated \textbar
+\textbar some \textbar \texttt{0:(take 1 t)} \textbar unevaluated \textbar
+\textbar nats \textbar \texttt{0:(map (+1) nats)} \textbar unevaluated \textbar
+\textbar xs,ys \textbar \texttt{(map (+1) nats)} \textbar unevaluated \textbar
+\textbar t \textbar \texttt{zipWith (+) xs ys} \textbar unevaluated \textbar
+
+As before, note that both occurrences of \texttt{zipWith (+) xs ys} are \textbf{actually the same expression}. We continue with another step in the evaluation of \texttt{take}, which leads to evaluating \texttt{zipWith (+) xs ys}, and subsequently, \texttt{xs} and \texttt{ys}:
+
+\textbar evens \textbar \texttt{(0+0):zipWith (+) xs ys} \textbar unevaluated \textbar
+\textbar some \textbar \texttt{0:(take 1 t)} \textbar unevaluated \textbar
+\textbar nats \textbar \texttt{0:1:(map (+1) nats)} \textbar unevaluated \textbar
+\textbar xs,ys \textbar \texttt{1:(map (+1) nats)} \textbar unevaluated \textbar
+\textbar t \textbar \texttt{zipWith (+) xs ys} \textbar unevaluated \textbar
+
+Note that after evaluating the expression \texttt{(map (+1) nats)} in one step, \textbf{the expression is not re-evaluated}, as shown in the table above.
+
+\textbar evens \textbar \texttt{(0+0):zipWith (+) xs ys} \textbar unevaluated \textbar
+\textbar some \textbar \texttt{0:(take 1 t)} \textbar unevaluated \textbar
+\textbar nats \textbar \texttt{0:1:(map (+1) nats)} \textbar unevaluated \textbar
+\textbar xs,ys \textbar \texttt{1:(map (+1) nats)} \textbar unevaluated \textbar
+\textbar t \textbar \texttt{(1+1):zipWith (+) xs' ys}' \textbar unevaluated \textbar
+
+We have now finished the second step in the evaluation of \texttt{take}. We omit adding variables \texttt{xs', ys}' and \texttt{t}'.
+\textbar evens \textbar \texttt{(0+0):zipWith (+) xs ys} \textbar unevaluated \textbar
+\textbar some \textbar \texttt{0:2:(take 0 t')} \textbar unevaluated \textbar
+\textbar nats \textbar \texttt{0:1:(map (+1) nats)} \textbar unevaluated \textbar
+\textbar xs,ys \textbar \texttt{1:(map (+1) nats)} \textbar unevaluated \textbar
+\textbar t \textbar \texttt{(1+1):zipWith (+) xs' ys}' \textbar unevaluated \textbar
+
+Now, \texttt{take 0 t}' evaluates to \texttt{[]}, hence we finally get:
+\textbar evens \textbar \texttt{(0+0):zipWith (+) xs ys} \textbar unevaluated \textbar
+\textbar some \textbar \texttt{0:2:[]} \textbar \textbf{evaluated} \textbar
+\textbar nats \textbar \texttt{0:1:(map (+1) nats)} \textbar unevaluated \textbar
+\textbar xs,ys \textbar \texttt{1:(map (+1) nats)} \textbar unevaluated \textbar
+\textbar t \textbar \texttt{(1+1):zipWith (+) xs' ys}' \textbar unevaluated \textbar
+
+and the evaluation stops. 
+
+\subsubsection*{ Applications of normal evaluation }
+
+\subsubsection*{ Dynamic programming - edit distance }
+
+Consider two strings \texttt{s1} and \texttt{s2}. We define the \textit{edit distance} between \texttt{s1} and \texttt{s2} as the \textbf{minimal number of edit operations} which make the strings \textbf{identical}. The allowed \textit{edit operations} are:
+\begin{itemize}
+	\item  character insertion (e.g. \texttt{text} and \texttt{ext} have edit distance 1)
+	\item  character deletion (e.g. \texttt{tet} and \texttt{text} have edit distance 1)
+	\item  character modification (e.g. \texttt{text} and \texttt{tent} have edit distance 1)
+\end{itemize}
+
+As an example, the strings \texttt{maple} and \texttt{apple} have edit distance 2:
+\begin{itemize}
+	\item  we delete the first symbol from \texttt{maple} and obtain \texttt{aple}
+	\item  we insert the symbol \texttt{p} at the second position in \texttt{aple} and obtain \texttt{apple}
+\end{itemize}
+
+\textbf{ Dynamic programming } computes the edit distance between two strings by building a matrix \texttt{d} having \texttt{size(s1)+1} lines and \texttt{size(s2)+1} columns, where \texttt{d[i][j]} represents the edit distance between the substrings \texttt{s1[0:i]} and \texttt{s2[0:j]}:
+\begin{itemize}
+	\item  \texttt{d[i][0] = i} for all lines (the distance between the empty string and the (sub)-string \texttt{s1[0:i]} is \texttt{i})
+	\item  \texttt{d[0][i] = i} for all columns (the distance between the empty string and the (sub)-string \texttt{s2[0:i]} is \texttt{i})
+	\item  if \texttt{s1[i]} and \texttt{s2[i]} coincide, then \texttt{d[i][j] = d[i-1][j-1]}
+	\item  otherwise, \texttt{d[i][j]} is computed by applying \textbf{the edit operation which minimises distance}. Concretely, \texttt{d[i][j]} is the minimal of \texttt{d[i-1][j] + 1} (delete character \texttt{i} from \texttt{s1}), \texttt{d[i-1][j-1] + 1} (modify character \texttt{i} from \texttt{s1}), \texttt{d[i][j-1] + 1} (insert character \texttt{i} in \texttt{s1})
+\end{itemize}
+
+
+\subsubsection*{ Functional implementation }
+
+Dynamic programming (for edit distance) can be efficiently implemented in Haskell, by exploiting lazyness \textbf{in order to compute only those necessary distances}, and \textbf{only once}. We first start with an example of an implementation of the infinite list of Fibonacci numbers:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+fibo = 0:1:(zipWith (+) fibo (tail fibo))
+
+\end{tcblisting}
+
+
+\section*{ References }
+
+\begin{itemize}
+	\item  \texttt{ Lazy dynamic programming } \footnote{\url{http://jelv.is/blog/Lazy-Dynamic-Programming/ }}
+\end{itemize}

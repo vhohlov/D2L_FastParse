@@ -20,9 +20,12 @@ trait IO {
   def writeMedia(file:String)
 
   //save the output of the parser to the created file structure
-  def writeTexSrc(texSrc:String)
+  def writeTexSrc(texSrc:String, fileName:String)
 
   //get the web or local address of the DocuWiki src
   def getDokuAddress(): String
 
+  def writeMain(text:String)
+
+  def getLinkContent(path:String): Option[String]
 }

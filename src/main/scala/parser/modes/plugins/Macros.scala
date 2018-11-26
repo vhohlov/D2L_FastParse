@@ -32,11 +32,12 @@ class Macros extends Plugin{
   def mathLine = P("$math[" ~ mathText("]") ~ "]").map(math => "$" + math + "$")//.log("mathematicLine")
 
 
-  def mathText(s:String) = P(!s ~ (supraAsterix|AnyChar.!)).rep.map{
+  def mathText(s:String) = P(!s ~ (y|supraAsterix|AnyChar.!)).rep.map{
     ctSeq=>ctSeq.mkString("")
   }
+  //some hacks for wrong used grammar for macro
   def supraAsterix = P("^∗").map(_=>"^{∗}")
-
+  def y = P("\\y").map(_=> "\\textbackslash y")
 
   def titledMath = P("$" ~ mathStatement ~ title.? ~ body ~ "$end").map{
     case(macroType, title, body) => {

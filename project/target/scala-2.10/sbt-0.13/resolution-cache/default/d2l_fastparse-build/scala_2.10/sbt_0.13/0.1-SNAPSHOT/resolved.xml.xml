@@ -4,7 +4,7 @@
 		module="d2l_fastparse-build"
 		revision="0.1-SNAPSHOT"
 		status="integration"
-		publication="20180606022510"
+		publication="20180911024455"
 		e:sbtVersion="0.13" e:scalaVersion="2.10"
 	>
 		<description>

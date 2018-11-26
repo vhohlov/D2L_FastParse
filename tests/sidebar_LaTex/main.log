@@ -1,0 +1,5664 @@
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2018.5.20)  11 SEP 2018 03:01
+entering extended mode
+ \write18 enabled.
+ %&-line parsing enabled.
+**main.tex
+(./main.tex
+LaTeX2e <2011/06/27>
+Babel <3.9h> and hyphenation patterns for 78 languages loaded.
+(/usr/share/texlive/texmf-dist/tex/latex/base/report.cls
+Document Class: report 2007/10/19 v1.4h Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size12.clo
+File: size12.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@chapter=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2010/09/12 v5.6 Page Geometry
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is detected.
+)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifvtex.sty
+Package: ifvtex 2010/03/01 v1.5 Detect VTeX and its facilities (HO)
+Package ifvtex Info: VTeX not detected.
+)
+(/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
+)
+\Gm@cnth=\count88
+\Gm@cntv=\count89
+\c@Gm@tempcnt=\count90
+\Gm@bindingoffset=\dimen103
+\Gm@wd@mp=\dimen104
+\Gm@odd@mp=\dimen105
+\Gm@even@mp=\dimen106
+\Gm@layoutwidth=\dimen107
+\Gm@layoutheight=\dimen108
+\Gm@layouthoffset=\dimen109
+\Gm@layoutvoffset=\dimen110
+\Gm@dimlist=\toks15
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2008/03/30 v1.1d Input encoding file
+\inpenc@prehook=\toks16
+\inpenc@posthook=\toks17
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+))
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/ucs.sty
+Package: ucs 2013/05/11 v2.2 UCS: Unicode input support
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-global.def
+File: uni-global.def 2013/05/13 UCS: Unicode global data
+)
+\uc@secondtry=\count91
+\uc@combtoks=\toks18
+\uc@combtoksb=\toks19
+\uc@temptokena=\toks20
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/t1enc.def
+File: t1enc.def 2005/09/27 v1.99g Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding T1 on input line 43.
+))
+(/usr/share/texlive/texmf-dist/tex/latex/textgreek/textgreek.sty
+Package: textgreek 2011/10/09 v0.7 Greek symbols in text
+Package textgreek Info: Loading the definitions for the Greek fontencoding. on 
+input line 39.
+
+(/usr/share/texlive/texmf-dist/tex/latex/greek-fontenc/lgrenc.def
+File: lgrenc.def 2013/07/16 v0.9 LGR Greek font encoding definitions
+
+(/usr/share/texlive/texmf-dist/tex/latex/greek-fontenc/greek-fontenc.def
+File: greek-fontenc.def 2013/11/28 v0.11 Common Greek font encoding definitions
+
+))
+Package textgreek Info: Loaded fontmap: {eur/*/*}{U/eur/*/*} {phv/*/*}{U/psy/*/
+*}. on input line 69.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/titlesec/titlesec.sty
+Package: titlesec 2011/12/15 v2.10.0 Sectioning titles
+\ttl@box=\box26
+\beforetitleunit=\skip43
+\aftertitleunit=\skip44
+\ttl@plus=\dimen111
+\ttl@minus=\dimen112
+\ttl@toksa=\toks21
+\titlewidth=\dimen113
+\titlewidthlast=\dimen114
+\titlewidthfirst=\dimen115
+)
+(/usr/share/texlive/texmf-dist/tex/latex/appendix/appendix.sty
+Package: appendix 2009/09/02 v1.2b extra appendix facilities
+\c@@pps=\count92
+\c@@ppsavesec=\count93
+\c@@ppsaveapp=\count94
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2013/01/14 v2.14 AMS math features
+\@mathmargin=\skip45
+
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks22
+\ex@=\dimen116
+))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d
+\pmbraise@=\dimen117
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 1999/12/14 v2.01 operator names
+)
+\inf@bad=\count95
+LaTeX Info: Redefining \frac on input line 210.
+\uproot@=\count96
+\leftroot@=\count97
+LaTeX Info: Redefining \overline on input line 306.
+\classnum@=\count98
+\DOTSCASE@=\count99
+LaTeX Info: Redefining \ldots on input line 378.
+LaTeX Info: Redefining \dots on input line 381.
+LaTeX Info: Redefining \cdots on input line 466.
+\Mathstrutbox@=\box27
+\strutbox@=\box28
+\big@size=\dimen118
+LaTeX Font Info:    Redeclaring font encoding OML on input line 566.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
+\macc@depth=\count100
+\c@MaxMatrixCols=\count101
+\dotsspace@=\muskip10
+\c@parentequation=\count102
+\dspbrk@lvl=\count103
+\tag@help=\toks23
+\row@=\count104
+\column@=\count105
+\maxfields@=\count106
+\andhelp@=\toks24
+\eqnshift@=\dimen119
+\alignsep@=\dimen120
+\tagshift@=\dimen121
+\tagwidth@=\dimen122
+\totwidth@=\dimen123
+\lineht@=\dimen124
+\@envbody=\toks25
+\multlinegap=\skip46
+\multlinetaggap=\skip47
+\mathdisplay@stack=\toks26
+LaTeX Info: Redefining \[ on input line 2665.
+LaTeX Info: Redefining \] on input line 2666.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amscls/amsthm.sty
+Package: amsthm 2004/08/06 v2.20
+\thm@style=\toks27
+\thm@bodyfont=\toks28
+\thm@headfont=\toks29
+\thm@notefont=\toks30
+\thm@headpunct=\toks31
+\thm@preskip=\skip48
+\thm@postskip=\skip49
+\thm@headsep=\skip50
+\dth@everypar=\toks32
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)
+(/usr/share/texlive/texmf-dist/tex/generic/ulem/ulem.sty
+\UL@box=\box29
+\UL@hyphenbox=\box30
+\UL@skip=\skip51
+\UL@hook=\toks33
+\UL@height=\dimen125
+\UL@pe=\count107
+\UL@pixel=\dimen126
+\ULC@box=\box31
+Package: ulem 2012/05/18
+\ULdepth=\dimen127
+)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2012/11/06 v6.83m Hypertext links for LaTeX
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
+Package: hobsub-hyperref 2012/05/28 v1.13 Bundle oberdiek, subset hyperref (HO)
+
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty
+Package: hobsub-generic 2012/05/28 v1.13 Bundle oberdiek, subset generic (HO)
+Package: hobsub 2012/05/28 v1.13 Construct package bundles (HO)
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+Package hobsub Info: Skipping package `ifvtex' (already loaded).
+Package: intcalc 2007/09/27 v1.1 Expandable calculations with integers (HO)
+Package hobsub Info: Skipping package `ifpdf' (already loaded).
+Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
+Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
+Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+Package: pdfescape 2011/11/25 v1.13 Implements pdfTeX's escape features (HO)
+Package: bigintcalc 2012/04/08 v1.3 Expandable calculations on big integers (HO
+)
+Package: bitset 2011/01/30 v1.1 Handle bit-vector datatype (HO)
+Package: uniquecounter 2011/01/30 v1.2 Provide unlimited unique counter (HO)
+)
+Package hobsub Info: Skipping package `hobsub' (already loaded).
+Package: letltxmacro 2010/09/02 v1.4 Let assignment for LaTeX macros (HO)
+Package: hopatch 2012/05/28 v1.2 Wrapper for package hooks (HO)
+Package: xcolor-patch 2011/01/30 xcolor patch
+Package: atveryend 2011/06/30 v1.8 Hooks at the very end of document (HO)
+Package atveryend Info: \enddocument detected (standard20110627).
+Package: atbegshi 2011/10/05 v1.16 At begin shipout hook (HO)
+Package: refcount 2011/10/16 v3.4 Data extraction from label references (HO)
+Package: hycolor 2011/01/30 v1.7 Color options for hyperref/bookmark (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/auxhook.sty
+Package: auxhook 2011/03/04 v1.3 Hooks for auxiliary files (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
+)
+\@linkdim=\dimen128
+\Hy@linkcounter=\count108
+\Hy@pagecounter=\count109
+
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2012/11/06 v6.83m Hyperref: PDFDocEncoding definition (HO)
+)
+\Hy@SavedSpaceFactor=\count110
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/hyperref.cfg
+File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
+)
+Package hyperref Info: Option `unicode' set `true' on input line 4319.
+
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/puenc.def
+File: puenc.def 2012/11/06 v6.83m Hyperref: PDF Unicode definition (HO)
+)
+Package hyperref Info: Hyper figures OFF on input line 4443.
+Package hyperref Info: Link nesting OFF on input line 4448.
+Package hyperref Info: Hyper index ON on input line 4451.
+Package hyperref Info: Plain pages OFF on input line 4458.
+Package hyperref Info: Backreferencing OFF on input line 4463.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4688.
+\c@Hy@tempcnt=\count111
+
+(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip11
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 5041.
+\XeTeXLinkMargin=\dimen129
+\Fld@menulength=\count112
+\Field@Width=\dimen130
+\Fld@charsize=\dimen131
+Package hyperref Info: Hyper figures OFF on input line 6295.
+Package hyperref Info: Link nesting OFF on input line 6300.
+Package hyperref Info: Hyper index ON on input line 6303.
+Package hyperref Info: backreferencing OFF on input line 6310.
+Package hyperref Info: Link coloring OFF on input line 6315.
+Package hyperref Info: Link coloring with OCG OFF on input line 6320.
+Package hyperref Info: PDF/A mode OFF on input line 6325.
+LaTeX Info: Redefining \ref on input line 6365.
+LaTeX Info: Redefining \pageref on input line 6369.
+\Hy@abspage=\count113
+\c@Item=\count114
+\c@Hfootnote=\count115
+)
+
+Package hyperref Message: Driver (autodetected): hpdftex.
+
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2012/11/06 v6.83m Hyperref driver for pdfTeX
+\Fld@listcount=\count116
+\c@bookmark@seq@number=\count117
+
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
+Package: rerunfilecheck 2011/04/15 v1.7 Rerun checks for auxiliary files (HO)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+82.
+)
+\Hy@SectionHShift=\skip52
+)
+(/usr/share/texmf/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+
+(/usr/share/texlive/texmf-dist/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+\Gread@gobject=\count118
+)
+(/usr/share/texlive/texmf-dist/tex/latex/colortbl/colortbl.sty
+Package: colortbl 2012/02/13 v1.0a Color table columns (DPC)
+
+(/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
+Package: array 2008/09/09 v2.4c Tabular extension package (FMi)
+\col@sep=\dimen132
+\extrarowheight=\dimen133
+\NC@list=\toks34
+\extratabsurround=\skip53
+\backup@length=\skip54
+)
+\everycr=\toks35
+\minrowclearance=\skip55
+)
+\rownum=\count119
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1337.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1341.
+Package xcolor Info: Model `RGB' extended on input line 1353.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1355.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1356.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1357.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1358.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/multirow/multirow.sty
+\bigstrutjot=\dimen134
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/graphics.cfg
+File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
+)
+Package graphics Info: Driver file: pdftex.def on input line 91.
+)
+\Gin@req@height=\dimen135
+\Gin@req@width=\dimen136
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tcolorbox/tcolorbox.sty
+Package: tcolorbox 2014/02/06 version 2.70 text color boxes
+
+(/usr/share/texmf/tex/latex/pgf/basiclayer/pgf.sty
+(/usr/share/texmf/tex/latex/pgf/utilities/pgfrcs.sty
+(/usr/share/texmf/tex/generic/pgf/utilities/pgfutil-common.tex
+\pgfutil@everybye=\toks36
+)
+(/usr/share/texmf/tex/generic/pgf/utilities/pgfutil-latex.def
+\pgfutil@abb=\box32
+
+(/usr/share/texlive/texmf-dist/tex/latex/ms/everyshi.sty
+Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
+))
+(/usr/share/texmf/tex/generic/pgf/utilities/pgfrcs.code.tex
+Package: pgfrcs 2010/10/25 v2.10 (rcs-revision 1.24)
+))
+Package: pgf 2008/01/15 v2.10 (rcs-revision 1.12)
+
+(/usr/share/texmf/tex/latex/pgf/basiclayer/pgfcore.sty
+(/usr/share/texmf/tex/latex/pgf/systemlayer/pgfsys.sty
+(/usr/share/texmf/tex/generic/pgf/systemlayer/pgfsys.code.tex
+Package: pgfsys 2010/06/30 v2.10 (rcs-revision 1.37)
+
+(/usr/share/texmf/tex/generic/pgf/utilities/pgfkeys.code.tex
+\pgfkeys@pathtoks=\toks37
+\pgfkeys@temptoks=\toks38
+
+(/usr/share/texmf/tex/generic/pgf/utilities/pgfkeysfiltered.code.tex
+\pgfkeys@tmptoks=\toks39
+))
+\pgf@x=\dimen137
+\pgf@y=\dimen138
+\pgf@xa=\dimen139
+\pgf@ya=\dimen140
+\pgf@xb=\dimen141
+\pgf@yb=\dimen142
+\pgf@xc=\dimen143
+\pgf@yc=\dimen144
+\w@pgf@writea=\write3
+\r@pgf@reada=\read1
+\c@pgf@counta=\count120
+\c@pgf@countb=\count121
+\c@pgf@countc=\count122
+\c@pgf@countd=\count123
+
+(/usr/share/texmf/tex/generic/pgf/systemlayer/pgf.cfg
+File: pgf.cfg 2008/05/14  (rcs-revision 1.7)
+)
+Package pgfsys Info: Driver file for pgf: pgfsys-pdftex.def on input line 900.
+
+(/usr/share/texmf/tex/generic/pgf/systemlayer/pgfsys-pdftex.def
+File: pgfsys-pdftex.def 2009/05/22  (rcs-revision 1.26)
+
+(/usr/share/texmf/tex/generic/pgf/systemlayer/pgfsys-common-pdf.def
+File: pgfsys-common-pdf.def 2008/05/19  (rcs-revision 1.10)
+)))
+(/usr/share/texmf/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.tex
+File: pgfsyssoftpath.code.tex 2008/07/18  (rcs-revision 1.7)
+\pgfsyssoftpath@smallbuffer@items=\count124
+\pgfsyssoftpath@bigbuffer@items=\count125
+)
+(/usr/share/texmf/tex/generic/pgf/systemlayer/pgfsysprotocol.code.tex
+File: pgfsysprotocol.code.tex 2006/10/16  (rcs-revision 1.4)
+))
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcore.code.tex
+Package: pgfcore 2010/04/11 v2.10 (rcs-revision 1.7)
+
+(/usr/share/texmf/tex/generic/pgf/math/pgfmath.code.tex
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathcalc.code.tex
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathutil.code.tex)
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathparser.code.tex
+\pgfmath@dimen=\dimen145
+\pgfmath@count=\count126
+\pgfmath@box=\box33
+\pgfmath@toks=\toks40
+\pgfmath@stack@operand=\toks41
+\pgfmath@stack@operation=\toks42
+)
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathfunctions.code.tex
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathfunctions.basic.code.tex)
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathfunctions.trigonometric.code.tex)
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathfunctions.random.code.tex)
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathfunctions.comparison.code.tex)
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathfunctions.base.code.tex)
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathfunctions.round.code.tex)
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathfunctions.misc.code.tex)))
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathfloat.code.tex
+\c@pgfmathroundto@lastzeros=\count127
+))
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcorepoints.code.tex
+File: pgfcorepoints.code.tex 2010/04/09  (rcs-revision 1.20)
+\pgf@picminx=\dimen146
+\pgf@picmaxx=\dimen147
+\pgf@picminy=\dimen148
+\pgf@picmaxy=\dimen149
+\pgf@pathminx=\dimen150
+\pgf@pathmaxx=\dimen151
+\pgf@pathminy=\dimen152
+\pgf@pathmaxy=\dimen153
+\pgf@xx=\dimen154
+\pgf@xy=\dimen155
+\pgf@yx=\dimen156
+\pgf@yy=\dimen157
+\pgf@zx=\dimen158
+\pgf@zy=\dimen159
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcorepathconstruct.code.tex
+File: pgfcorepathconstruct.code.tex 2010/08/03  (rcs-revision 1.24)
+\pgf@path@lastx=\dimen160
+\pgf@path@lasty=\dimen161
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcorepathusage.code.tex
+File: pgfcorepathusage.code.tex 2008/04/22  (rcs-revision 1.12)
+\pgf@shorten@end@additional=\dimen162
+\pgf@shorten@start@additional=\dimen163
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcorescopes.code.tex
+File: pgfcorescopes.code.tex 2010/09/08  (rcs-revision 1.34)
+\pgfpic=\box34
+\pgf@hbox=\box35
+\pgf@layerbox@main=\box36
+\pgf@picture@serial@count=\count128
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcoregraphicstate.code.tex
+File: pgfcoregraphicstate.code.tex 2008/04/22  (rcs-revision 1.9)
+\pgflinewidth=\dimen164
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcoretransformations.code.tex
+File: pgfcoretransformations.code.tex 2009/06/10  (rcs-revision 1.11)
+\pgf@pt@x=\dimen165
+\pgf@pt@y=\dimen166
+\pgf@pt@temp=\dimen167
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcorequick.code.tex
+File: pgfcorequick.code.tex 2008/10/09  (rcs-revision 1.3)
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcoreobjects.code.tex
+File: pgfcoreobjects.code.tex 2006/10/11  (rcs-revision 1.2)
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcorepathprocessing.code.tex
+File: pgfcorepathprocessing.code.tex 2008/10/09  (rcs-revision 1.8)
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcorearrows.code.tex
+File: pgfcorearrows.code.tex 2008/04/23  (rcs-revision 1.11)
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex
+File: pgfcoreshade.code.tex 2008/11/23  (rcs-revision 1.13)
+\pgf@max=\dimen168
+\pgf@sys@shading@range@num=\count129
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex
+File: pgfcoreimage.code.tex 2010/03/25  (rcs-revision 1.16)
+
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcoreexternal.code.tex
+File: pgfcoreexternal.code.tex 2010/09/01  (rcs-revision 1.17)
+\pgfexternal@startupbox=\box37
+))
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcorelayers.code.tex
+File: pgfcorelayers.code.tex 2010/08/27  (rcs-revision 1.2)
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcoretransparency.code.tex
+File: pgfcoretransparency.code.tex 2008/01/17  (rcs-revision 1.2)
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcorepatterns.code.tex
+File: pgfcorepatterns.code.tex 2009/07/02  (rcs-revision 1.3)
+)))
+(/usr/share/texmf/tex/generic/pgf/modules/pgfmoduleshapes.code.tex
+File: pgfmoduleshapes.code.tex 2010/09/09  (rcs-revision 1.13)
+\pgfnodeparttextbox=\box38
+)
+(/usr/share/texmf/tex/generic/pgf/modules/pgfmoduleplot.code.tex
+File: pgfmoduleplot.code.tex 2010/10/22  (rcs-revision 1.8)
+)
+(/usr/share/texmf/tex/latex/pgf/compatibility/pgfcomp-version-0-65.sty
+Package: pgfcomp-version-0-65 2007/07/03 v2.10 (rcs-revision 1.7)
+\pgf@nodesepstart=\dimen169
+\pgf@nodesepend=\dimen170
+)
+(/usr/share/texmf/tex/latex/pgf/compatibility/pgfcomp-version-1-18.sty
+Package: pgfcomp-version-1-18 2007/07/23 v2.10 (rcs-revision 1.1)
+))
+(/usr/share/texlive/texmf-dist/tex/latex/tools/verbatim.sty
+Package: verbatim 2003/08/22 v1.5q LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks43
+\verbatim@line=\toks44
+\verbatim@in@stream=\read2
+)
+(/usr/share/texlive/texmf-dist/tex/latex/environ/environ.sty
+Package: environ 2013/04/01 v0.3 A new environment syntax
+
+(/usr/share/texlive/texmf-dist/tex/latex/trimspaces/trimspaces.sty
+Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
+))
+(/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2011/01/03 v2.1 e-TeX tools for LaTeX
+
+(/usr/share/texlive/texmf-dist/tex/latex/etex-pkg/etex.sty
+Package: etex 1998/03/26 v2.0 eTeX basic definition package (PEB)
+\et@xins=\count130
+)
+\etb@tempcnta=\count131
+)
+\tcb@titlebox=\box39
+\tcb@upperbox=\box40
+\tcb@lowerbox=\box41
+\tcb@phantombox=\box42
+\c@tcbbreakpart=\count132
+\c@tcblayer=\count133
+\tcb@temp=\box43
+\tcb@temp=\box44
+\tcb@temp=\box45
+\tcb@temp=\box46
+\tcb@out=\write4
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tcolorbox/tcblistings.code.tex
+Library (tcolorbox): 'tcblistings.code.tex' version '2.70'
+(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count134
+\lst@gtempboxa=\box47
+\lst@token=\toks45
+\lst@length=\count135
+\lst@currlwidth=\dimen171
+\lst@column=\count136
+\lst@pos=\count137
+\lst@lostspace=\dimen172
+\lst@width=\dimen173
+\lst@newlines=\count138
+\lst@lineno=\count139
+\lst@maxwidth=\dimen174
+
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2013/08/26 1.5b (Carsten Heinz)
+\c@lstnumber=\count140
+\lst@skipnumbers=\count141
+\lst@framebox=\box48
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2013/08/26 1.5b listings configuration
+))
+Package: listings 2013/08/26 1.5b (Carsten Heinz)
+
+(/usr/share/texlive/texmf-dist/tex/latex/tcolorbox/tcblistingscore.code.tex
+Library (tcolorbox): 'tcblistingscore.code.tex' version '2.70'
+)) (/usr/share/texlive/texmf-dist/tex/latex/tcolorbox/tcbbreakable.code.tex
+Library (tcolorbox): 'tcbbreakable.code.tex' version '2.70'
+\tcb@totalupperbox=\box49
+\tcb@totallowerbox=\box50
+) (/usr/share/texlive/texmf-dist/tex/latex/tcolorbox/tcbtheorems.code.tex
+Library (tcolorbox): 'tcbtheorems.code.tex' version '2.70'
+) (/usr/share/texlive/texmf-dist/tex/latex/pagenote/pagenote.sty
+Package: pagenote 2009/09/03 v1.1a page/end notes
+
+(/usr/share/texlive/texmf-dist/tex/latex/ifmtarg/ifmtarg.sty
+Package: ifmtarg 2009/09/02 v1.2a check for an empty argument
+)
+\c@pagenote=\count142
+\c@pnotesavechap=\count143
+)
+\@notefile=\write5
+\openout5 = `main.ent'.
+
+
+Writing note file main.ent
+(/usr/share/texlive/texmf-dist/tex/latex/adjustbox/adjustbox.sty
+Package: adjustbox 2012/05/21 v1.0 Adjusting TeX boxes (trim, clip, ...)
+
+(/usr/share/texlive/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+Package: xkeyval 2012/10/14 v2.6b package option processing (HA)
+
+(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+\XKV@toks=\toks46
+\XKV@tempa@toks=\toks47
+\XKV@depth=\count144
+File: xkeyval.tex 2012/10/14 v2.6b key=value parser (HA)
+))
+(/usr/share/texlive/texmf-dist/tex/latex/adjustbox/adjcalc.sty
+Package: adjcalc 2012/05/16 v1.1 Provides advanced setlength with multiple back
+-ends (calc, etex, pgfmath)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/adjustbox/trimclip.sty
+Package: trimclip 2012/05/16 v1.0 Trim and clip general TeX material
+
+(/usr/share/texlive/texmf-dist/tex/latex/collectbox/collectbox.sty
+Package: collectbox 2012/05/17 v0.4b Collect macro arguments as boxes
+\collectedbox=\box51
+)
+\tc@llx=\dimen175
+\tc@lly=\dimen176
+\tc@urx=\dimen177
+\tc@ury=\dimen178
+Package trimclip Info: Using driver 'tc-pdftex.def'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/adjustbox/tc-pdftex.def
+File: tc-pdftex.def 2012/05/13 v1.0 Clipping driver for pdftex
+))
+\adjbox@Width=\dimen179
+\adjbox@Height=\dimen180
+\adjbox@Depth=\dimen181
+\adjbox@Totalheight=\dimen182
+
+(/usr/share/texlive/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
+Package: ifoddpage 2011/09/13 v1.0 Conditionals for odd/even page detection
+\c@checkoddpage=\count145
+)
+(/usr/share/texlive/texmf-dist/tex/latex/varwidth/varwidth.sty
+Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
+\@vwid@box=\box52
+\sift@deathcycles=\count146
+\@vwid@loff=\dimen183
+\@vwid@roff=\dimen184
+))
+(/usr/share/texlive/texmf-dist/tex/latex/wrapfig/wrapfig.sty
+\wrapoverhang=\dimen185
+\WF@size=\dimen186
+\c@WF@wrappedlines=\count147
+\WF@box=\box53
+\WF@everypar=\toks48
+Package: wrapfig 2003/01/31  v 3.6
+)
+\c@tcb@cnt@_def=\count148
+\c@tcb@cnt@prop=\count149
+\c@tcb@cnt@_proof=\count150
+\c@tcb@cnt@remark=\count151
+\c@tcb@cnt@example=\count152
+\c@tcb@cnt@theorem=\count153
+\c@tcb@cnt@exercise=\count154
+\c@tcb@cnt@solution=\count155
+\c@tcb@cnt@algorithm=\count156
+ (./main.aux)
+\openout1 = `main.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 73.
+LaTeX Font Info:    ... okay on input line 73.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 73.
+LaTeX Font Info:    ... okay on input line 73.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 73.
+LaTeX Font Info:    ... okay on input line 73.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 73.
+LaTeX Font Info:    ... okay on input line 73.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 73.
+LaTeX Font Info:    ... okay on input line 73.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 73.
+LaTeX Font Info:    ... okay on input line 73.
+LaTeX Font Info:    Checking defaults for LGR/cmr/m/n on input line 73.
+LaTeX Font Info:    Try loading font information for LGR+cmr on input line 73.
+
+(/usr/share/texlive/texmf-dist/tex/latex/cbfonts-fd/lgrcmr.fd
+File: lgrcmr.fd 2013/09/01 v1.0 Greek European Computer Regular
+)
+LaTeX Font Info:    ... okay on input line 73.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 73.
+LaTeX Font Info:    ... okay on input line 73.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 73.
+LaTeX Font Info:    ... okay on input line 73.
+
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: a4paper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(72.2698pt, 452.96826pt, 72.2698pt)
+* v-part:(T,H,B)=(72.2698pt, 700.50723pt, 72.2698pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=452.96826pt
+* \textheight=700.50723pt
+* \oddsidemargin=-0.00018pt
+* \evensidemargin=-0.00018pt
+* \topmargin=-37.00018pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=12.0pt
+* \footskip=30.0pt
+* \marginparwidth=35.0pt
+* \marginparsep=10.0pt
+* \columnsep=10.0pt
+* \skip\footins=10.8pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/ucsencs.def
+File: ucsencs.def 2011/01/21 Fixes to fontencodings LGR, T3
+LGR\textpentedeka already defined.
+LGR\textpenteqilioi already defined.
+LGR\textpentemuria already defined.
+LGR\textstigma already defined.
+LGR\textqoppa already defined.
+LGR\texteuro already defined.
+LGR\textperthousand already defined.
+LGR\textquoteleft already defined.
+LGR\textquoteright already defined.
+LGR\u already defined.
+LGR\= already defined.
+LGR\" already defined.
+LGR\textpercent already defined.
+LGR\textperiodcentered already defined.
+LGR\' already defined.
+LGR\textanoteleia already defined.
+LGR\textAlpha already defined.
+LGR\textBeta already defined.
+LGR\textDelta already defined.
+LGR\textEpsilon already defined.
+LGR\textPhi already defined.
+LGR\textGamma already defined.
+LGR\textEta already defined.
+LGR\textIota already defined.
+LGR\textTheta already defined.
+LGR\textKappa already defined.
+LGR\textLambda already defined.
+LGR\textMu already defined.
+LGR\textNu already defined.
+LGR\textOmicron already defined.
+LGR\textPi already defined.
+LGR\textChi already defined.
+LGR\textRho already defined.
+LGR\textSigma already defined.
+LGR\textTau already defined.
+LGR\textUpsilon already defined.
+LGR\textOmega already defined.
+LGR\textXi already defined.
+LGR\textPsi already defined.
+LGR\textZeta already defined.
+LGR\` already defined.
+LGR\textalpha already defined.
+LGR\textbeta already defined.
+LGR\textvarsigma already defined.
+LGR\textdelta already defined.
+LGR\textepsilon already defined.
+LGR\textphi already defined.
+LGR\textgamma already defined.
+LGR\texteta already defined.
+LGR\textiota already defined.
+LGR\texttheta already defined.
+LGR\textkappa already defined.
+LGR\textlambda already defined.
+LGR\textmu already defined.
+LGR\textnu already defined.
+LGR\textomicron already defined.
+LGR\textpi already defined.
+LGR\textchi already defined.
+LGR\textrho already defined.
+LGR\textautosigma already defined.
+LGR\textsigma already defined.
+LGR\texttau already defined.
+LGR\textupsilon already defined.
+LGR\textomega already defined.
+LGR\textxi already defined.
+LGR\textpsi already defined.
+LGR\textzeta already defined.
+LGR\guillemotleft already defined.
+LGR\guillemotright already defined.
+LGR\~ already defined.
+LGR\textemdash already defined.
+LGR\textdigamma already defined.
+LGR\textDigamma already defined.
+LGR\textdexiakeraia already defined.
+LGR\textaristerikeraia already defined.
+
+fontencoding LGR patched
+)
+\AtBeginShipoutBox=\box54
+Package hyperref Info: Link coloring OFF on input line 73.
+ (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
+Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
+)
+\c@section@level=\count157
+)
+LaTeX Info: Redefining \ref on input line 73.
+LaTeX Info: Redefining \pageref on input line 73.
+LaTeX Info: Redefining \nameref on input line 73.
+
+(./main.out) (./main.out)
+\@outlinefile=\write6
+\openout6 = `main.out'.
+
+
+(/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count158
+\scratchdimen=\dimen187
+\scratchbox=\box55
+\nofMPsegments=\count159
+\nofMParguments=\count160
+\everyMPshowfont=\toks49
+\MPscratchCnt=\count161
+\MPscratchDim=\dimen188
+\MPnumerator=\count162
+\makeMPintoPDFobject=\count163
+\everyMPtoPDFconversion=\toks50
+) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
+
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
+)
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+ABD: EveryShipout initializing macros
+\c@lstlisting=\count164
+LaTeX Font Info:    Try loading font information for U+msa on input line 75.
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 75.
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) [1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./main.toc)
+\tf@toc=\write7
+\openout7 = `main.toc'.
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
+been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.76 \chapter
+             { Course: Introduction } [1
+
+]
+Chapter 1.
+(./pp:intro.tex
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.3 ...ys can we reverse a sequence of integers? }
+                                                  
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2013/08/26 1.5b listings language file
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang2.sty
+File: lstlang2.sty 2013/08/26 1.5b listings language file
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang3.sty
+File: lstlang3.sty 2013/08/26 1.5b listings language file
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2013/08/26 1.5b listings language file
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang2.sty
+File: lstlang2.sty 2013/08/26 1.5b listings language file
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang3.sty
+File: lstlang3.sty 2013/08/26 1.5b listings language file
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2013/08/26 1.5b listings language file
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang2.sty
+File: lstlang2.sty 2013/08/26 1.5b listings language file
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang3.sty
+File: lstlang3.sty 2013/08/26 1.5b listings language file
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2013/08/26 1.5b (Carsten Heinz)
+)
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 28.
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
+File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[2
+
+]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[3]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.125 \subsubsection*{ Why so many reversals? }
+                                               
+Titles must not be nested
+
+[4]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 135.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 135.
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.144 \subsubsection*{ How many other ways? }
+                                             
+Titles must not be nested
+
+[5]) [6]
+Chapter 2.
+! Extra }, or forgotten \endgroup.
+<recently read> }
+                 
+l.79 ...se: Side-effects and recursive functions }
+                                                  
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+(./pp:rec.tex
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1 \subsection*
+                { Side-effects }
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <20.74> not available
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 19.
+LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10.95> not available
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 19.
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[7
+
+]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing
+LaTeX Font Info:    Font shape `T1/cmtt/bx/it' in size <10.95> not available
+(Font)              Font shape `T1/cmtt/m/it' tried instead on input line 23.
+)
+[8]
+LaTeX Font Info:    Font shape `OMS/cmr/bx/n' in size <20.74> not available
+(Font)              Font shape `OMS/cmsy/b/n' tried instead on input line 83.
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.88 \subsubsection*
+                    { Side-effects may easily introduce bugs }
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[9]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.116 \subsubsection*
+                     { Side-effects may be unpredictable }
+Titles must not be nested
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 116--117
+
+ []
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[10]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.147 \subsection*
+                  { Recursion }
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.162 \subsubsection*
+                     { Recursion may be inefficient }
+Titles must not be nested
+
+[11]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.186 \subsubsection*
+                     { Solving the call explosion problem }
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[12]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[13]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[14]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.281 \subsection*
+                  { Higher-order functions }
+Titles must not be nested
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.283 \subsubsection*
+                     { Overview }
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[15]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[16]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.396 \subsubsection*
+                     { Question }
+Titles must not be nested
+
+[17]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.399 \subsection*
+                  { Programming with higher-order functions is difficult in C }
+
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.428 \subsection*
+                  { Introduction to Haskell }
+Titles must not be nested
+
+[18]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[19]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[20]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing))
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.81 \subsection{ Lab: Introduction to Haskell}
+                                               
+Titles must not be nested
+
+(./pp:l01.tex
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1 \section*
+             { Haskell: Introducere }
+Titles must not be nested
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-2.def
+File: uni-2.def 2013/05/13 UCS: Unicode data U+0200..U+02FF
+)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.5 \subsection*
+                { Introducere }
+Titles must not be nested
+
+LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <12> not available
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 7.
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-0.def
+File: uni-0.def 2013/05/13 UCS: Unicode data U+0000..U+00FF
+)
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-1.def
+File: uni-1.def 2013/05/13 UCS: Unicode data U+0100..U+01FF
+)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.9 \subsection*
+                { Platforma Haskell }
+Titles must not be nested
+
+[21]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.33 \subsection*
+                 { Tipuri de date în Haskell }
+Titles must not be nested
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 \subsubsection*
+                    { Tipuri de bază }
+Titles must not be nested
+
+[22]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.61 \subsubsection*
+                    { Liste }
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing
+LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <6> not available
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 2.
+)
+[23]
+Underfull \hbox (badness 1087) in paragraph at lines 81--82
+[]\T1/cmr/bx/n/20.74 Pentru a reprezenta []iruri de car-ac-tere,
+ []
+
+
+Underfull \hbox (badness 3108) in paragraph at lines 81--82
+\T1/cmtt/m/n/20.74 ['S', 't', 'r', 'i', 'n', 'g']\T1/cmr/bx/n/20.74 , care, la
+ []
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.84 \subsubsection*
+                    { Tupluri }
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[24]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.105 \subsection*
+                  { Funcții în Haskell }
+Titles must not be nested
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.107 \subsubsection*
+                     { Apelare }
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[25]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.149 \subsubsection*
+                     { Definirea unei funcții }
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[26]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+Underfull \hbox (badness 1147) in paragraph at lines 215--216
+[]\T1/cmr/bx/n/20.74 Observa[]i c�, acum, tipul ar�-tat de \T1/cmtt/m/n/20.74 :
+t
+ []
+
+[27]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.219 \subsubsection*
+                     { Pattern matching }
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[28]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.263 \subsubsection*
+                     { Tail recursion }
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[29]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.307 \subsection*
+                  { Exerciții }
+Titles must not be nested
+
+[30]
+Overfull \hbox (62.7449pt too wide) in paragraph at lines 312--313
+\T1/cmr/bx/n/20.74 Scrie[]i o im-ple-mentare straight-forward, f�r� restric[]ii
+,
+ []
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[31] (/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-34.def
+File: uni-34.def 2013/05/13 UCS: Unicode data U+2200..U+22FF
+)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.355 \subsubsection*
+                     { Linkuri utile }
+Titles must not be nested
+
+)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.83 \section{ Course: Higher-order functions}
+                                              
+Titles must not be nested
+
+(./pp:high.tex
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2 \subsection*
+                { Higher-order functions }
+Titles must not be nested
+
+[32]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.32 \subsubsection*
+                    { Currying }
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[33]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.61 \subsubsection*
+                    { Other higher-order functions }
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[34]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[35]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.137 \subsubsection*
+                     { Haskell implementation of foldl }
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[36]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.160 \subsubsection*
+                     { An exercise in modular programming with higher-order ...
+
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.173 ...graph{ Matrix representation in Haskell }
+                                                  \hfill\\
+Titles must not be nested
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 173--174
+
+ []
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[37]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.248 \paragraph{ Matrix multiplication }
+                                         \hfill\\
+Titles must not be nested
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 248--249
+
+ []
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.250 \subparagraph{ Step 1: Transposition }
+                                            \hfill\\
+Titles must not be nested
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 250--251
+
+ []
+
+[38]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.276 ...graph{ Step 2: Computing multiplication }
+                                                  \hfill\\
+Titles must not be nested
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 276--277
+
+ []
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[39]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.311 \paragraph{ Matrices as images }
+                                      \hfill\\
+Titles must not be nested
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 311--312
+
+ []
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[40]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing))
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.85 \subsection{ Lab: Higher-order functions}
+                                              
+Titles must not be nested
+
+(./pp:l02.tex
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1 \section*
+             { Funcții }
+Titles must not be nested
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.10 \subsection*
+                 { Funcții de ordin superior }
+Titles must not be nested
+
+[41]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[42]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.86 \subsection*
+                 { Currying vs. uncurrying }
+Titles must not be nested
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-33.def
+File: uni-33.def 2013/05/13 UCS: Unicode data U+2100..U+21FF
+) [43]
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+Underfull \hbox (badness 1221) in paragraph at lines 109--110
+\T1/cmtt/m/n/20.74 a ->Bool \T1/cmr/bx/n/20.74 (ia un ar-gu-ment []i �n-toarce 
+o
+ []
+
+[44]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+Underfull \hbox (badness 1052) in paragraph at lines 127--128
+[]\T1/cmr/bx/n/20.74 Func[]iile prim-ite, re-spec-tiv re-tur-nate de
+ []
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.147 \subsection*
+                  { Funcții anonime }
+Titles must not be nested
+
+[45]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-3.def
+File: uni-3.def 2013/05/13 UCS: Unicode data U+0300..U+03FF
+)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.188 \subsection*
+                  { Combinatori și închideri funcționale }
+Titles must not be nested
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 188--189
+
+ []
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[46]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[47]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+Overfull \hbox (68.82098pt too wide) in paragraph at lines 258--259
+[]\T1/cmr/bx/n/20.74 Mai multe de-talii teo-ret-ice de-spre �nchideri func[]ion
+ale,
+ []
+
+[48]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.263 \subsection*
+                  { Exerciții updated }
+Titles must not be nested
+
+[49]
+Overfull \hbox (72.99655pt too wide) in paragraph at lines 278--279
+\T1/cmr/bx/n/20.74 ("3", "3"), ("2", "1"), ("1", "2")] ->"313231332112" 
+ []
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.281 \subsection*
+                  { Exerciții}
+Titles must not be nested
+
+
+Overfull \hbox (67.8141pt too wide) in paragraph at lines 281--283
+[]\T1/cmr/bx/n/20.74 subsection[] Exerci[]ii 1. Defini[]i o �nchidere func[]ion
+al�
+ []
+
+[50]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.307 \subsection*
+                  { Linkuri utile }
+Titles must not be nested
+
+
+Overfull \hbox (71.09369pt too wide) in paragraph at lines 309--310
+[]\T1/cmtt/m/n/20.74 Hoogle - motor de c�utare pentru func[]ii Haskell
+ []
+
+)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.87 ...on{ Lab: Even more higher-order functions}
+                                                  
+Titles must not be nested
+
+(./pp:l03.tex
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1 \section*
+             { Aplicații cu funcții de ordin superior }
+Titles must not be nested
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.5 \subsection*
+                { Recapitulare }
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[51]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.17 \subsubsection*
+                    { Folduri }
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+Underfull \hbox (badness 1205) in paragraph at lines 30--31
+[]\T1/cmr/bx/n/20.74 O vari-ant� im-por-tant� a lui \T1/cmtt/m/n/20.74 foldl \T
+1/cmr/bx/n/20.74 este
+ []
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+<./media/:pp:fold-visualization.png, id=955, 803.0pt x 192.72pt>
+File: ./media/:pp:fold-visualization.png Graphic file (type png)
+
+<use ./media/:pp:fold-visualization.png>
+Package pdftex.def Info: ./media/:pp:fold-visualization.png used on input line 
+48.
+(pdftex.def)             Requested size: 802.99805pt x 192.71951pt.
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[52 <./media/:pp:fold-visualization.png>]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.72 \subsection*
+                 { Exerciții }
+Titles must not be nested
+
+[53]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.102 \subsection*
+                  { Resurse }
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[54])
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.89 ...{ Course: Types in functional programming}
+                                                  
+Titles must not be nested
+
+(./pp:types.tex
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1 \section*
+             { Types in functional programming }
+Titles must not be nested
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 89--2
+
+ []
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.3 \subsection*
+                { Typing in programming languages }
+Titles must not be nested
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.5 \subsubsection*
+                   { Strong vs weak typing }
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[55]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+Overfull \hbox (55.1706pt too wide) in paragraph at lines 41--42
+[]\T1/cmr/bx/n/20.74 where \T1/cmtt/m/n/20.74 + \T1/cmr/bx/n/20.74 is in-ter-pr
+eted as a unary op-er-a-tor. JavaScript
+ []
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.43 \paragraph{ Morale }
+                         \hfill\\
+Titles must not be nested
+
+[56]
+Underfull \hbox (badness 10000) in paragraph at lines 43--44
+
+ []
+
+[57] [58] [59]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+)
+(./main.listing)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.108 \subsubsection*
+                     { Compile-time vs runtime typing }
+Titles must not be nested
+
+[60] [61]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+)
+(./main.listing)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.160 \subsection*
+                  { Typing in Haskell }
+Titles must not be nested
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.162 \subsection*
+                  { Type inference in Haskell }
+Titles must not be nested
+
+
+Overfull \hbox (81.65895pt too wide) in paragraph at lines 164--165
+[]\T1/cmr/bx/n/20.74 Haskell im-ple-ments the  \T1/cmtt/m/n/20.74 Hindley-Milne
+r type inference
+ []
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.166 \subsubsection*
+                     { Intro }
+Titles must not be nested
+
+[62]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[63]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.198 \subsubsection*
+                     { Expression trees }
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[64]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.243 \subsubsection*
+                     { Typing rules }
+Titles must not be nested
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.247 \paragraph{ Rule (TVar) }
+                               \hfill\\
+Titles must not be nested
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 247--248
+
+ []
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.251 \paragraph{ Rule (TFun) }
+                               \hfill\\
+Titles must not be nested
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 251--252
+
+ []
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.255 \paragraph{ Rule (TApp) }
+                               \hfill\\
+Titles must not be nested
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 255--256
+
+ []
+
+[65]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.269 \subsubsection*
+                     { Type inference stage 1: Expression tree construction }
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.293 \subsubsection*
+                     { Type inference stage 2: Rule application }
+Titles must not be nested
+
+[66] [67]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+)
+(./main.listing))
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.91 \section{ Course: Abstract datatypes}
+                                          
+Titles must not be nested
+
+(./pp:adt.tex
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1 \subsection*
+                { Abstract Datatypes }
+Titles must not be nested
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 91--2
+
+ []
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.3 \subsubsection*
+                   { Intro }
+Titles must not be nested
+
+[68]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[69]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.48 \subsubsection*
+                    { Monomorphic List implementation }
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[70]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.87 \subsubsection*
+                    { Propositional Logic in Haskell }
+Titles must not be nested
+
+[71]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[72]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.160 \subsubsection*
+                     { Monomorphic Trees in Haskell }
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[73]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[74]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing))
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.93 \subsection{ Lab: Abstract datatypes}
+                                          
+Titles must not be nested
+
+(./pp:l04.tex
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1 \section*
+             { Tipuri de date abstracte }
+Titles must not be nested
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 \subsection*
+                 { Tipuri de date abstracte (TDA) }
+Titles must not be nested
+
+[75]
+Underfull \hbox (badness 3138) in paragraph at lines 19--21
+[]\T1/cmr/bx/n/20.74 Unii au-tori in-clud �n de-scrierea TDA-
+ []
+
+
+Underfull \hbox (badness 1803) in paragraph at lines 19--21
+\T1/cmr/bx/n/20.74 de vedere, im-ple-men-t�rile \T1/cmtt/m/n/20.74 LinkedList [
+]\T1/cmr/bx/n/20.74 i
+ []
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.24 \subsubsection*
+                    { Constructori }
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[76]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+Underfull \hbox (badness 1668) in paragraph at lines 95--96
+[]\T1/cmr/bx/n/20.74 Pe scurt, acest lu-cru �n-roleaz� TDA-ul
+ []
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[77]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.107 \subsubsection*
+                     { Înregistrări }
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[78]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.154 \subsection*
+                  { TDA-uri polimorfice }
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[79]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.193 \subsubsection*
+                     { Constante polimorfice }
+Titles must not be nested
+
+[80]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[81]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.265 \subsubsection*
+                     { Maybe și Either }
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[82]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[83]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.362 \subsubsection*
+                     { Exerciții }
+Titles must not be nested
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.368 \subparagraph{ 1. List }
+                              \hfill\\
+Titles must not be nested
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 368--369
+
+ []
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[84]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.385 \subparagraph{ 2. Tree }
+                              \hfill\\
+Titles must not be nested
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.387 \subparagraph{ 3. Numere naturale extinse }
+                                                 \hfill\\
+Titles must not be nested
+
+[85]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.392 \subparagraph{ 4. Înregistrări }
+                                        \hfill\\
+Titles must not be nested
+
+[86]
+Underfull \hbox (badness 10000) in paragraph at lines 392--393
+
+ []
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.404 \subsection*
+                  { Referințe }
+Titles must not be nested
+
+[87])
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.95 ...rse: Polymorphism in functional languages}
+                                                  
+Titles must not be nested
+
+(./pp:polymorphism.tex
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1 \section*
+             { Polymorphism in functional languages }
+Titles must not be nested
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.3 \subsection*
+                { Polymorphism in Object-Oriented languages }
+Titles must not be nested
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.13 \subsubsection*
+                    { Ad-hoc polymorphism }
+Titles must not be nested
+
+[88]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[89]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[90]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+Overfull \hbox (59.90195pt too wide) in paragraph at lines 134--135
+[]\T1/cmr/bx/n/20.74 Since \T1/cmtt/m/n/20.74 Who \T1/cmr/bx/n/20.74 im-ple-men
+ts both \T1/cmtt/m/n/20.74 Interface1 \T1/cmr/bx/n/20.74 and \T1/cmtt/m/n/20.74
+ Interface2\T1/cmr/bx/n/20.74 ,
+ []
+
+[91]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.170 \subsubsection*
+                     { Genericity }
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[92]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.224 \subsubsection*
+                     { Others }
+Titles must not be nested
+
+LaTeX Font Info:    Font shape `T1/cmtt/bx/it' in size <20.74> not available
+(Font)              Font shape `T1/cmtt/m/it' tried instead on input line 226.
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.228 \subsection*
+                  { Polymorphism in Haskell }
+Titles must not be nested
+
+[93]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.230 \subsubsection*
+                     { Parametric polymorphism }
+Titles must not be nested
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.249 \subsubsection*
+                     { Polymorphic types }
+Titles must not be nested
+
+[94]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[95]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[96]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.312 \paragraph{ Type constructors }
+                                     \hfill\\
+Titles must not be nested
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 312--313
+
+ []
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.322 \paragraph{ The List type constructor }
+                                             \hfill\\
+Titles must not be nested
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 322--323
+
+ []
+
+[97]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.338 \paragraph{ The Pair type constructor }
+                                             \hfill\\
+Titles must not be nested
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 338--339
+
+ []
+
+[98]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.369 \subsubsection*
+                     { Ad-hoc polymorphism }
+Titles must not be nested
+
+[99]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.377 \paragraph{ Towards type-classes }
+                                        \hfill\\
+Titles must not be nested
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 377--378
+
+ []
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[100]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[101]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.436 \paragraph{ Type-classes }
+                                \hfill\\
+Titles must not be nested
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 436--437
+
+ []
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[102]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[103]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[104]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing))
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.97 \subsection{ Lab: Haskell type-classes}
+                                            
+Titles must not be nested
+
+(./pp:l05.tex
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1 \section*
+             { Clase de tipuri (Type-classes) }
+Titles must not be nested
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 97--2
+
+ []
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.9 \subsection*
+                { Typeclasses }
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[105]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+Underfull \hbox (badness 10000) in paragraph at lines 59--60
+\T1/cmtt/m/n/20.74 data Color = Red |Green |Blue deriving
+ []
+
+[106]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.62 \subsection*
+                 { Constrângeri de clasă }
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[107]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.112 \subsection*
+                  { Clase de tipuri și tipuri de date polimorfice }
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[108]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.150 \subsection*
+                  { Informații despre clase în ghci }
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-32.def
+File: uni-32.def 2013/05/13 UCS: Unicode data U+2000..U+20FF
+)) [109]
+Overfull \hbox (260.24948pt too wide) in paragraph at lines 183--184
+\T1/cmr/bx/n/20.74 �n \T1/cmtt/m/n/20.74 GHC.Classes\T1/cmr/bx/n/20.74 : []$\T1
+/cmtt/m/n/20.74 https : / / githubcom$[]\T1/cmr/bx/n/20.74 /ghc/ghc/blob/master
+/libraries/ghc-
+ []
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.186 \subsection*
+                  { Exerciții }
+Titles must not be nested
+
+[110]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[111]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[112]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.254 \subsection*
+                  { Alte exerciții }
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.278 \subsection*
+                  { Resurse }
+Titles must not be nested
+
+[113])
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.99 ...arameter passing in Programming Languages}
+                                                  
+Titles must not be nested
+
+(./pp:c06.tex
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1 \section*
+             { Parameter passing in different programming languages }
+Titles must not be nested
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.11 \subsubsection*
+                    { Call-by-value }
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[114]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.36 \subsubsection*
+                    { Call-by-reference }
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.59 \subsubsection*
+                    { Call-by-macro expansion }
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[115]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.80 \subsubsection*
+                    { Call-by-name }
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[116]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.120 \subsubsection*
+                     { Call-by-need (lazy) }
+Titles must not be nested
+
+[117]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.133 \subsection*
+                  { Lazy evaluation in Haskell }
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[118]
+Overfull \hbox (71.09369pt too wide) in paragraph at lines 155--156
+[]\T1/cmtt/m/n/20.74 True && (False && (foldr (&&) True [True,True])) 
+ []
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+Overfull \hbox (71.09369pt too wide) in paragraph at lines 175--176
+[]\T1/cmtt/m/n/20.74 foldl (&&) ((True && True) && False) [True,True] 
+ []
+
+
+Overfull \hbox (50.48172pt too wide) in paragraph at lines 176--177
+[]\T1/cmtt/m/n/20.74 foldl (&&) (((True && True) && False) && True)
+ []
+
+
+Overfull \hbox (60.7877pt too wide) in paragraph at lines 177--178
+[]\T1/cmtt/m/n/20.74 foldl (&&) ((((True && True) && False) && True)
+ []
+
+[119])
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.101 ...tion{ Course: Lazy evaluation in Haskell}
+                                                  
+Titles must not be nested
+
+(./pp:c07.tex
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1 \section*
+             { Lazy Evaluation in Haskell }
+Titles must not be nested
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.3 \subsubsection*
+                   { Introduction }
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[120]
+Overfull \hbox (53.64882pt too wide) in paragraph at lines 20--21
+[]\T1/cmr/bx/n/20.74 First, note that \T1/cmtt/m/n/20.74 nats \T1/cmr/bx/n/20.7
+4 is a re-cur-sive non-terminating
+ []
+
+
+Overfull \hbox (53.10571pt too wide) in paragraph at lines 24--25
+[]\T1/cmr/bx/n/20.74 let \T1/cmtt/m/n/20.74 op = \x y->if x >2 then 0 else x+y\
+T1/cmr/bx/n/20.74 . Then,
+ []
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[121]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[122] [123]
+Overfull \hbox (89.7995pt too wide) in paragraph at lines 127--133
+\T1/cmr/bx/n/20.74 ||xs,ys |\T1/cmtt/m/n/20.74 1:(map (+1) nats) \T1/cmr/bx/n/2
+0.74 |un-eval-u-ated ||t |\T1/cmtt/m/n/20.74 (1+1):zipWith
+ []
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.143 \subsubsection*
+                     { Applications of normal evaluation }
+Titles must not be nested
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.145 \subsubsection*
+                     { Dynamic programming - edit distance }
+Titles must not be nested
+
+[124] [125]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.169 \subsubsection*
+                     { Functional implementation }
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.180 \section*
+               { References }
+Titles must not be nested
+
+)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.103 ...tion{ Lab: Haskell and Scheme evaluation}
+                                                  
+Titles must not be nested
+
+(./pp:l06.tex
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1 \subsection*
+                { Întârzierea evaluării }
+Titles must not be nested
+
+[126]
+Overfull \hbox (81.39967pt too wide) in paragraph at lines 14--15
+[] \T1/cmtt/m/n/20.74 C06: Parameter passing in Programming Languages
+ []
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.23 \subsection*
+                 {Moduri de evaluare a unei expresii: }
+Titles must not be nested
+
+[127]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.29 \subsubsection*
+                    {Evaluare aplicativă vs. evaluare normală}
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing
+LaTeX Font Info:    Try loading font information for LGR+cmtt on input line 1.
+
+(/usr/share/texlive/texmf-dist/tex/latex/cbfonts-fd/lgrcmtt.fd
+File: lgrcmtt.fd 2013/09/01 v1.0 Greek European Computer Typewriter
+)
+LaTeX Font Info:    Font shape `LGR/cmtt/bx/n' in size <10.95> not available
+(Font)              Font shape `LGR/cmtt/m/n' tried instead on input line 1.
+)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+LaTeX Font Info:    Font shape `LGR/cmtt/bx/n' in size <20.74> not available
+(Font)              Font shape `LGR/cmtt/m/n' tried instead on input line 46.
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.48 \subsubsection*
+                    {Evaluare aplicativă}
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[128]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.60 \subsubsection*
+                    {Evaluare normală}
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.73 \subsubsection*
+                    {Exerciții:}
+Titles must not be nested
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.76 \paragraph{ I. Șiruri }
+                             \hfill\\
+Titles must not be nested
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 76--77
+
+ []
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.82 \paragraph{ II. Aproximații }
+                                   \hfill\\
+Titles must not be nested
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 82--83
+
+ []
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[129]
+Overfull \hbox (110.01755pt too wide) in paragraph at lines 102--103
+\T1/cmr/bx/n/20.74 mar-ilor lui \T1/cmtt/m/n/20.74 f'(a)\T1/cmr/bx/n/20.74 , ca
+l-cu-late ast-fel: $\OML/cmm/m/it/20.74 f[]\OT1/cmr/m/n/20.74 (\OML/cmm/m/it/20
+.74 a\OT1/cmr/m/n/20.74 ) = [] []$ 
+ []
+
+[130])
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.105 \section{ Course: The Lambda Calculus}
+                                            
+Titles must not be nested
+
+(./pp:lambda.tex
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1 \section*
+             { The Lambda Calculus }
+Titles must not be nested
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.3 \subsection*
+                { A brief history }
+Titles must not be nested
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 \subsection*
+                { Intuition }
+Titles must not be nested
+
+[131]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.13 \subsection*
+                 { Syntax }
+Titles must not be nested
+
+[132]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 \subsubsection*
+                    { What is a lambda-expression? }
+Titles must not be nested
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.48 \subsection*
+                 { The semantics of the Lambda Calculus }
+Titles must not be nested
+
+[133]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.50 \subsubsection*
+                    { Step 1: reduction }
+Titles must not be nested
+
+[134]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.93 \paragraph{ Free and bound variables }
+                                           \hfill\\
+Titles must not be nested
+
+[135]
+Underfull \hbox (badness 10000) in paragraph at lines 93--94
+
+ []
+
+[136] [137]
+
+LaTeX Warning: Command \textbackslash invalid in math mode on input line 149.
+
+[138]
+Overfull \hbox (112.15297pt too wide) in paragraph at lines 158--159
+[]\T1/cmr/bx/n/20.74 * c1'. $\OMS/cmsy/m/n/20.74 f\OML/cmm/m/it/20.74 ^^Uy:body
+\OMS/cmsy/m/n/20.74 g\OT1/cmr/m/n/20.74 [\OML/cmm/m/it/20.74 par=x$ \T1/cmr/bx/
+n/20.74 = \lambda y.body[par/x]$\OML/cmm/m/it/20.74 if$\T1/cmr/bx/n/20.74 math[
+x
+ []
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.162 \subsubsection*
+                     { Step 2. reduction order(s) }
+Titles must not be nested
+
+[139]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.185 \paragraph{ Theorem (Church Rosser) }
+                                           \hfill\\
+Titles must not be nested
+
+[140]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.207 \paragraph{ Applicative evaluation }
+                                          \hfill\\
+Titles must not be nested
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 207--208
+
+ []
+
+[141] [142]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.243 \paragraph{ Normal evaluation }
+                                     \hfill\\
+Titles must not be nested
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 243--244
+
+ []
+
+[143]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.261 \paragraph{ Lazy evaluation }
+                                   \hfill\\
+Titles must not be nested
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 261--262
+
+ []
+
+[144]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.295 \subsection*
+                  { The Lambda Calculus as a programming language }
+Titles must not be nested
+
+[145])
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.107 ...n{ H01: Haskell Lazy Dynamic Programming}
+                                                  
+Titles must not be nested
+
+(./pp:h01.tex) [146]
+Chapter 3.
+! Argument of \ttlh@hang has an extra }.
+<inserted text> 
+                \par 
+l.109 \chapter{Logic programming}
+                                 
+I've run across a `}' that doesn't seem to match anything.
+For example, `\def\a#1{...}' and `\a}' would produce
+this error. If you simply proceed now, the `\par' that
+I've just inserted will cause me to report a runaway
+argument that might be the root of the problem. But if
+your `}' was spurious, just type `2' and it will go away.
+
+Runaway argument?
+! Paragraph ended before \ttlh@hang was complete.
+<to be read again> 
+                   \par 
+l.109 \chapter{Logic programming}
+                                 
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+Runaway argument?
+! Paragraph ended before \ttl@mkchap was complete.
+<to be read again> 
+                   \par 
+l.109 \chapter{Logic programming}
+                                 
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.110 \section{ Course: Introduction to Prolog}
+                                               
+Titles must not be nested
+
+(./pp:c08.tex
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1 \section*
+             { Introduction to Prolog }
+Titles must not be nested
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.3 \subsection*
+                { The basics }
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.29 \subsubsection*
+                    { Atoms }
+Titles must not be nested
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.34 \subsubsection*
+                    { Relations }
+Titles must not be nested
+
+[147
+
+]
+Overfull \hbox (295.38356pt too wide) in paragraph at lines 38--39
+\T1/cmr/bx/n/20.74 la-tions. Math-e-mat-i-cally, :$\OML/cmm/m/it/20.74 studies 
+\OT1/cmr/m/n/20.74 = \OMS/cmsy/m/n/20.74 f\OT1/cmr/m/n/20.74 (\OML/cmm/m/it/20.
+74 gigel; aa\OT1/cmr/m/n/20.74 )\OML/cmm/m/it/20.74 ; \OT1/cmr/m/n/20.74 (\OML/
+cmm/m/it/20.74 mary; pp\OT1/cmr/m/n/20.74 )\OML/cmm/m/it/20.74 ; \OT1/cmr/m/n/2
+0.74 (\OML/cmm/m/it/20.74 mary; aa\OT1/cmr/m/n/20.74 )\OML/cmm/m/it/20.74 ; \OT
+1/cmr/m/n/20.74 (\OML/cmm/m/it/20.74 john; pp\OT1/cmr/m/n/20.74 )\OMS/cmsy/m/n/
+20.74 g$ 
+ []
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.40 \subsubsection*
+                    { Queries }
+Titles must not be nested
+
+[148]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.56 \subsubsection*
+                    { Clauses }
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.75 \subsubsection*
+                    { Re-satisfaction }
+Titles must not be nested
+
+[149]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+Overfull \hbox (87.45404pt too wide) in paragraph at lines 95--96
+[]\T1/cmr/bx/n/20.74 however fol-low-ing the in-ter-ro-ga-tion \T1/cmtt/m/n/20.
+74 -? lectureOfTwo(L)\T1/cmr/bx/n/20.74 ,
+ []
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[150]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.121 \subsubsection*
+                     { Proof trees }
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[151]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.173 \subsection*
+                  { Prolog programming }
+Titles must not be nested
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.175 \subsubsection*
+                     { Instantiating variables }
+Titles must not be nested
+
+[152]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.203 \subsubsection*
+                     { Representations - lists }
+Titles must not be nested
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.205 \paragraph{ The idea }
+                            \hfill\\
+Titles must not be nested
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 205--206
+
+ []
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[153]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[154]
+Overfull \hbox (82.55267pt too wide) in paragraph at lines 250--251
+[]\T1/cmr/bx/n/20.74 example: \T1/cmtt/m/n/20.74 -? L = cons(1,cons(0,void)), h
+ead(L,H). 
+ []
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[155]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.283 \paragraph{ Actual Prolog lists }
+                                       \hfill\\
+Titles must not be nested
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 283--284
+
+ []
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.307 \subsubsection*
+                     { List membership }
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[156]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.342 \paragraph{ List reversing }
+                                  \hfill\\
+Titles must not be nested
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 342--343
+
+ []
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[157]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.378 \subsubsection*
+                     { Take-away }
+Titles must not be nested
+
+[158])
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.112 \subsection{ Lab: Prolog 101}
+                                   
+Titles must not be nested
+
+(./pp:l07.tex
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1 \subsection*
+                { Laborator 7 - Prolog: Introducere }
+Titles must not be nested
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2 \subsubsection*
+                   { Despre Prolog }
+Titles must not be nested
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.6 \subsubsection*
+                   { Structura unui program Prolog }
+Titles must not be nested
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.15 \subsubsection*
+                    { Fapte }
+Titles must not be nested
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.20 \subsubsection*
+                    { Interogari }
+Titles must not be nested
+
+[159]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.23 \subsubsection*
+                    { Reguli }
+Titles must not be nested
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 22--24
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 22--24
+
+ []
+
+[160]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.27 \subsubsection*
+                    { Exemplu }
+Titles must not be nested
+
+[161]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.41 \subsubsection*
+                    { Variabile }
+Titles must not be nested
+
+
+Overfull \hbox (63.66689pt too wide) in paragraph at lines 37--46
+\T1/cmr/bx/n/20.74 mama(Mama):- fe-meie(Mama), par-inte(Mama,Copil).
+ []
+
+
+Overfull \hbox (116.45496pt too wide) in paragraph at lines 37--46
+\T1/cmr/bx/n/20.74 Sa ob-ser-vam ur-ma-toarea reg-ula: compute_sum(A,B,Sum):-
+ []
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.47 \subsubsection*
+                    { Liste }
+Titles must not be nested
+
+[162]
+Overfull \vbox (539.88557pt too high) has occurred while \output is active []
+
+
+[163]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[164]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[165]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.133 \subsubsection*
+                     { Exercitii liste \& diverse }
+Titles must not be nested
+
+
+Overfull \hbox (66.1223pt too wide) in paragraph at lines 146--147
+[]\T1/cmr/bx/n/20.74 Idenficati pred-i-catele nece-sare, ar-i-tatea fiecaruia,
+ []
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.150 \subsubsection*
+                     { Arbori }
+Titles must not be nested
+
+[166]
+Overfull \hbox (56.62932pt too wide) in paragraph at lines 153--154
+[]\T1/cmr/bx/n/20.74 Implementati pred-i-catele \T1/cmtt/m/n/20.74 size(T,S) \T
+1/cmr/bx/n/20.74 si \T1/cmtt/m/n/20.74 height(T,H)\T1/cmr/bx/n/20.74 . 
+ []
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.157 \subsubsection*
+                     { Reprezentarea datelor in Prolog }
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.175 \subsubsection*
+                     { Resurse (functii matematice) }
+Titles must not be nested
+
+)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.114 ...rse: Clauses, unification, cut, negation}
+                                                  
+Titles must not be nested
+
+(./pp:c09.tex
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1 \section*
+             { Formal syntax, Unification, Backtracking, Cut, Negation }
+Titles must not be nested
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.3 \subsection*
+                { Prolog syntax }
+Titles must not be nested
+
+[167]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[168]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.53 \subsubsection*
+                    { Shorthands }
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[169]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.96 \subsubsection*
+                    { Common pitfalls }
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.114 \subsection*
+                  { Unification }
+Titles must not be nested
+
+[170]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.123 \subsubsection*
+                     { Unification rules }
+Titles must not be nested
+
+
+Overfull \hbox (162.95155pt too wide) in paragraph at lines 133--134
+[]$[]$ 
+ []
+
+[171]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.143 \subsubsection*
+                     { Recursive substitutions }
+Titles must not be nested
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.147 \subsubsection*
+                     { Goal satisfaction (Backtracking) }
+Titles must not be nested
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 147--148
+
+ []
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+Overfull \hbox (86.46098pt too wide) in paragraph at lines 161--162
+[]\T1/cmr/bx/n/20.74 The ex-e-cu-tion tree for the goal \T1/cmtt/m/n/20.74 -? c
+ontains(2,[1,2,3]).
+ []
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[172]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.203 \paragraph{ Backtracking }
+                                \hfill\\
+Titles must not be nested
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 203--204
+
+ []
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.207 \subsubsection*
+                     { Cut (!) - pruning the goal tree }
+Titles must not be nested
+
+[173]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[174]
+\openout4 = `main.listing'.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+Overfull \hbox (96.88309pt too wide) in paragraph at lines 286--287
+\T1/cmr/bx/n/20.74 se-man-tics: \T1/cmtt/m/n/20.74 q(X,Y) \T1/cmr/bx/n/20.74 wi
+ll not be sat-is-fied for $\OMS/cmsy/m/n/20.74 f\OML/cmm/m/it/20.74 test=X; tes
+t=Y\OMS/cmsy/m/n/20.74 g$\T1/cmr/bx/n/20.74 .
+ []
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+\openout4 = `main.listing'.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[175]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.310 \subsubsection*
+                     { Negation }
+Titles must not be nested
+
+\openout4 = `main.listing'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+) (./main.listing)
+[176])
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.116 \subsection{ Lab: Prolog 102}
+                                   
+Titles must not be nested
+
+(./pp:l08.tex
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1 \subsection*
+                { Laborator 08 - Programare in Prolog }
+Titles must not be nested
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.3 \subsubsection*
+                   { Multimi }
+Titles must not be nested
+
+[177]
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.11 \subsubsection*
+                    { Permutari, Aranjamente, Combinari }
+Titles must not be nested
+
+)
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.118 \subsection{ Lab: Prolog graphs}
+                                      
+Titles must not be nested
+
+(./pp:l09.tex [178]
+Overfull \hbox (303.13136pt too wide) in paragraph at lines 7--14
+\T1/cmr/bx/n/20.74 [8,gal-ben], [9,al-bas-tru], [10,mov] ], [ [1,2],[1,3],[2,6]
+,[3,2],[3,4],[4,5],[5,6],[5,7],[5,8],
+ []
+
+
+! Package titlesec Error: Nested titles.
+
+See the titlesec package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.15 \subsubsection*
+                    { Exerciții }
+Titles must not be nested
+
+[179]) [180]
+Chapter 4.
+! Argument of \ttlh@hang has an extra }.
+<inserted text> 
+                \par 
+l.122 \end
+          {document}
+I've run across a `}' that doesn't seem to match anything.
+For example, `\def\a#1{...}' and `\a}' would produce
+this error. If you simply proceed now, the `\par' that
+I've just inserted will cause me to report a runaway
+argument that might be the root of the problem. But if
+your `}' was spurious, just type `2' and it will go away.
+
+Runaway argument?
+! Paragraph ended before \ttlh@hang was complete.
+<to be read again> 
+                   \par 
+l.122 \end
+          {document}
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+Runaway argument?
+! Paragraph ended before \ttl@mkchap was complete.
+<to be read again> 
+                   \par 
+l.122 \end
+          {document}
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+(./main.ent)
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 122.
+
+
+Package hyperref Warning: The anchor of a bookmark and its parent's must not
+(hyperref)                be the same. Added a new anchor on input line 122.
+
+[181
+
+]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 122.
+ (./main.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 122.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 122.
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: 75ECF7FD191798F2E5EAB5ACE93A9035;2031.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 122.
+ )
+(\end occurred inside a group at level 2)
+
+### simple group (level 2) entered at line 79 ({)
+### semi simple group (level 1) entered at line 79 (\begingroup)
+### bottom level 
+Here is how much of TeX's memory you used:
+ 29574 strings out of 493304
+ 474907 string characters out of 6139871
+ 673851 words of memory out of 5000000
+ 29644 multiletter control sequences out of 15000+600000
+ 27687 words of font info for 79 fonts, out of 8000000 for 9000
+ 957 hyphenation exceptions out of 8191
+ 78i,9n,152p,947b,2921s stack positions out of 5000i,500n,10000p,200000b,80000s
+pdfTeX warning (dest): name{Hfootnote.53} has been referenced b
+ut does not exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.52} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.51} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.50} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.49} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.48} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.47} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.46} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.45} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.44} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.43} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.42} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.41} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.40} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.39} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.38} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.37} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.36} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.35} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.34} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.33} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.32} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.31} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.30} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.29} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.28} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.27} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.26} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.25} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.24} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.23} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.22} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.21} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.20} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.19} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.18} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.17} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.16} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.15} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.14} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.13} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.12} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.11} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.10} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.9} has been referenced but does not exist
+, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.8} has been referenced but does not exist
+, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.7} has been referenced but does not exist
+, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.6} has been referenced but does not exist
+, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.5} has been referenced but does not exist
+, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.4} has been referenced but does not exist
+, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.3} has been referenced but does not exist
+, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.2} has been referenced but does not exist
+, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exist
+, replaced by a fixed one
+
+pdfTeX warning (dest): name{lstnumber.-226.3} has been referenced but does not 
+exist, replaced by a fixed one
+
+{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texlive/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmbsy10.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/c
+bfonts/grxn2074.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cbfonts/g
+ttn1095.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cbfonts/gttn2074.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.p
+fb></usr/share/texmf/fonts/type1/public/cm-super/sfbi1200.pfb></usr/share/texmf
+/fonts/type1/public/cm-super/sfbi2074.pfb></usr/share/texmf/fonts/type1/public/
+cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pf
+b></usr/share/texmf/fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf/
+fonts/type1/public/cm-super/sfbx2074.pfb></usr/share/texmf/fonts/type1/public/c
+m-super/sfit1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfit2074.pfb
+></usr/share/texmf/fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/texmf/f
+onts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm
+-super/sfrm1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm2074.pfb>
+</usr/share/texmf/fonts/type1/public/cm-super/sfti1200.pfb></usr/share/texmf/fo
+nts/type1/public/cm-super/sftt0800.pfb></usr/share/texmf/fonts/type1/public/cm-
+super/sftt1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1200.pfb><
+/usr/share/texmf/fonts/type1/public/cm-super/sftt2074.pfb>
+Output written on main.pdf (182 pages, 823518 bytes).
+PDF statistics:
+ 2927 PDF objects out of 2984 (max. 8388607)
+ 2688 compressed objects within 27 object streams
+ 1755 named destinations out of 2073 (max. 500000)
+ 90 words of extra memory for PDF output out of 10000 (max. 10000000)
+

@@ -1,0 +1,9 @@
+\contentsline {chapter}{\numberline {1} Course: Introduction }{2}{chapter.1}
+\contentsline {chapter}{\numberline {2}Functional Programming }{7}{chapter.2}
+\contentsline {section}{\numberline {2.1} Course: Side-effects and recursive functions }{7}{section.2.1}
+\contentsline {section}{ Course: Side-effects and recursive functions }{146}{lstnumber.-226.3}
+\contentsline {chapter}{\numberline {3}Logic programming}{147}{chapter.3}
+\contentsline {section}{\numberline {3.0} Course: Side-effects and recursive functions }{180}{Item.41}
+\contentsline {section}{ Course: Side-effects and recursive functions }{181}{Item.41}
+\contentsline {chapter}{\numberline {4}Notes}{181}{chapter.4}
+\contentsline {section}{\numberline {4.0} Course: Side-effects and recursive functions }{181}{section*.2}

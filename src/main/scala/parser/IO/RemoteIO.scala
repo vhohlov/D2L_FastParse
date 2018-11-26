@@ -17,6 +17,7 @@ class RemoteIO extends IO {
   var serverPath: Option[String] = None
   var dokuPath: Option[String] = None
   var localRepoPath: File = _
+  var mainPath: File = _
 
 
   def apply(link: String) = {
@@ -196,7 +197,7 @@ class RemoteIO extends IO {
 
     try {
       val response: HttpResponse[String] = Http(serverPath.get + export + dokuPath.get + fileName.get).asString
-      (s"$localRepoPath/DokuWiki/$dokuSrc").toFile.createIfNotExists().overwrite(response.body)
+      //(s"$localRepoPath/DokuWiki/$dokuSrc").toFile.createIfNotExists().overwrite(response.body)
       Some(response.body)
     }
     catch {
@@ -213,10 +214,12 @@ class RemoteIO extends IO {
       localRepoPath = ("./tests/" + file + "_LaTex").toFile.createIfNotExists(true)
 
       //create DokuWiki src directory
-      (s"$localRepoPath/DokuWiki").toFile.createIfNotExists(true)
+      //(s"$localRepoPath/DokuWiki").toFile.createIfNotExists(true)
 
       //create media directory
       (s"$localRepoPath/media").toFile.createIfNotExists(true)
+
+      mainPath = (s"$localRepoPath/main.tex").toFile.createIfNotExists()
 
       Some(localRepoPath)
     }
@@ -227,7 +230,7 @@ class RemoteIO extends IO {
   }
 
   def writeMedia(file: String) = {
-    println("file to get: " + serverPath.get + media + file);
+    println("[Download] File: " + serverPath.get + media + file);
     try {
       val resp: HttpResponse[Array[Byte]] = Http(serverPath.get + media + file).asBytes
       var path: File = (s"$localRepoPath/media/$file").toFile.createIfNotExists()
@@ -239,9 +242,9 @@ class RemoteIO extends IO {
     }
   }
 
- def writeTexSrc(texSrc:String)  = {
+ def writeTexSrc(texSrc:String, fileName: String)  = {
 
-   var texFile = fileName.get + ".tex"
+   var texFile = fileName + ".tex"
 
    try {
      (s"$localRepoPath/$texFile").toFile.createIfNotExists().overwrite(texSrc)
@@ -251,6 +254,31 @@ class RemoteIO extends IO {
        None
    }
  }
+
+  def writeMain(text:String) = {
+    try {
+      mainPath.append(text)
+    }
+    catch {
+      case e: Any => println(s"Main file write data exception: $e")
+        None
+    }
+  }
+
+  def getLinkContent(path:String): Option[String] = {
+    var downloadPath = serverPath.get + export + dokuPath.get + path
+
+    println("[Download] Address: " + downloadPath)
+
+    try {
+      val response: HttpResponse[String] = Http(downloadPath).asString
+      Some(response.body)
+    }
+    catch {
+      case e: Any => println(s"content download exception $e")
+        None
+    }
+  }
 
   def getDokuAddress(): String = {
     serverPath.get + "doku.php?id="

@@ -1,0 +1,371 @@
+
+\subsection*{ Higher-order functions }
+
+In our previous examples, we have seen functions such as \texttt{(+)} or \texttt{(*)} which are passed as parameter to other functions, e.g. \texttt{foldr}. \textit{A function which expects another function as parameter is called a \textbf{higher-order function}}.
+
+One distinctive functional programming trait relies on defining and using higher-order functions. Haskell makes this programming style very natural.
+
+Functions can be defined in several ways, e.g.
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+f x = x + 1
+
+\end{tcblisting}
+
+as \textbf{anonymous functions}:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+f = \x -> x + 1
+
+\end{tcblisting}
+
+(which is read \textit{"lambda x ..."}) or using \textbf{pattern matching}:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+f 0 = 1
+f 1 = 2
+f 2 = 3
+
+\end{tcblisting}
+
+
+\subsubsection*{ Currying }
+
+Consider the following function definitions:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+f1 x y = x + y
+f2 x = \y -> x + y
+f3 = \x -> \y -> x + y
+f4 = \x y -> x + y
+
+\end{tcblisting}
+
+
+Read syntactically:
+\begin{itemize}
+	\item  the first function expects two parameters and returns their additions
+	\item  the second function \textbf{returns a function which adds y to x}. For instance \texttt{(f2 4)} is a function which adds \texttt{4} to an integer
+	\item  the third function is similar to the previous one, but defined as an anonymous function
+	\item  the fourth function is an anonymous function definition with two parameters
+\end{itemize}
+
+\textbf{There is no conceptual or functional difference between \textit{any} of the above definitions}. From a \textit{Haskell compiler's view} all function definitions look exactly as the third one. For instance, \texttt{(f1 1)} is a correct function call which will return a function adding \texttt{1} to its parameter. \texttt{(f1 1)} is called a \textbf{functional closure}, because it creates (closes) a context in which the first parameter is equal to the value \texttt{1}.
+
+At the same time, the function call \texttt{((f1 1) 2)} is correct, returns \texttt{3}, and is equivalent to \texttt{(f1 1 2)}.
+
+More generally, functions defined as \texttt{f2} or \texttt{f3} are called \textbf{curried (or curry) functions} (in honor of Haskell Curry, a mathematician which contributed to functional programming) --- they receive parameters \textit{in turn}. The other definitions are called \textbf{uncurried}.
+
+We again stress that, in Haskell, there is no difference between curried and uncurried functions. This is \textbf{not the case} in other functional languages, e.g. Lisp, Scheme.
+
+\subsubsection*{ Other higher-order functions }
+
+Imagine we want to do a certain computation on each member of a list, individually. Let's say, double each element. If we think functionally, we want to take a list \texttt{[a,b,c, ...]}, a function \texttt{f}, and build the list:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+[f a, f b, f c, ...]
+
+\end{tcblisting}
+
+
+It turns out we can write such a function relying on fold:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+pp_map f = foldr (\x y->(f x):y) []
+
+\end{tcblisting}
+
+
+
+There is also a shorter way to write \texttt{pp\_map}:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+pp_map f = foldr ((:).f) []
+
+\end{tcblisting}
+
+
+In the expression \texttt{(:).f}, \texttt{.} (the dot) stands for functional composition. Consider the anonymous function:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+\x->x+1
+
+\end{tcblisting}
+
+which takes a parameter \texttt{x} and returns its natural successor. We can compose it as follows:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+(\x -> 2*x).(\x->x+1)
+
+\end{tcblisting}
+
+to obtain the function \texttt{\textbackslash x -\textgreater  2*(x+1)}. In general, the function call \texttt{(f.g) x} is equivalent to \texttt{f (g x)}.
+
+To understand \texttt{(:).f} let us write the cons \texttt{(:)} as an anonymous function:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+\h t -> h:t
+
+\end{tcblisting}
+
+Hence, the following expressions are equivalent:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+((:).f)
+((\h t -> h:t).f)
+((\h->\t->h:t).f)
+(\t->(f h):t)
+
+\end{tcblisting}
+ 
+
+A natural mistake is to consider \texttt{((:).f)} as invalid, since it receives two parameters, and we cannot compose such a function with one receiving only one parameter. However, every function in Haskell receives one parameter and returns \textbf{a value} (which can be a function or a primitive value).
+
+There are other examples of useful higher-order functions. We illustrate them using examples:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+filter (>3) [1,2,3,4,5,2]
+zipWith (+) [1,2,3] [3,2,1]
+
+\end{tcblisting}
+
+
+Guess what each function does, by testing it on several lists.
+
+\subsubsection*{ Haskell implementation of foldl }
+
+In the previous lecture, we have defined the fold left procedure as:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+foldl op acc []     = acc                  
+foldl op acc (h:t) = foldl op (op h acc) t
+
+\end{tcblisting}
+
+
+Instead, in Haskell, \texttt{foldl} is implemented as follows:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+foldl op acc []     = acc                  
+foldl op acc (h:t) = foldl op (op acc h) t
+
+\end{tcblisting}
+
+
+Note the call of the \texttt{op} function.
+
+\subsubsection*{ An exercise in modular programming with higher-order functions }
+
+Let us consider the task of matrix multiplication in Haskell. Example:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+  1   2   3            1   0   0         1+3  2  2+3      4   2   5
+  4   5   6      x     0   1   1     =   4+6  5  5+6  =   10  5   11
+  7   8   9            1   0   1         7+9  8  8+9      16  8   17
+
+\end{tcblisting}
+
+
+
+\paragraph{ Matrix representation in Haskell }\hfill\\
+
+The basic representation building-block in Haskell is the list. We can represent matrices in Haskell as a list where each element is a row (hence a list of elements). Example:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+m = [[1,2,3],[4,5,6],[7,8,9]]
+
+\end{tcblisting}
+
+
+A good warmup exercise is to write a nice display function for matrices. We transform each element of a line into a string:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+displayline l = map (\e->(show e)++" ") l
+
+\end{tcblisting}
+
+
+The code can be improved for legibility:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+displayline = map ((++" ").show) 
+
+\end{tcblisting}
+
+
+
+Next, we fold the list into a string with a newline character: 
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+displayline l = foldr (++) "\n" (map ((++" ").show) l)
+
+\end{tcblisting}
+
+
+and simplify again, by expressing the pipeline function calls as functional composition:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+displayline :: Show a => [a] -> [Char]
+displayline = (foldr (++) "\n") .  (map ( (++ " ") . show ) )
+
+\end{tcblisting}
+
+
+Note that we need to explicitly state the type of display. Sometimes, in Haskell, an explicit type declaration is required. For now, we omit details.
+
+Next, we apply the above process on all matrix lines:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+display :: Show a => [[a]] -> [[Char]]
+display = 
+    let bind = foldr (++) "\n"
+    in bind.(map (bind . (map ((++" ") . show ) ) ) )
+
+\end{tcblisting}
+
+
+Notice that we have separated the binding process, because we reuse it.
+
+Finally, we make all matrices displayable:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+instance (Show a) => Show [[a]] where
+    show = 
+        let bind = foldr (++) "\n"
+        in bind.(map (bind.(map ((++" ").show ) ) ) )
+
+\end{tcblisting}
+
+More details about this implementation (e.g. instances, classes) will be given in future lectures.
+        
+\paragraph{ Matrix multiplication }\hfill\\
+
+\subparagraph{ Step 1: Transposition }\hfill\\
+
+Matrix multiplication operates on the \textbf{lines} of the first matrix and \textbf{columns} of the second. We transpose the second matrix, so that we now operate on lines on both matrices. The following code extracts \textbf{the first line} from a matrix \texttt{m}:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+map head m
+
+\end{tcblisting}
+
+A matrix \texttt{m} \textbf{without} its first column is:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+map tail m
+
+\end{tcblisting}
+
+Finally transposition is given by:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+transpose ([]:_) = []
+transpose m = (map head m) : transpose (map tail m)
+
+\end{tcblisting}
+
+Notice that the \textit{basis case} corresponds to a \textbf{list containing empty lists}.
+
+\subparagraph{ Step 2: Computing multiplication }\hfill\\
+
+To compute the \texttt{i,j}th \textbf{element} of the multiplication matrix, we need to multiply per element the \texttt{i}th line by the \texttt{j}th column:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+zipWith (*) li cj
+
+\end{tcblisting}
+
+and then add-up the values:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+foldr (+) 0 (zipWith (*) li cj)
+
+\end{tcblisting}
+
+
+To obtain the \texttt{i}th \textbf{line} of the multiplication matrix, we need to repeat the above process \textbf{for each column of the second matrix}, in other words, for each line of its transposition:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+map (\col -> foldr (+) 0 (zipWith (*) li col) ) (transpose m2)
+
+\end{tcblisting}
+
+
+Finally, to obtain the multiplication matrix, we need to compute all its lines, hence:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+mult m1 m2 = 
+  map (\line -> map (\col -> foldr (+) 0 (zipWith (*) line col) ) (transpose m2) ) m1
+
+\end{tcblisting}
+
+
+\paragraph{ Matrices as images }\hfill\\
+
+A matrix can be used to represent a \textbf{rasterized image} (a collection of pixels). In this example, we consider that pixels can have values: ' ' (white), '.' (grey) and '*' (black).
+
+Higher-order functions can be naturally used to represent image-transformations, for instance, flipping:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+flipH = map reverse
+flipV = reverse
+
+\end{tcblisting}
+
+
+Rotations:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+rotate90left = flipV.transpose
+rotate90right = flipH.transpose
+
+\end{tcblisting}
+
+
+The \textit{negative} of an image:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+invert = map (map (\x->if x=='*' then ' ' else '*') )
+
+\end{tcblisting}
+
+
+Scaling an image horizontally:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+scalex = foldr (\h t->h:h:t) []    
+
+\end{tcblisting}
+
+
+Scaling vertically:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+scaley = map scalex
+
+\end{tcblisting}
+
+
+Balanced scale:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+scale = scalex . scaley
+
+\end{tcblisting}
+
+
+Or just a random sequence of operations:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+rand = foldr (.) id [rotate90left, invert, scale]
+
+\end{tcblisting}

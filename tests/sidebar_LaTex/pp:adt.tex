@@ -1,0 +1,231 @@
+\subsection*{ Abstract Datatypes }
+
+\subsubsection*{ Intro }
+
+An Abstract Datatype relies on \textit{functions} to describe the possible values of a type. We start with a simplistic example:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+data Nat = Zero | Succ Nat
+
+\end{tcblisting}
+
+\begin{itemize}
+	\item  the expression \texttt{data Nat} introduces a new \textbf{type} in the programming language
+	\item  after \texttt{=}, the \textbf{base constructors} of the type follow. In Haskell, \textbf{all constructors} must begin with a capital letter
+	\item  \texttt{Zero} is a nullary constructor. 
+	\item  \texttt{Succ Nat} designates an \textbf{internal} constructor, which expects a natural number (of type \texttt{Nat}). A value \texttt{(Succ x)} \textbf{is} of type \texttt{Nat} (i.e. a natural number), and we may be tempted to see it as a function call, which \textit{returns} the successor of \texttt{x}
+\end{itemize}
+
+\texttt{Zero} and \texttt{Succ} are called \textbf{data constructors} in Haskell. \texttt{Nat} is called a \texttt{type} or \texttt{type-constructor}. We shall distinguish between the two in a later lecture.
+
+Note that the \textit{internal} representation of an ADT, as perceived by the programmer, is \textit{abstract}. We may see values as \textit{calls} of special functions - data constructors. Except for their meaning (and language-level implementation), data constructors behave exactly as functions. For instance:
+\begin{itemize}
+	\item  \texttt{Zero :: Nat}
+	\item  \texttt{Succ :: Nat -\textgreater  Nat}
+\end{itemize}
+
+We continue the example with addition:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+add :: Nat -> Nat -> Nat
+add Zero y = y
+add (Succ x) y = Succ (add x y)
+
+\end{tcblisting}
+
+
+An important observation is that the \textbf{pattern matching mechanism} in Haskell relies on data constructors, and their applications. For instance, the following definition is a correct usage of the pattern matching mechanism:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+f (1:y:[]) = ...
+
+\end{tcblisting}
+
+I uses the data constructors \texttt{(:)} and \texttt{[]} for lists, as well as the data constructor \texttt{1} for integers. The pattern describes any list of integers which starts with a \texttt{1} and contains exactly two elements.
+
+\subsubsection*{ Monomorphic List implementation }
+
+In what follows, we give an implementation for the type \textit{List of integers}. This type is called \textit{monomorphic}, since our list can only contain elements of a single type (integer):
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+data IList = Void | Cons Integer IList
+
+app :: IList -> IList -> IList
+app Void l = l
+app (Cons h t) l = Cons h (app t l)
+
+convert :: IList -> [Integer]
+convert Void = []
+convert (Cons h t) = h : (convert t)
+
+mfoldl :: (b -> Integer -> b) -> b -> IList -> b
+mfoldl op acc Void = acc
+mfoldl op acc (Cons h t) = mfoldl op (op acc h) t
+
+mfoldr :: (Integer -> a -> a) -> a -> IList -> a
+mfoldr op acc Void = acc
+mfoldr op acc (Cons h t) = op h (mfoldr op acc t)
+
+convert2 :: IList -> [Integer]
+convert2 = mfoldr (:) []
+
+showl :: IList -> String
+showl = show . convert2
+
+
+\end{tcblisting}
+
+
+In the above code, we have defined some basic list operations, such as \texttt{app} (list concatenation) and \texttt{convert}, which transforms a list of type \texttt{IList} to a conventional Haskell list (of type \texttt{[Integer]}).
+
+We have also implemented the two folding procedures for \texttt{IList}. Note the type signature of each fold. Finally, we have used folds to provide an alternative implementation for convert, as well as for converting lists to strings.
+
+
+\subsubsection*{ Propositional Logic in Haskell }
+
+Abstract Datatypes are a natural way to define more elaborate data-structures, such as propositional formulae. We give a possible definition below:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+data Formula = Var String | And Formula Formula | Or Formula Formula | Not Formula
+
+\end{tcblisting}
+
+
+We observe that:
+\begin{itemize}
+	\item  \texttt{Var :: String -\textgreater  Formula}
+	\item  \texttt{And :: Formula -\textgreater  Formula -\textgreater  Formula}
+	\item  \texttt{Or :: Formula -\textgreater  Formula -\textgreater  Formula}
+	\item  \texttt{Not :: Formula -\textgreater  Formula}
+\end{itemize}
+
+A good exercise consists in the implementation of a display function for formulae:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+fshow :: Formula -> String
+fshow (Var v) = v
+fshow (And f1 f2) = "("++(fshow f1)++" ^ "++(fshow f2)++")"
+fshow (Or f1 f2) = "("++(fshow f1)++" V "++(fshow f2)++")"
+fshow (Not f) = "~("++(fshow f)++")"
+
+\end{tcblisting}
+
+
+Next, we implement a function \texttt{push}, which pushes negation \textit{inward}:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+push :: Formula -> Formula
+push (Var v) = (Var v)
+push (Not (Var v)) = Not (Var v)
+push (Not (And f1 f2)) = Or (push (Not f1)) (push (Not f2))
+push (Not (Or f1 f2)) = And (push (Not f1)) (push (Not f2))
+push (And f1 f2) = And (push f1) (push f2)
+push (Or f1 f2) = Or (push f1) (push f2)
+
+\end{tcblisting}
+
+
+Notice, at lines 4,5 the implementation of deMorgan's laws.
+
+Finally, we implement a function which computes the truth-value of a formula, under a certain interpretation. First, we define the type \texttt{Interpretation}:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+type Interpretation = String -> Bool
+
+i :: Interpretation
+i "x" = True
+i "y" = False
+i "z" = True
+
+\end{tcblisting}
+ 
+
+In the first line, we have defined a \textbf{type-alias}: \texttt{Interpretation} is a function from strings to booleans. We have also implemented a three-variable interpretation, for testing purposes. Next, we implement \texttt{eval}:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+eval :: Interpretation -> Formula -> Bool
+eval i (Var v) = i v
+eval i (Not f) = not(eval i f)
+eval i (And f1 f2) = (eval i f1) &\&&&\&& (eval i f2)
+eval i (Or f1 f2) = (eval i f1) || (eval i f2)
+
+\end{tcblisting}
+
+
+\subsubsection*{ Monomorphic Trees in Haskell }
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+data ITree = Leaf | Node ITree Integer ITree
+
+\end{tcblisting}
+
+
+Note that:
+\begin{itemize}
+	\item  \texttt{Leaf :: ITree}
+	\item  \texttt{Node :: ITree -\textgreater  Integer -\textgreater  ITree -\textgreater  ITree}
+\end{itemize}
+
+Next, we implement a folding operation on Trees. The key to it is to conceptually define what folding should do on Trees. To grasp an intuition, recall that: 
+\begin{itemize}
+	\item  \texttt{foldr (:) []} is the \textbf{identity function} on lists. Hence, \texttt{foldr (:) [] [1,2,3]} produces \texttt{[1,2,3]}.
+	\item  also, recall that the map operation can be defined as: \texttt{\textbackslash f -\textgreater  foldr ((:).f) []}
+\end{itemize}
+
+Similar to the list case, a fold on trees should:
+\begin{itemize}
+	\item  \textbf{preserve the tree structure}, given the appropriate operator (e.g. \texttt{Node}). 
+	\item  hence, the call \texttt{mtfold Node Leaf} (where \texttt{Leaf} is the accumulator) should be the \textbf{identity function on trees}. 
+\end{itemize}
+
+Let us define the identity function \texttt{tid} for trees:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+tid Leaf = Leaf
+tid (Node r k l) = Node (tid r) k (tid l)
+
+\end{tcblisting}
+
+
+As already said, \texttt{(tid t)} is equivalent to the call \texttt{(mtfold Node Leaf t)}, for any arbitrary tree \texttt{t}.
+To obtain the general \texttt{mtfold} implementation, we simply generalise \texttt{Node} by an arbitrary operation \texttt{op}:
+\begin{itemize}
+	\item  if \texttt{Node :: ITree -\textgreater  Integer -\textgreater  ITree -\textgreater  ITree}, then
+	\item  \texttt{op :: b -\textgreater  Integer -\textgreater  b -\textgreater  b}
+\end{itemize}
+
+We also generalise \texttt{Leaf} by an arbitrary accumulator:
+\begin{itemize}
+	\item  if \texttt{Leaf :: ITree} then
+	\item  \texttt{acc :: b}
+\end{itemize}
+
+The code generalisation becomes:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+mtfold :: (b -> Integer -> b -> b) -> b -> ITree -> b
+mtfold op acc = 
+    let f (Node left key right) = f (f left) key (f right)
+        f Leaf = acc
+    in f
+
+\end{tcblisting}
+
+
+Notice that \texttt{f} is precisely the generalisation of \texttt{tid} according to our observations. We can use \texttt{mtfold} to implement various tree operations such as:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+tsum = mtfold (\k r l->k + r + l) 0 
+tmirror = mtfold (\k r l -> Node l k r) Leaf 
+tflatten = mtfold (\k r l -> r ++ [k] ++ l) [] 
+
+\end{tcblisting}
+ 

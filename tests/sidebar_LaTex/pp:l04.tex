@@ -1,0 +1,410 @@
+\section*{ Tipuri de date abstracte }
+
+Scopul laboratorului:
+\begin{itemize}
+	\item  Recapitularea conceptului de TDA
+	\item  Definirea de TDA-uri în Haskell
+	\item  Familiarizarea cu conceptul de TDA-uri polimorfice
+	\item  Introducerea tipului de date \texttt{Maybe}
+\end{itemize}
+
+
+\subsection*{ Tipuri de date abstracte (TDA) }
+
+\textbf{Tipurile de date abstracte} sunt modele pentru a defini tipuri de date în funcție de comportamentul acestora (valori posibile, axiome, operații), contrastând cu \textit{structurile de date}, definite din punct de vedere al implementării.
+
+Un TDA familiar este \textbf{list}. \\Pentru a lucra cu liste într-un limbaj ca Java, am scris două \textit{implementări} distincte, și anume \texttt{LinkedList} și \texttt{ArrayList}. Ambele implementări respectă specificațiile din primul paragraf.
+
+\begin{tcolorbox}[colback=yellow!40, colframe=yellow!60, breakable]
+Unii autori includ în descrierea TDA-urilor și complexități. Din acest punct de vedere, implementările 
+\texttt{LinkedList} și \texttt{ArrayList} diferă.
+\end{tcolorbox}
+
+
+\subsubsection*{ Constructori }
+
+Valorile posibile ale unui TDA sunt date de constructorii acestuia.\\Să considerăm un tip simplu de date: \texttt{Bool}, care poate avea două valori: \texttt{False} și \texttt{True}.\\Sintaxa Haskell pentru a defini acest tip de date este următoarea:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+data Bool = False | True
+
+\end{tcblisting}
+
+
+\begin{tcolorbox}[colback=yellow!40, colframe=yellow!60, breakable]
+Atât numele tipului de date cât și numele constructorilor trebuie scris cu literă mare.
+\end{tcolorbox}
+
+\texttt{False} și \texttt{True} nu sunt parametrizate și pot fi privite ca valori. Se mai numesc și \textit{constructori nulari}.\\
+Să considerăm un alt TDA care descrie un arbore binar cu valori întregi. Arborele poate fi gol sau un nod cu doi copii.
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+data Tree = Nil | Node Int Tree Tree
+
+\end{tcblisting}
+
+
+\texttt{Node} este un constructor care primește un argument de tipul \texttt{Int} și două argumente de tip \texttt{Tree}, pentru a creea o valoare de tip \texttt{Tree}. Putem să ne gândim la el ca la o funcție:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+Prelude> :t Node
+Node :: Int -> Tree -> Tree -> Tree
+
+\end{tcblisting}
+
+
+Constructorii sunt foarte importanți în \textit{pattern matching}. Ca exemplu, vom scrie o funcție care însumează toate valorile dintr-un arbore:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+treeSum :: Tree -> Int
+treeSum Nil = 0
+treeSum (Node v l r) = v + (treeSum l) + (treeSum r)
+
+\end{tcblisting}
+
+
+Observăm prezența a două pattern-uri: unul pentru arborele vid, celălalt pentru un nod, într-un fel foarte asemănător cu modul în care lucram cu liste, făcând pattern matching pe \texttt{[]} și \texttt{(x:xs)}.
+
+\begin{tcolorbox}[colback=cyan!5, colframe=cyan!10, breakable]
+Observați că ghci nu știe cum să afișeze arborele nostru:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+Prelude> Node 1 Nil Nil
+
+<interactive>:38:1:
+    No instance for (Show Tree) arising from a use of 'print'
+    In a stmt of an interactive GHCi command: print it
+
+\end{tcblisting}
+
+
+Pentru a vă fi mai ușor să vă verificați, puteți obține o reprezentare a tipurilor definite de voi astfel:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+data Tree = Nil | Node Int Tree Tree deriving (Show)
+
+\end{tcblisting}
+
+
+Pe scurt, acest lucru înrolează TDA-ul vostru în clasa \texttt{Show}, oferind o implementare implicită a funcției \texttt{show} (apelată de ghci). Mai multe detalii în laboratorul următor.
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+Prelude> Node 1 Nil Nil
+Node 1 Nil Nil
+
+\end{tcblisting}
+
+\end{tcolorbox}
+
+
+\subsubsection*{ Înregistrări }
+
+Vrem să definim un TDA pentru a descrie un student, folosind următoarele câmpuri: nume, prenume, an de studiu, medie.
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+-- tipul de date si constructorul au acelasi nume, ceea ce este ok
+-- pentru ca reprezinta concepte diferite.
+data Student = Student String String Int Float
+
+\end{tcblisting}
+
+
+Observăm că semnficația câmpurilor nu este evidentă din definiție. Vrem să extragem valori dintr-un Student; definim funcțiile:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+nume :: Student -> String
+nume (Student n _ _ _) = n
+
+prenume :: Student -> String
+prenume (Student _ p _ _) = p
+
+an :: Student -> Int
+an (Student _ _ a _) = a
+
+medie :: Student -> Float
+medie (Student _ _ _ m) = m
+
+\end{tcblisting}
+
+
+Pentru a face descrierea tipului de date mai clară și a evita să scriem manual acele funcții, putem folosi sintaxa:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+data Student = Student { nume :: String
+                       , prenume :: String
+                       , an :: Int
+                       , medie :: Float
+                       }
+
+\end{tcblisting}
+
+                      
+
+
+\subsection*{ TDA-uri polimorfice }
+
+Până acum, am definit TDA-uri care lucrează doar cu întregi. Dorim să scăpăm de această limitare și să definim TDA-uri care pot lucra cu orice alt tip de date. De exemplu, are sens să considerăm capul unei liste care conține elemente de tip \texttt{a}, ca fiind un element de tip \texttt{a}, indiferent de cum arată acest tip.\\
+Într-adevăr, aceasta este definiția funcției \texttt{head} existentă în Haskell:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+Prelude> :t head
+head :: [a] -> a
+
+\end{tcblisting}
+
+
+\texttt{a} se numește \textbf{variabilă de tip} și poate să reprezinte orice tip de date (evident, cu condiția ca toate \texttt{a}-urile care apar să se refere la același tip).
+
+\begin{tcolorbox}[colback=blue!10, colframe=blue!20]
+Să ne uităm la tipul altei funcții cunoscute:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+Prelude> :t map
+map :: (a -> b) -> [a] -> [b]
+
+\end{tcblisting}
+
+
+\texttt{map} primește ca argument o funcție - care primește un element de tip \texttt{a} și întoarce un element de tip \texttt{b} - și o listă de elemente de tip \texttt{a} și întoarce o listă de elemente de tip \texttt{b}. De precizat că \texttt{a} și \texttt{b} pot fi distincte dar nu este necesar.
+\end{tcolorbox}
+
+Listele din Haskell sunt \textbf{polimorfice}. Ele pot conține date de orice tip. O instanță a listelor are însă un tip concret:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+Prelude> :t ['a', 'b', 'c']
+['a', 'b', 'c'] :: [Char]
+
+\end{tcblisting}
+
+
+\subsubsection*{ Constante polimorfice }
+
+Care este tipul listei vide?
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+Prelude> :t []
+[] :: [a]
+
+\end{tcblisting}
+
+
+Observăm că tipul listei vide este general. Asta înseamnă că lista vidă poate fi tratată ca o listă de orice tip.
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+Prelude> [1,2,3] ++ "123" -- eroare, tipuri diferite
+Prelude> [1,2,3] ++ []
+[1,2,3]
+Prelude> "123" ++ []
+"123"
+
+\end{tcblisting}
+
+
+Spunem că \texttt{[]} este o \textbf{constantă polimorfică}.
+
+\begin{tcolorbox}[colback=blue!10, colframe=blue!20]
+O altă constantă polimorfică este, de exemplu \texttt{1}. De aceea putem scrie:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+Prelude> 1 + 2
+3
+Prelude> 1 + 2.71
+3.71
+
+\end{tcblisting}
+
+
+Dacă forțăm 1 să fie întreg, vom primi o eroare la a doua adunare:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+Prelude> (1 :: Int) + 2.71
+
+<interactive>:60:14:
+    No instance for (Fractional Int) arising from the literal '2.71'
+    In the second argument of '(+)', namely '2.71'
+    In the expression: (1 :: Int) + 2.71
+    In an equation for 'it': it = (1 :: Int) + 2.71
+
+\end{tcblisting}
+
+
+\texttt{1} are însă o constrângere despre care vom discuta în laboratorul următor.
+\end{tcolorbox}
+
+
+Pentru a implementa în Haskell un TDA polimorfic, folosim sintaxa:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+data List a = Empty | Cons a (List a)
+
+\end{tcblisting}
+
+
+\begin{tcolorbox}[colback=blue!10, colframe=blue!20]
+Ce este \texttt{List}?\\
+\texttt{List} este un \textbf{constructor de tip}, nu un tip de date. Constructorii de tip primesc ca parametrii \textit{tipuri} și întorc un tip (sau un alt constructor de tip dacă nu primesc suficienți parametrii).\\Asta înseamnă că, \texttt{List} nu este un \textit{tip}, dar \texttt{List Int}, \texttt{List Char} etc. sunt tipuri.
+\end{tcolorbox}
+
+\subsubsection*{ Maybe și Either }
+
+Unul dintre TDA-urile puse la dispoziție de Haskell este \texttt{Maybe}, un tip \textit{polimorfic} care modelează prezența unei anumite valori, sau absența acesteia:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+data Maybe a = Nothing | Just a
+
+\end{tcblisting}
+
+
+Pentru a ilustra importanța acestui TDA, considerăm următoare situație: vrem să implementăm o funcție care returnează suma valoriilor celor doi copii ai unui nod dat:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+childrenSum :: Tree -> Maybe Int
+childrenSum Nil = Nothing
+childrenSum (Node _ Nil _) = Nothing
+childrenSum (Node _ _ Nil) = Nothing
+childrenSum (Node _ (Node v _ _) (Node w _ _)) = Just (v + w)
+
+\end{tcblisting}
+
+
+Această sumă există doar pentru arbore diferit de Nil, cu ambii copii diferiți de Nil.
+
+Putem scrie o funcție care ia un \texttt{Maybe} și returnează un șir pentru printare. Combinăm apoi cele două funcții:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+pretty :: Maybe Int -> String
+pretty Nothing = "No value"
+pretty (Just v) = "Sum is " ++ show v
+
+printChildrenSum :: Tree -> String
+printChildrenSum = pretty . childrenSum
+
+\end{tcblisting}
+
+
+Încărcăm modulele în ghci și voilà:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+*Main> printChildrenSum (Node 1 (Node 1 Nil (Node 2 Nil Nil)) (Node 3 (Node 4 (Node 5 Nil Nil) Nil) (Node 6 Nil Nil)))
+"Sum is 4"
+*Main> printChildrenSum Nil
+"No value"
+*Main> printChildrenSum (Node 1 Nil (Node 1 Nil Nil))
+"No value"
+*Main> printChildrenSum (Node 1 (Node 1 Nil Nil) Nil)
+"No value"
+
+\end{tcblisting}
+
+
+Un TDA similar este \texttt{Either}, care modelează valori cu două tipuri posibile:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+data Either a b = Left a | Right b
+
+\end{tcblisting}
+
+
+Prin convenție, constructorul \texttt{Left} reprezintă o eroare, iar constructorul \texttt{Right} o valoare corectă. Astfel putem extinde mecanisme de error-handling pentru a conține mai multe informații despre ce a cauzat eroarea (spre deosebire de \texttt{Maybe}, care doar indică \textbf{existența} unei erori):
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+childrenSum :: Tree -> Either String Int
+childrenSum Nil = Left "Tree is Nil"
+childrenSum (Node _ Nil _) = Left "Left child is Nil"
+childrenSum (Node _ _ Nil) = Left "Right child is Nil"
+childrenSum (Node _ (Node v _ _) (Node w _ _)) = Right (v + w)
+
+pretty :: Either String Int -> String
+pretty (Left s) = s
+pretty (Right i) = "Sum is " ++ show i
+
+printChildrenSum :: Tree -> String
+printChildrenSum = pretty . childrenSum
+
+\end{tcblisting}
+
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+*Main> printChildrenSum (Node 1 (Node 1 Nil (Node 2 Nil Nil)) (Node 3 (Node 4 (Node 5 Nil Nil) Nil) (Node 6 Nil Nil)))
+"Sum is 4"
+*Main> printChildrenSum Nil
+"Tree is Nil"
+*Main> printChildrenSum (Node 1 Nil (Node 1 Nil Nil))
+"Left child is Nil"
+*Main> printChildrenSum (Node 1 (Node 1 Nil Nil) Nil)
+"Right child is Nil"
+
+\end{tcblisting}
+
+
+\subsubsection*{ Exerciții }
+
+\begin{tcolorbox}[colback=yellow!40, colframe=yellow!60, breakable]
+Încercați să vă obișnuiți să scrieți explicit tipurile tuturor funcțiilor definite de voi în continuare.
+\end{tcolorbox}
+
+\subparagraph{ 1. List }\hfill\\
+
+a) implementați TDA-ul pentru propria voastră listă care poate conține doar numere întregi\\b) scrieți o funcție care convertește valori ale TDA-ului vostru în liste din Haskell
+
+\begin{tcolorbox}[colback=cyan!5, colframe=cyan!10, breakable]
+Dacă tipul vostru de listă se numește \texttt{List}, atunci tipul funcției va fi: 
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+convertList :: List -> [Int]
+
+\end{tcblisting}
+
+\end{tcolorbox}
+
+c) modificați tipul \texttt{List} pentru a fi polimorfic, apoi modificați și funcția \texttt{convertList}
+
+\subparagraph{ 2. Tree }\hfill\\
+a) Implementați TDA-ul pentru arbori polimorfici.\\b) Implementați \texttt{foldT}, echivalentul lui \texttt{foldr} (puteți vizualiza rezultatul ca fiind înlocuirea tuturor constructorilor nulari cu o valoare constantă și a tuturor celorlalți constructori cu funcții care iau același numă de argumente.\\c) Implementați o funcție \texttt{mapT} (echivalentul lui \texttt{map}), folosindu-vă de \texttt{foldT}.\\d) Implementați o funcție \texttt{zipWithT} (echivalentul lui \texttt{zipWith}).\\
+\subparagraph{ 3. Numere naturale extinse }\hfill\\
+a) Implementați un TDA care să modeleze numere naturale extinse cu un punct la infinit ($ \hat{\mathbb{N}} = \mathbb{N} \cup \{ \infty \}$).\\b) Implementați o funcție \texttt{extSum} care să evalueze suma a două numere naturale extinse.\\c) Implementați o funcție \texttt{extDiv} care să evalueze raportul a două numere naturale extinse (împărțirea la 0 și la infinit are rezultat definit).\\d) Implementați o funcție \texttt{extLess} care spune dacă un număr natural extins e mai mic decât un altul.
+
+În laboratorul următor, vom vedea cum putem implementa aceste operații într-un mod consistent cu restul limbajului, folosind operatori cunoscuți (\texttt{+}, \texttt{div}, \texttt{\textless }).
+                   
+\subparagraph{ 4. Înregistrări }\hfill\\
+
+a) Scrieți un TDA care codifică un tuplu (înregistrare) format din următoarele câmpuri:
+   \begin{itemize}
+   	\item  Nume (codificat ca String)
+   	\item  Vârstă (codificat ca Integer)
+   	\item  Prieteni (codificat ca o lista de String-uri)
+   	\item  Notă PP (codificat ca Integer). Acest câmp este opțional!
+   \end{itemize}
+
+b) Scrieți o funcție care primește o listă de înregistrări și le întoarce pe acelea pentru care vârsta este mai mare ca 20.\\c) Scrieți o funcție care primește o listă de înregistrări și le întoarce pe acelea care conțin cel puțin un prieten cu numele "Matei".\\d) Scrieți o funcție care primește o listă de înregistrări și le întoarce pe acelea care conțin câmpul "Notă PP".\\e) Scrieți o funcție care primește o listă de nume, o listă de vârste, o listă ce conține liste de prieteni, și întoarce o listă de înregistrări corespunzătoare.
+
+\subsection*{ Referințe }
+
+\begin{itemize}
+	\item  \texttt{Abstract Data Type - Haskell wiki} \footnote{\url{https://wiki.haskell.org/Abstract\_data\_type}}
+	\item  \texttt{Algebraic Data Type - Haskell wiki} \footnote{\url{https://wiki.haskell.org/Algebraic\_data\_type}}
+	\item  \texttt{Maybe - Haskell wiki} \footnote{\url{https://wiki.haskell.org/Maybe}}
+\end{itemize}

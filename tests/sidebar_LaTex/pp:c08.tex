@@ -1,0 +1,383 @@
+\section*{ Introduction to Prolog }
+
+\subsection*{ The basics }
+
+Consider the following code:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+student(gigel).
+student(ionel).
+student(john).
+student(mary).
+
+male(gigel).
+male(ionel).
+male(john).
+female(mary).
+
+lecture(pp).
+lecture(aa).
+
+studies(gigel,aa).
+studies(mary,pp).
+studies(mary,aa).
+studies(john,pp).
+
+\end{tcblisting}
+
+
+\subsubsection*{ Atoms }
+\texttt{gigel}, \texttt{ionel}, \texttt{john}, \texttt{mary}, \texttt{pp}, \texttt{aa} are \textbf{atoms}. Atoms are basic Prolog constructs. Prolog is a weakly-typed language, and primitive types such as \textit{String} or \textit{Integer} are part of the language. The afore-mentioned elements have type \textit{atom} (which is different from \textit{String}).
+
+Atoms are specific to Prolog, and they are \textit{inherited} from First-Order Logic, the formalism on which Prolog is based.
+
+\subsubsection*{ Relations }
+
+\texttt{studies}, \texttt{male}, \texttt{female} and \texttt{lecture} are \textbf{relations}. In First-Order Logic, a relation over sets $A_1, \ldots, A_n$, having \textbf{arity n}, is a subset $R\subseteq A_1 \times \ldots \times A_n$. In Prolog, we make no distinction between the types ($A_i$) of each element from a relation. Thus, in Prolog, \textbf{a relation} of \textbf{arity n} is a subset $R\subseteq Prim$ where $Prim$ is the set of \textbf{primitive values} from the language. Strings, integers and \textbf{atoms} are such values.
+
+The above program is simply a definition of 4 relations. Mathematically, :$studies=\{(gigel,aa),(mary,pp),(mary,aa), (john,pp)\}$
+
+\subsubsection*{ Queries }
+
+After loading the previous program, the interpreter (with prompt \texttt{?-}) expects a \textbf{query} from the programmer. Formallly, a query is a \textbf{conjuction of literals}, where each \textbf{literal} is of the form: $R(t_1,\ldots, t_n)$ and $t_i$ are \textbf{terms}. Instead of pursuing a formal approach, we illustrate examples of queries, for our above program (in what follows, we prepend \texttt{?-} to Prolog code to remind the reader we are performing a query):
+\begin{itemize}
+	\item  \texttt{?- student(gigel)}
+	\item  \texttt{?- student(gigel),studies(gigel,aa)} (\texttt{,} should be read as logical \textit{and})
+	\item  \texttt{?- student(X)}:
+
+  \begin{itemize}
+  	\item  \texttt{X} is a \textbf{variable}. All tokens starting with a \textbf{capital letter} are (treated as) variables.
+  	\item  Variables can be \textbf{bound} to any value from the program. Variables do not have a type.
+  	\item  When a variable is present in a query, Prolog will try to find \textbf{all values} for that variable which satisfy the query. By typing \texttt{;} we can iterate over all such values.
+  \end{itemize}
+	\item  \texttt{?- student(X), lecture(X,aa)}
+\end{itemize}
+
+\subsubsection*{ Clauses }
+
+As shown so far, programs behave as \textit{databases} (relations are essentially \textit{tables}) and via the interpreter, we can use queries to interrogate the database.
+
+However, a Prolog program is far more than just a database. We can also define \textbf{new relations} based on existing ones, \textbf{without exhaustively enumerating all members}. For instance, let us add to our initial program, the relation \textit{all male students which share a lecture with a female student}:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+hasFemaleColleague(M) :- student(M), male(M), studies(M,L), studies(F,L), female(F).
+
+\end{tcblisting}
+
+
+The above \textbf{clause} or \textbf{rule} can be translated to First-Order Logic (FOL) where it can be read easier:
+
+$student(M) \wedge male(M) \wedge studies(M,L) \wedge studies(F,L) \wedge female(F) \implies hasFemaleColleague(M)$
+
+Notice the direction of the implication, as well as the usage of \texttt{,} (logical conjunction), \texttt{:-} (implication) and \texttt{.}(the end of a clause).
+
+\subsubsection*{ Re-satisfaction }
+
+Let us define a new property (1-ary relation) which describes those lectures which have at least two students. The first attempt:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+lectureOfTwo(L) :- lecture(L), studies(X,L), studies(Y,L).
+
+\end{tcblisting}
+
+
+is incorrect, as \texttt{X} and \texttt{Y} may be bound to the same student. Another attempt is:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+lectureOfTwo(L) :- lecture(L), studies(X,L), studies(Y,L), X \= Y.
+
+\end{tcblisting}
+
+
+however following the interrogation \texttt{-? lectureOfTwo(L)}, \texttt{pp} and \texttt{aa} are prompted twice. To understand this, let us write our relation in FOL:
+
+$lecture(L) \wedge studies(X,L) \wedge studies(Y,L) \wedge X \neq Y \implies lectureofTwo(L)$
+
+Formally, FOL sentences require that all variables are within the scope of a \textbf{quantifier}. Thus, to be more exact, we should write:
+
+$\forall L( lecture(L) \wedge \exists X \exists Y (studies(X,L) \wedge studies(Y,L) \wedge X \neq Y) \implies lectureofTwo(L))$
+
+Notice the scope of each quantification, as a change in the parentheses may modify the meaning of the sentence.
+
+Prolog does not interpret the sentence as in FOL. Instead, it finds \textbf{all combinations} of values for \texttt{L}, \texttt{X} and \texttt{Y} that satisfy the left-hand side (LHS) of the implication. In our example, these are:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+pp, mary, john
+pp, john, mary
+aa, gigel, mary
+aa, mary, gigel
+
+\end{tcblisting}
+
+
+and then reports the values of \texttt{L} \textbf{for each such combination}. For this reason, we observe that both \texttt{aa} and \texttt{pp} are reported twice.
+
+We can verify this by querying: \texttt{-? lecture(L), studies(X,L), studies(Y,L), X \textbackslash = Y.}
+
+\subsubsection*{ Proof trees }
+
+We briefly discuss the concept of \texttt{proof trees} which will be approached in more detail later on, when discussing \textbf{resolution}. To introduce it, consider the queries:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+-? female(X), studies(X,L).
+
+\end{tcblisting}
+
+
+and 
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+-? studies(X,L), female(X).
+
+\end{tcblisting}
+
+
+Viewed as FOL sentences (with appropriate quantification), the queries are the same. However, in answering those queries, Prolog searches its \textbf{knowledge-base} (database) differently.
+
+For the first query:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+Find X which satisfies female(X):
+  X = mary,
+  Find L which satisfies studies(mary,L):
+  L = pp,
+    report X = mary, L = pp.
+  L = aa
+    report X = mary, L = aa.
+
+\end{tcblisting}
+
+
+And for the second:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+Find X,L which satisfy studies(X,L):
+  X = gigel, L = aa
+    female(gigel) could not be established, continue search
+  X = mary, L = pp
+    female(mary) is true, report X = mary, L = pp.
+  X = mary, L = aa
+    female(mary) is true, report X = mary, L = aa.
+  X = john, L = pp
+    female(john) could not be established, search finishes.
+
+\end{tcblisting}
+
+
+This simplistic example shows that the complexity of a Prolog program (execution), may be affected by the \textbf{order} in which literals appear in a clause. We will later see that \textbf{even the output} may be affected by this order.
+
+\subsection*{ Prolog programming }
+
+\subsubsection*{ Instantiating variables }
+
+The question \textit{does Prolog permit side-effects} is difficult to answer. On one hand:
+\begin{itemize}
+	\item  side-effects are present: \textbf{variables can be instantiated}. For instance, when resolving \texttt{-? female(X), studies(X,L)}, initially, the variable \texttt{X} is unbound. However, once the part \texttt{female(X)} has been satisfied, \texttt{X} is bound to \texttt{mary}.
+	\item  however, \textbf{side-effects are inherently limited}: during \textbf{the satisfaction of a query/clause, a bound variable cannot be unbound}. In our example, \texttt{X} remains \textit{permanently bound to Mary}. \texttt{X} can only become free \textbf{upon resatisfaction of a query/clause}.
+\end{itemize}
+
+Variables can be (partially) bound several ways:
+\begin{itemize}
+	\item  via \textbf{unification}: e.g. \texttt{X = 2} is not the conventional assignment - \texttt{=} designates \textbf{unification}. We illustrate this via several examples:
+
+  \begin{itemize}
+  	\item  \texttt{-? X = 2, Y = X.}
+  	\item  \texttt{-? X = Y + 2, Z = 2 + Y, X = Z.} - here note that expressions are treated as such - no computation (of \texttt{2+2}) is performed.
+  \end{itemize}
+	\item  conventional assignment is performed using the \texttt{is} operator:
+
+  \begin{itemize}
+  	\item  \texttt{-? X is 2+2.}
+  \end{itemize}
+	\item  comparison is performed using the operator \texttt{=:=}:
+
+  \begin{itemize}
+  	\item  \texttt{-? X is 2+2, X =:= 4.}
+  \end{itemize}
+\end{itemize}
+
+\subsubsection*{ Representations - lists }
+
+\paragraph{ The idea }\hfill\\
+
+One distinguishing feature of FOL is that it allows representing objects which programmers use, such as lists, trees, graphs, matrices, etc. Prolog inherits this feature. In Prolog, we can enroll any term in a relation, including other - composite terms. At the same time, variables can be bound to terms. We illustrate this via an example:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+-? X = f(Y,Z), Y = g(W), W = Z, Z = 2.
+
+\end{tcblisting}
+
+
+Here, \texttt{X} is bound to \texttt{f(g(2),2)}. Note that \texttt{f} is a binary relation and \texttt{g(2)} (a term) is enrolled with \texttt{2} in this relation.
+
+We can exploit this feature to represent lists as follows:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+-? L = cons(1, cons(2, cons(3, void))).
+
+\end{tcblisting}
+
+Note here that:
+\begin{itemize}
+	\item  \texttt{cons} is a binary relation. A list is an \textbf{instance} of such a relation.
+	\item  it enrols an \textbf{element} (the head) together with a \textbf{relation instance} describing the \textbf{tail}.
+\end{itemize}
+
+We can define helpful relations over lists:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+head(L,H) :- L = cons(H,_).
+tail(L,T) :- L = cons(_,T).
+
+empty(L) :- L = void.
+nonempty(L) :- L = cons(_,_).
+
+\end{tcblisting}
+
+
+\texttt{\_} is used much in the same way as in Haskell - to designate an arbitrary term whose name is unimportant for the programmer.
+
+The basic observation here is that:
+\begin{itemize}
+	\item  \textbf{we use queries over relations in order to perform computations on lists}
+	\item  we assume variable \texttt{L} is \textbf{bound} and stands for the input
+	\item  we assume variables \texttt{H} and \texttt{T} are unbound, and stand for the output. They will be bound to the result, or results, if there are several.
+	\item  example: \texttt{-? L = cons(1,cons(0,void)), head(L,H).}
+	\item  essentially, this is a \textbf{programmer convention}. For instance, the query: \texttt{-? head(L,1).} is valid, and will produce: \texttt{L = cons(1, \_G766).} Here, \texttt{\_G766} is an anonymous variable which is not bound - it can be anything. Basically, what Prolog is telling us is that \texttt{L} must be \textit{cons of 1 into something}.
+\end{itemize}
+
+We can add new relations such as \texttt{len}:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+len(L,R) :- empty(L), R = 0.
+len(L,R) :- nonempty(L), tail(L,T), len(T,R1), R is R1 + 1.
+
+\end{tcblisting}
+
+
+Note that, we have defined two clauses which treat terms of different types for \texttt{L}. We can rewrite \texttt{len} in several ways, which illustrate Prolog's flexibility:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+len(void,R) :- R = 0.
+len(cons(_,T),R) :- len(T,R1), R is R1 + 1.
+
+\end{tcblisting}
+
+
+We can perform unification \textit{implicitly} in the left-hand side of the implication. We can also do it for \texttt{R}, which results in:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+len(void,0).
+len(cons(_,T),R) :- len(T,R1), R is R1 + 1.
+
+\end{tcblisting}
+
+
+\paragraph{ Actual Prolog lists }\hfill\\
+
+In Prolog (as in Haskell), lists are an essential programming construct. In the previous section, we have illustrated the \textbf{principle} governing list representations (as relations). Lists are already implemented in Prolog and helpful relations (or predicates) are already defined for them.
+
+\textbf{Real} Prolog lists are defined as follows:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+[] % the empty list
+[H|T] % 'cons' of H into T
+[1,2,3] % a list with integers 1,2 and 3
+
+\end{tcblisting}
+
+
+Thus, in order to work on Prolog Lists, we could rewrite \texttt{len} as follows:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+len2([],0).
+len2([_|T],R) :- len2(T,R1), R is R1 + 1.
+
+\end{tcblisting}
+
+
+\subsubsection*{ List membership }
+
+We start with the following implementation of the predicate \texttt{contains} which verifies if an element is part of a list:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+contains(E,[E|_]).
+contains(E,[H|T]) :- E \= H, contains(E,T).
+
+\end{tcblisting}
+
+
+Testing our predicate yields:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+?- contains(1,[1,2,3]).
+true 
+false.
+
+\end{tcblisting}
+
+
+The second \texttt{false} seems puzzling and inconvenient. We can trace it down if we build the \textit{proof tree} for \texttt{contains(1,[1,2,3])}:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+contains(1,[1|_]) is satisfied. true is reported. Prolog continues re-satisfaction:
+contains(1,[1|[2,3]]) may be satisfied:
+  1 \= 1 is not satisfied, hence Prolog reports false. Re-satisfaction ends.
+
+\end{tcblisting}
+
+
+We shall examine a more efficient way of defining \texttt{contains} in a future lecture.
+
+\paragraph{ List reversing }\hfill\\
+
+We start with the following - accumulator-based implementation:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+rev([],R,R).
+rev([H|T],Acc,R) :- rev(T,[H|Acc],R). 
+reverse(L,R) :- rev(L,[],R).
+
+\end{tcblisting}
+
+
+While \texttt{-? reverse([1,2,3],L).} works just as expected, \texttt{reverse(L,[1,2,3]).} reports the correct result and then loops. First of all, we note that this query violates our assumption the the \textit{first} list is the \textit{input}, while the second - the \textit{output}. Again, to understand the behaviour, we build the proof tree:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+to satisfy reverse(L,[1,2,3]), we must satisfy rev(L,[],[1,2,3]).
+the first clause of rev cannot be satisfied since [] and [1,2,3] do not unify.
+during the satisfaction of the second clause L = [H1|T1] (which is possible since L is unbound). 
+  We attempt to satisfy rev(T1,[H1|[]],[1,2,3]):
+    the first clause of rev cannot be satisfied ([H1] and [1,2,3] do not unify)
+    while satisfying the second clause T1 = [H2|T2].
+      We attempt to satisfy rev(T2,[H2|[H1|[]]],[1,2,3]).
+         the first clause of rev cannot be satisfied ([H2,H1] and [1,2,3] do not unify)
+         while satisfying the second clause T2 = [H3|T3].
+            We attempt to satisfy rev(T3,[H3|[H2|[H1|[]]]],[1,2,3])
+              the first clause of rev CAN be satisfied ([H3,H2,H1] unify with [1,2,3]). The result is reported
+              we attempt re-satisfaction via the second clause: T3 = [H4|T4]
+                the first clause of rev cannot be satisfied ([H4,H3,H2,H1] and [1,2,3]) do not unify).
+                ....
+                the process repeats until the stack becomes full.
+
+\end{tcblisting}
+
+
+\subsubsection*{ Take-away }
+
+\begin{itemize}
+	\item  Building and understanding \textit{proof trees} is an essential tool for learning to program safely in Prolog.
+	\item  It is important to keep a convention regarding \textit{input} and \textit{output} variables when writing a Prolog program. Sometimes, such a convention can be more flexible (\texttt{contains} will be an example), however, the programmer must make sure this is indeed possible.
+\end{itemize}

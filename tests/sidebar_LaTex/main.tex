@@ -1,0 +1,358 @@
+\documentclass[a4paper, 12pt]{report}
+\usepackage[margin=2.54cm]{geometry}
+%type of input encoding
+\usepackage[utf8x]{inputenc}
+%determines what font to use, not input encoding
+%default OT1 supports 7-bit enconding chars
+%T1 used for printing chars with 8-bit encodigns
+\usepackage[T1]{fontenc}
+%%for printing greek letters
+\usepackage{textgreek}
+\usepackage{titlesec}
+\usepackage[titletoc, title]{appendix}
+\titleformat{\chapter}
+{\normalfont\LARGE\bfseries}{\thechapter}{1em}{}
+\titleformat{\section}{\LARGE\bfseries}
+\titleformat{\subsection}{\LARGE\bfseries}
+\titleformat{\subsubsection}{\LARGE\bfseries}
+\titleformat*{\section}{\LARGE\bfseries}
+\titleformat*{\subsection}{\Large\bfseries}
+\titleformat*{\subsubsection}{\large\bfseries}
+%for printing greek letters
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{ulem}
+\usepackage[unicode]{hyperref}
+\usepackage[table]{xcolor}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{tcolorbox}
+%loads listings package for general use
+%and also avaiable this way inside tcolorbox
+\tcbuselibrary{listings}
+%breaks a tcolorbox over pages
+\tcbuselibrary{breakable}
+%for printing theorems
+\tcbuselibrary{theorems}%used for printing notes at the end of file
+%continuous used for one numbering in the whole doc
+\usepackage[continuous]{pagenote}
+\makepagenote
+\let\footnote=\pagenote
+%for not counting Notes as a new section
+%\renewcommand*{\notedivision}{\section*{\notesname}}
+%for not printing sections divisions in Notes
+\renewcommand*{\pagenotesubhead}[1]{}\graphicspath{ {./media/} }
+\usepackage[export]{adjustbox}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\setlength{\parindent}{0in}
+%for warning Overfull \hbox
+\hfuzz=50.002pt
+%settings for listings env
+\lstset{breaklines=true,
+numbers=left,
+numberstyle=\small,
+numbersep=8pt,
+xleftmargin=10pt,
+escapeinside=&&
+}
+\newtcbtheorem{_def}{Definition}{breakable}{df}
+\newtcbtheorem{prop}{Proposition}{breakable}{prp}
+\newtcbtheorem{_proof}{Proof}{breakable}{prf}
+\newtcbtheorem{remark}{Remark}{breakable}{rmk}
+\newtcbtheorem{example}{Example}{breakable}{exp}
+\newtcbtheorem{theorem}{Theorem}{breakable}{th}
+\newtcbtheorem{exercise}{Exercise}{breakable}{exer}
+\newtcbtheorem{solution}{Solution}{breakable}{sol}
+\newtcbtheorem{algorithm}{Algorithm}{breakable}{alg}
+\title{Un document Latex}
+\author{Victor Hohlov}
+\date{2018-05-05 }
+
+\begin{document}
+\maketitle
+\tableofcontents
+\chapter{ Course: Introduction }
+\input{pp:intro}
+\chapter{Functional Programming }
+\section{ Course: Side-effects and recursive functions }
+\input{pp:rec}
+\subsection{ Lab: Introduction to Haskell}
+\input{pp:l01}
+\section{ Course: Higher-order functions}
+\input{pp:high}
+\subsection{ Lab: Higher-order functions}
+\input{pp:l02}
+\subsection{ Lab: Even more higher-order functions}
+\input{pp:l03}
+\section{ Course: Types in functional programming}
+\input{pp:types}
+\section{ Course: Abstract datatypes}
+\input{pp:adt}
+\subsection{ Lab: Abstract datatypes}
+\input{pp:l04}
+\section{ Course: Polymorphism in functional languages}
+\input{pp:polymorphism}
+\subsection{ Lab: Haskell type-classes}
+\input{pp:l05}
+\section{ Course: Parameter passing in Programming Languages}
+\input{pp:c06}
+\section{ Course: Lazy evaluation in Haskell}
+\input{pp:c07}
+\subsection{ Lab: Haskell and Scheme evaluation}
+\input{pp:l06}
+\section{ Course: The Lambda Calculus}
+\input{pp:lambda}
+\section{ H01: Haskell Lazy Dynamic Programming}
+\input{pp:h01}
+\chapter{Logic programming}
+\section{ Course: Introduction to Prolog}
+\input{pp:c08}
+\subsection{ Lab: Prolog 101}
+\input{pp:l07}
+\section{ Course: Clauses, unification, cut, negation}
+\input{pp:c09}
+\subsection{ Lab: Prolog 102}
+\input{pp:l08}
+\subsection{ Lab: Prolog graphs}
+\input{pp:l09}
+\newpage
+\printnotes
+\end{document}\documentclass[a4paper, 12pt]{report}
+\usepackage[margin=2.54cm]{geometry}
+%type of input encoding
+\usepackage[utf8x]{inputenc}
+%determines what font to use, not input encoding
+%default OT1 supports 7-bit enconding chars
+%T1 used for printing chars with 8-bit encodigns
+\usepackage[T1]{fontenc}
+%%for printing greek letters
+\usepackage{textgreek}
+\usepackage{titlesec}
+\usepackage[titletoc, title]{appendix}
+\titleformat{\chapter}
+{\normalfont\LARGE\bfseries}{\thechapter}{1em}{}
+\titleformat*{\section}{\LARGE\bfseries}
+\titleformat*{\subsection}{\Large\bfseries}
+\titleformat*{\subsubsection}{\large\bfseries}
+%for printing greek letters
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{ulem}
+\usepackage[unicode]{hyperref}
+\usepackage[table]{xcolor}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{tcolorbox}
+%loads listings package for general use
+%and also avaiable this way inside tcolorbox
+\tcbuselibrary{listings}
+%breaks a tcolorbox over pages
+\tcbuselibrary{breakable}
+%for printing theorems
+\tcbuselibrary{theorems}%used for printing notes at the end of file
+%continuous used for one numbering in the whole doc
+\usepackage[continuous]{pagenote}
+\makepagenote
+\let\footnote=\pagenote
+%for not counting Notes as a new section
+%\renewcommand*{\notedivision}{\section*{\notesname}}
+%for not printing sections divisions in Notes
+\renewcommand*{\pagenotesubhead}[1]{}\graphicspath{ {./media/} }
+\usepackage[export]{adjustbox}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\setlength{\parindent}{0in}
+%for warning Overfull \hbox
+\hfuzz=50.002pt
+%settings for listings env
+\lstset{breaklines=true,
+numbers=left,
+numberstyle=\small,
+numbersep=8pt,
+xleftmargin=10pt,
+escapeinside=&&
+}
+\newtcbtheorem{_def}{Definition}{breakable}{df}
+\newtcbtheorem{prop}{Proposition}{breakable}{prp}
+\newtcbtheorem{_proof}{Proof}{breakable}{prf}
+\newtcbtheorem{remark}{Remark}{breakable}{rmk}
+\newtcbtheorem{example}{Example}{breakable}{exp}
+\newtcbtheorem{theorem}{Theorem}{breakable}{th}
+\newtcbtheorem{exercise}{Exercise}{breakable}{exer}
+\newtcbtheorem{solution}{Solution}{breakable}{sol}
+\newtcbtheorem{algorithm}{Algorithm}{breakable}{alg}
+\title{Un document Latex}
+\author{Victor Hohlov}
+\date{2018-05-05 }
+
+\begin{document}
+\maketitle
+\tableofcontents
+\chapter{ Course: Introduction }
+\input{pp:intro}
+\chapter{Functional Programming }
+\section{ Course: Side-effects and recursive functions }
+\input{pp:rec}
+\subsection{ Lab: Introduction to Haskell}
+\input{pp:l01}
+\section{ Course: Higher-order functions}
+\input{pp:high}
+\subsection{ Lab: Higher-order functions}
+\input{pp:l02}
+\subsection{ Lab: Even more higher-order functions}
+\input{pp:l03}
+\section{ Course: Types in functional programming}
+\input{pp:types}
+\section{ Course: Abstract datatypes}
+\input{pp:adt}
+\subsection{ Lab: Abstract datatypes}
+\input{pp:l04}
+\section{ Course: Polymorphism in functional languages}
+\input{pp:polymorphism}
+\subsection{ Lab: Haskell type-classes}
+\input{pp:l05}
+\section{ Course: Parameter passing in Programming Languages}
+\input{pp:c06}
+\section{ Course: Lazy evaluation in Haskell}
+\input{pp:c07}
+\subsection{ Lab: Haskell and Scheme evaluation}
+\input{pp:l06}
+\section{ Course: The Lambda Calculus}
+\input{pp:lambda}
+\section{ H01: Haskell Lazy Dynamic Programming}
+\input{pp:h01}
+\chapter{Logic programming}
+\section{ Course: Introduction to Prolog}
+\input{pp:c08}
+\subsection{ Lab: Prolog 101}
+\input{pp:l07}
+\section{ Course: Clauses, unification, cut, negation}
+\input{pp:c09}
+\subsection{ Lab: Prolog 102}
+\input{pp:l08}
+\subsection{ Lab: Prolog graphs}
+\input{pp:l09}
+\newpage
+\printnotes
+\end{document}\documentclass[a4paper, 12pt]{report}
+\usepackage[margin=2.54cm]{geometry}
+%type of input encoding
+\usepackage[utf8x]{inputenc}
+%determines what font to use, not input encoding
+%default OT1 supports 7-bit enconding chars
+%T1 used for printing chars with 8-bit encodigns
+\usepackage[T1]{fontenc}
+%%for printing greek letters
+\usepackage{textgreek}
+\usepackage{titlesec}
+\usepackage[titletoc, title]{appendix}
+\titleformat{\chapter}
+{\normalfont\LARGE\bfseries}{\thechapter}{1em}{}
+\titleformat*{\section}{\LARGE\bfseries}
+\titleformat*{\subsection}{\Large\bfseries}
+\titleformat*{\subsubsection}{\large\bfseries}
+%for printing greek letters
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{ulem}
+\usepackage[unicode]{hyperref}
+\usepackage[table]{xcolor}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{tcolorbox}
+%loads listings package for general use
+%and also avaiable this way inside tcolorbox
+\tcbuselibrary{listings}
+%breaks a tcolorbox over pages
+\tcbuselibrary{breakable}
+%for printing theorems
+\tcbuselibrary{theorems}%used for printing notes at the end of file
+%continuous used for one numbering in the whole doc
+\usepackage[continuous]{pagenote}
+\makepagenote
+\let\footnote=\pagenote
+%for not counting Notes as a new section
+%\renewcommand*{\notedivision}{\section*{\notesname}}
+%for not printing sections divisions in Notes
+\renewcommand*{\pagenotesubhead}[1]{}\graphicspath{ {./media/} }
+\usepackage[export]{adjustbox}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\setlength{\parindent}{0in}
+%for warning Overfull \hbox
+\hfuzz=50.002pt
+%settings for listings env
+\lstset{breaklines=true,
+numbers=left,
+numberstyle=\small,
+numbersep=8pt,
+xleftmargin=10pt,
+escapeinside=&&
+}
+\newtcbtheorem{_def}{Definition}{breakable}{df}
+\newtcbtheorem{prop}{Proposition}{breakable}{prp}
+\newtcbtheorem{_proof}{Proof}{breakable}{prf}
+\newtcbtheorem{remark}{Remark}{breakable}{rmk}
+\newtcbtheorem{example}{Example}{breakable}{exp}
+\newtcbtheorem{theorem}{Theorem}{breakable}{th}
+\newtcbtheorem{exercise}{Exercise}{breakable}{exer}
+\newtcbtheorem{solution}{Solution}{breakable}{sol}
+\newtcbtheorem{algorithm}{Algorithm}{breakable}{alg}
+\title{Un document Latex}
+\author{Victor Hohlov}
+\date{2018-05-05 }
+
+\begin{document}
+\maketitle
+\tableofcontents
+\chapter{ Course: Introduction }
+\input{pp:intro}
+\chapter{Functional Programming }
+\section{ Course: Side-effects and recursive functions }
+\input{pp:rec}
+\subsection{ Lab: Introduction to Haskell}
+\input{pp:l01}
+\section{ Course: Higher-order functions}
+\input{pp:high}
+\subsection{ Lab: Higher-order functions}
+\input{pp:l02}
+\subsection{ Lab: Even more higher-order functions}
+\input{pp:l03}
+\section{ Course: Types in functional programming}
+\input{pp:types}
+\section{ Course: Abstract datatypes}
+\input{pp:adt}
+\subsection{ Lab: Abstract datatypes}
+\input{pp:l04}
+\section{ Course: Polymorphism in functional languages}
+\input{pp:polymorphism}
+\subsection{ Lab: Haskell type-classes}
+\input{pp:l05}
+\section{ Course: Parameter passing in Programming Languages}
+\input{pp:c06}
+\section{ Course: Lazy evaluation in Haskell}
+\input{pp:c07}
+\subsection{ Lab: Haskell and Scheme evaluation}
+\input{pp:l06}
+\section{ Course: The Lambda Calculus}
+\input{pp:lambda}
+\section{ H01: Haskell Lazy Dynamic Programming}
+\input{pp:h01}
+\chapter{Logic programming}
+\section{ Course: Introduction to Prolog}
+\input{pp:c08}
+\subsection{ Lab: Prolog 101}
+\input{pp:l07}
+\section{ Course: Clauses, unification, cut, negation}
+\input{pp:c09}
+\subsection{ Lab: Prolog 102}
+\input{pp:l08}
+\subsection{ Lab: Prolog graphs}
+\input{pp:l09}
+\newpage
+\printnotes
+\end{document}

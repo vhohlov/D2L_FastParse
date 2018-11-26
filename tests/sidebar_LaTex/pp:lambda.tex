@@ -1,0 +1,298 @@
+\section*{ The Lambda Calculus }
+
+\subsection*{ A brief history }
+
+The Lambda Calculus was created in 1928 by Alonzo Church. (To be expanded).
+
+\subsection*{ Intuition }
+
+At first glance, the Lambda Calculus formalises the fundamental concept of \textit{function application} from mathematics. Consider the function $f(x) = x + 1$. Then $f(2)$ denotes the \textbf{application} of the function $f$ to argument $1$. In order to compute the result, \textbf{all occurrences of variable $x$ are replaced by the parameter}(here $1$), in the body of the function. The result is $1+1$, which is subsequently computed using the laws of arithmetic.
+
+At its core, the Lambda Calculus is not (apriori) designed to describe e.g. addition, or other mathematical operators (however, as we shall further see, it is possible to encode numbers and a subset of arithmetic in the Lambda Calculus).
+
+\subsection*{ Syntax }
+
+The Lambda Calculus defines three constructs:
+\begin{itemize}
+	\item  \textbf{variables} (henceforth denoted as $x, y, \ldots$)
+	\item  \textbf{functions} (similar to \texttt{\textbackslash x-\textgreater ...} from Haskell)
+	\item  \textbf{function applications} (similar to function calls \texttt{(f x)} from Haskell)
+\end{itemize}
+
+Formally, let $V$ stand for a finite set whose elements are called \textbf{variables}. A \textbf{$\lambda$-expression} $e$ is recursively defined as:
+
+$e ::= x \in V \mid \lambda x.e \mid (e_1\;e_2)$
+
+Examples of $\lambda$-expressions:
+\begin{itemize}
+	\item  $x$
+	\item  $\lambda x.x$
+	\item  $(\lambda x.\lambda y.x\;z)$
+\end{itemize}
+
+The set $V$ of variables will henceforth be implicit.
+
+Note that, in the Lambda Calculus, functions are \textbf{curried} (each function takes one parameter at a time). Thus, a Haskell function \texttt{\textbackslash x y-\textgreater body} would be written as $\lambda x\lambda y.body$.
+
+\subsubsection*{ What is a lambda-expression? }
+
+Lambda-expressions are not designed to suit certain programming applications, hence there is no predefined concept of primitive value (integer or char), nor are there special functions to construct lists. Hence, at first glance, most lambda expressions do not seem to stand for something tangible (yet). However, we can recognise certain basic functions such as:
+\begin{itemize}
+	\item  $\lambda x.x$ - the \textbf{identity} function
+	\item  $\lambda x.y$ - the \textbf{constant} function which allways returns $y$
+	\item  $\lambda x.\lambda y.x$ (resp. $\lambda x.\lambda y.y$) - \textbf{selector} functions, which are expected to be called with two parameters (curried), and return the first (resp. second) one.
+\end{itemize}
+
+In the Lambda Calculus, the \textbf{naming scheme} for the variables is unimportant. For instance, $\lambda x.x$ and $\lambda y.y$ stand for the same identity function. Similarly, $\lambda x.\lambda x.x$ and $\lambda x.\lambda y.y$ also stand for the same function which, called - returns the identity function.
+
+\subsection*{ The semantics of the Lambda Calculus }
+
+\subsubsection*{ Step 1: reduction }
+
+The algebraic function application $f(c)$ of function $f(x)=body$ on parameter $par$ is encoded in the Lambda calculus as the lambda-expression:
+
+$(\lambda x.body\; par)$
+
+where $body,par$ are $\lambda-expressions$ and $x$ is a variable.
+
+Informally, computing the \textit{function call} or \textbf{reducing} the expression amounts to:
+\begin{itemize}
+	\item  the substitution of \textbf{all occurrences} of variable $x$ with parameter $par$ in the body of the function.
+\end{itemize}
+
+We denote such a substitution by $$ body[par / x]$$, where $body,par$ are $\lambda$-expressions and $x$ is a variable.
+
+We define $ body[par / x]$ recursively, over all types of lambda expressions, as follows:
+\begin{itemize}
+	\item  a. $ x[par/x] = par$
+	\item  b. $ y[par/x] = y$
+	\item  c. $ \{\lambda x.body\}[par/x] = \lambda x.body[par/x]$ where curled brackets denote the scoping of the substitution.
+	\item  d. $ (e_1\;e_2)[par/x] = (e_1[par/x]\;e_2[par/x])$ 
+\end{itemize}
+
+Examples:
+\begin{itemize}
+	\item  $ (\lambda x.(x\;y)\;y)[z/x] = (\{\lambda x.(x\;y)\}[z/x]\; y[z/x])=$\\$ = (\lambda x.(x\;y)[z/x]\;y) = (\lambda x.(x[z/x]\;y[z/x])\;y)=(\lambda x.(z\;x)\;y)$
+	\item  $ \{\lambda x.\lambda x.x\}[z/x] = \lambda x.\lambda x.z $
+\end{itemize}
+
+The second example from the previous list illustrates a conceptual problem with point c. from our definition. Suppose we would like to reduce:
+
+$$ (\lambda x.\lambda x.x\; y)$$
+
+On the left-hand side we have a function which returns the identity function, hence its call should produce $\lambda x.x$. However, if we substitute $x$ by $y$ in the \textbf{body} of the function, i.e. compute $ \{\lambda x.x\}[y/x]$, by c. we get $\lambda x.y$, which is not what we would expect.
+
+The problem here is related to \textbf{scoping}. In general, in a programming language, each variable is in the \textbf{scope} of a:
+\begin{itemize}
+	\item  variable definition (e.g. \texttt{int x = ....}), or
+	\item  function definition (e.g. \texttt{int f(int x) \{...\}}),
+\end{itemize}
+
+In the Lambda Calculus, we do not have variable definitions, hence variables can be \textit{free} of a particular value. However, scoping is still required. In the previous example, the single occurrence of variable $x$ is the parameter of the function $\lambda x.x$, not of $\lambda x.\lambda x.x$. Hence - informally, replacing it by $y$ in $\lambda x.x$, as done above - should be \textit{illegal}.
+
+\paragraph{ Free and bound variables }\hfill\\
+
+We label each \textbf{occurrence} of $x$ in the following expression:
+$(\lambda x.\lambda x.x_1\;x_2)$
+
+Informally, the occurrence $x_1$ is \textbf{bound}, because $x_1$ is the parameter of function $\lambda x.x_1$. However, $x_2$ is \textbf{free} - it does not designate the parameter of some function.
+
+An \textbf{occurrence} of a variable can either be bound or free.
+Suppose $x_i$ is an occurrence of variable $x$ in the $\lambda$-expression $e$. Then, if:
+\begin{itemize}
+	\item  $e=x$, then $x_i$ is \textbf{free} in $e$.
+	\item  $e=\lambda x.e'$ is \textbf{bound} in $e$.
+	\item  $e=(e_1\;e_2)$ is \textbf{bound/free} in $e$ iff it is \textbf{bound/free} in $e_1$ or $e_2$ (note that $x_i$ can occur either in $e_1$ or in $e_2$).
+\end{itemize}
+
+A \textbf{variable} is \textbf{bound} iff \textbf{all its occurrences are bound}.
+
+For example, in the expression:
+\begin{itemize}
+	\item  $e = (\lambda x.\lambda x.x\;x)$
+\end{itemize}
+we have two occurrences of variable $x$: the first is bound in $e$, however the second is free. Hence variable $x$ is free.
+
+The definition of a \textbf{free variable} makes more sense when judged in the context of a reduction.
+Let us replace the phrase:
+\begin{itemize}
+	\item  the substitution of \textbf{all occurrences} of variable $x$ with parameter $par$ in the body of the function.
+\end{itemize}
+with:
+\begin{itemize}
+	\item  the substitution of \textbf{all \textit{free} occurrences} of variable $x$ with parameter $par$ in the body of the function.
+\end{itemize}
+in the informal text for function application, and consider the following application:
+
+$$ (\lambda x.(x\;\lambda x.x)\; z)$$
+
+\begin{itemize}
+	\item  the first occurrence of $x$ is the formal parameter of function $\lambda x.(x\;\lambda x.x)$
+	\item  the second occurrence of $x$ is the formal parameter of function $\lambda x.x$
+\end{itemize}
+
+Thus, $x$ is \textbf{free} in $(x\;\lambda x.x)$, and precisely those \textbf{free occurrences} need to be replaced by the substitution. The expected result of the application should be: $(z\;\lambda x.x)$.
+
+Let us fix point c. with this in mind:
+
+\begin{itemize}
+	\item  c1. $ \{\lambda y.body\}[par/x] = \lambda y.body[par/x]$ if $x \neq y$
+	\item  c2. $ \{\lambda x.body\}[par/x] = \lambda x.body$
+\end{itemize}
+
+However, point c1. still suffers from a problem. To see this, consider the expression:
+
+$$ \lambda y.(\lambda x \lambda y.x\;y) $$
+
+Here, we can reduce the inner expression and by applying the c1. substitution rule we would obtain: $\lambda y.\lambda y.y$. However, this result is incorrect. By re-examining the expression, we observe that $\lambda x.\lambda y.x$ is a \textit{selector}. Application $(\lambda x \lambda y.x\;y)$ should return a constant function, not the identity function.
+
+At second glance, we can observe that, by simply applying c1, the \textbf{scoping of y} has changed: $y$ was initially the formal parameter of $\lambda y.(\lambda x \lambda y.x\;y)$. After the reduction, it became the formal parameter of $\textbackslash y.y$, hence changing the entire meaning of the expression.
+
+To solve this, we should:
+\begin{itemize}
+	\item  rename all $y$s in the function body $\lambda y.x$ by a \textbf{new, unused} variable. The result is: $ \lambda y.(\lambda x \lambda z.x\;y) $
+  * next, we can proceed with c1. as before.
+
+To capture this, we replace c1 by:
+
+  * c1'. $ \{\lambda y.body\}[par/x$ = \textbackslash lambda y.body[par/x]$ if $math[x \textbackslash neq y] and $y$ is not free in $par$
+	\item  c2'. $ \{\lambda y.body\}[par/x] = \{\lambda z.body[z/y]\}[par/x]$ if $x \neq y$ and $y$ is free in $par$
+\end{itemize}
+
+\subsubsection*{ Step 2. reduction order(s) }
+
+In Step 1. we have satisfactorily defined the reduction:
+$$ (\lambda x.body\;par) \Rightarrow body[x/par] $$
+
+of a function application, by a thorough definition of substitution of all free occurrences of a variable (x) in an expression (body).
+
+In step 2. we look at more complicated expressions, in which several reductions can be performed at the same time.
+Let $e_1 \Rightarrow e_2 \Rightarrow \ldots \Rightarrow e_n$ be a sequence of \textbf{zero or more reductions} (hence $n$ can be 1). We write $e_1 \Rightarrow^* e_n$ - hence $e_1$ reduces to $e_n$ in zero or more steps.
+
+Consider:
+
+$$ \underline{(\lambda x.z\;\underline{(\lambda x.(x\;x)\;\lambda y.y)})}$$
+
+where we have underlined the two possible reductions. If we start with the second reduction, we obtain:
+\begin{itemize}
+	\item  $(\lambda x.z\;\underline{(\lambda y.y\;\lambda y.y)})$ which by the underlined reduction becomes:
+	\item  $(\lambda x.z\;\lambda y.y)$ which reduces to
+	\item  $z$
+\end{itemize}
+
+on the other hand, had we started with the first reduction in our example, we would obtain $z$ in a single step. The following result illustrates that selecting which application to reduce first, will not affect the ultimate result obtained via a sequence of reductions:
+
+\paragraph{ Theorem (Church Rosser) }\hfill\\
+Consider $e,e_1,e_2$ be $\lambda-expressions$ such that $e \Rightarrow^* e_1$ and $e \Rightarrow^* e_2$ such that $e_1\neq e_2$. Then there exists $e'$ such that $e_1 \Rightarrow^* e'$ and $e_2 \Rightarrow^* e'$.
+
+However, it is possible to choose a reduction sequence which does \textbf{not terminate}. Consider:
+
+$$ \underline{(\lambda x.z\;\underline{(\lambda x.(x\;x)\;\lambda y.(y\;y))})}$$
+
+If we select the outer application first, the result is, as before $z$. However, if we continuously select the inner application, we obtain a non-terminating reduction sequence.
+
+There are two strategies for application selection:
+\begin{itemize}
+	\item  \textbf{normal} strategy (informally: \textit{reduce the function first})
+	\item  \textbf{applicative} strategy (informally: \textit{reduce the parameter first})
+\end{itemize}
+
+In our first example, we have applied the \textbf{aplicative} strategy: we have always reduced the function parameters first.
+In our second example, we have applied the \textbf{normal} strategy: we have evaluated the function and ignored the parameter, hence avoiding non-termination.
+
+We write $e \Rightarrow^n e'$ (resp. $e \Rightarrow^a e'$) whenever $e$ reduces to $e'$ in zero or more reduction steps, via the \textbf{normal} (resp. \textbf{applicative}) strategy.
+
+We now formally define $\Rightarrow^n$ and $\Rightarrow^n$:
+
+\paragraph{ Applicative evaluation }\hfill\\
+
+We describe the strategies using the notation:
+
+$$ \frac{A}{B} $$
+  
+Which expresses that $B$ is true whenever $A$ is true.
+
+$$ (TFun) \frac{e \text{ does not contain applications}}{(\lambda x.body\; e) \Rightarrow^a body[e/x]} $$
+
+$$ (TApp1) \frac{e \Rightarrow^a e'}{(\lambda x.body\; e) \Rightarrow^a (\lambda x.body\;e')} $$
+
+The rule $(TApp1)$ ensures that, if a parameter $e$ from an application can be reduced to $e'$, then it will be done so before computing the application. This can only be done (via $(TFun)$), only after parameters can no longer be reduced.
+
+$$ (TApp2) \frac{e \Rightarrow^a e'}{(e\;e'')\Rightarrow^a (e'\;e'')}$$
+
+The rule $(TApp2)$ ensures that, whenever the right-hand side is not a function but is reducible, it will be reduced.
+
+In the following example, we illustrate a sequence of reduction rules via the applicative strategy.
+
+$$ ((\lambda x.(x\;x)\;\lambda y.y)\;(\lambda x.x\;\lambda x.x))$$
+
+In our particular example, we cannot apply $(TApp1)$, since the right-hand side of the application is not a function. However, we can apply $(TApp2)$: since $(\lambda x.(x\;x)\;\lambda y.y) \Rightarrow^a (\lambda y.y \lambda y.y)$, the expression becomes:
+
+$$ ((\lambda y.y\;\lambda y.y)\;(\lambda x.x\;\lambda x.x))$$
+
+as before, we apply $(TApp2)$ and obtain:
+
+$$ (\lambda y.y\;(\lambda x.x\;\lambda x.x))$$
+
+since the evaluation is applicative, we are forced to apply $(TApp1)$:
+
+$$ (\lambda y.y\;\lambda x.x)$$
+
+finally, we obtain $\lambda x.x$.
+
+\paragraph{ Normal evaluation }\hfill\\
+
+We only require two rules to specify normal evaluation:
+
+$$ (TFun) \frac{}{(\lambda x.body\; e) \Rightarrow^a body[e/x]} $$
+
+$$ (TApp) \frac{e \Rightarrow^a e'}{(e\;e'')\Rightarrow^a (e'\;e'')}$$
+
+Observe that parameters are never evaluated under the normal strategy. We illustrate it on the previous example:
+
+$$ ((\lambda x.(x\;x)\;\lambda y.y)\;(\lambda x.x\;\lambda x.x)) \Rightarrow^n$$, via $(TApp)$:
+$$ ((\lambda y.y\;\lambda y.y)\;(\lambda x.x\;\lambda x.x)) \Rightarrow^n$$, via $(TApp)$:
+$$ (\lambda y.y\;(\lambda x.x\;\lambda x.x)) \Rightarrow^n$$, via $(TFun)$:
+$$ (\lambda x.x\;\lambda x.x) \Rightarrow^n$$, via $(TFun)$:
+$$ \lambda x.x $$
+
+A fundamental property of normal evaluation is that, for each $\lambda$-expression $e$, if there exists an expression $e'$ which is \textbf{irreducible} and $e\Rightarrow^* e'$ (i.e. $e$ reduces to $e'$ via some arbitrary sequence of reductions), then $e\Rightarrow^n e'$ (i.e. by applying the normal evaluation strategy, we will obtain $e'$.
+
+\paragraph{ Lazy evaluation }\hfill\\
+
+Consider the following example:
+
+$$ (\lambda x.(x\;x)\;(\lambda y.y \lambda y.y))$$
+
+By applying the normal evaluation strategy, we obtain:
+$$ ((\lambda y.y \lambda y.y)\;(\lambda y.y \lambda y.y)) \Rightarrow^n$$
+$$ (\lambda y.y\;(\lambda y.y \lambda y.y)) \Rightarrow^n$$
+$$ (\lambda y.y \lambda y.y) \Rightarrow^n$$
+$$ \lambda y.y$$
+
+The careful reader will observe that $(\lambda y.y \lambda y.y)$ - i.e. the parameter of the outer function, is evaluated twice, which is really inefficient.
+
+The \textbf{lazy} evaluation strategy improves on this very issue. We informally illustrate Haskell lazy evaluation on this example. Note however, that lazy evaluation is a programming language-related strategy, and cannot be properly defined in the Lambda Calculus.
+
+We start of with:
+$$ (\lambda x.(x\;x)\;(\lambda y.y \lambda y.y))$$
+
+In Haskell, the parameter $par = (\lambda y.y \lambda y.y)$ is a \textbf{thunk}, i.e. a memory object which contains:
+\begin{itemize}
+	\item  the expression itself, here $(\lambda y.y \lambda y.y)$
+	\item  a \textbf{value}, initially unknown \texttt{?}
+\end{itemize}
+
+In the above evaluation we apply the normal strategy and obtain:
+$$ (par\;par)$$
+
+only here (in Haskell) the occurrences of $par$ are not independent as in the Lambda Calculus - they point to the \textbf{same thunk}. Now, $par$ is not a function, but it can be evaluated. The result is $\lambda y.y$. At this point, the value of the expression is \textbf{stored in the thunk}. Since the result is the identity function, the result is:
+
+$$par $$
+
+but now $par$ has already been evaluated hence the final result is immediately $\lambda y.y$, with no other (re-) evaluation of the inner expression.
+
+\subsection*{ The Lambda Calculus as a programming language }
+
+ 
+

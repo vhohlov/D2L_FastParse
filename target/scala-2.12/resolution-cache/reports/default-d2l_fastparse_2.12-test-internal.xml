@@ -7,7 +7,7 @@
 		revision="1.0"
 		conf="test-internal"
 		confs="compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, sources, docs, pom, scala-tool"
-		date="20180606022041"/>
+		date="20180911024719"/>
 	<dependencies>
 		<module organisation="com.github.pathikrit" name="better-files_2.12">
 			<revision name="3.5.0" status="release" pubdate="20180523194215" resolver="sbt-chain" artresolver="sbt-chain" homepage="https://github.com/pathikrit/better-files" extra-info.apiURL="https://pathikrit.github.io/better-files/latest/api/" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="5">

@@ -1,5 +1,6 @@
-[0m[[0minfo[0m] [0mRunning parser.Parser http://wiki.cs.pub.ro/studenti/diploma/redactare[0m
+[0m[[0minfo[0m] [0mRunning parser.Parser config[0m
 [0m[[0mdebug[0m] [0mWaiting for threads to exit or System.exit to be called.[0m
+[0m[[0mdebug[0m] [0mWaiting for thread run-main-1 to terminate.[0m
 [0m[[0mdebug[0m] [0m  Classpath:[0m
 [0m[[0mdebug[0m] [0m	/home/vhohlov/IdeaProjects/D2L_FastParse/target/scala-2.12/classes[0m
 [0m[[0mdebug[0m] [0m	/home/vhohlov/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-2.12.1.jar[0m
@@ -8,9 +9,11 @@
 [0m[[0mdebug[0m] [0m	/home/vhohlov/.ivy2/cache/com.lihaoyi/sourcecode_2.12/bundles/sourcecode_2.12-0.1.4.jar[0m
 [0m[[0mdebug[0m] [0m	/home/vhohlov/.ivy2/cache/org.scalaj/scalaj-http_2.12/jars/scalaj-http_2.12-2.4.0.jar[0m
 [0m[[0mdebug[0m] [0m	/home/vhohlov/.ivy2/cache/com.github.pathikrit/better-files_2.12/jars/better-files_2.12-3.5.0.jar[0m
-[0m[[0mdebug[0m] [0mWaiting for thread run-main-51 to terminate.[0m
-[0m[[0mdebug[0m] [0m	Thread run-main-51 exited.[0m
+[0m[[0mdebug[0m] [0m	Thread run-main-1 exited.[0m
 [0m[[0mdebug[0m] [0mInterrupting remaining threads (should be all daemons).[0m
-[0m[[0mdebug[0m] [0mNot interrupting system thread Thread[Keep-Alive-Timer,8,system][0m
+[0m[[0mdebug[0m] [0mInterrupting thread Keep-Alive-Timer[0m
+[0m[[0mdebug[0m] [0m	Interrupted Keep-Alive-Timer[0m
+[0m[[0mdebug[0m] [0mInterrupting thread Common-Cleaner[0m
+[0m[[0mdebug[0m] [0m	Interrupted Common-Cleaner[0m
 [0m[[0mdebug[0m] [0mSandboxed run complete..[0m
 [0m[[0mdebug[0m] [0mExited with code 0[0m

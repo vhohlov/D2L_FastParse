@@ -1,0 +1,188 @@
+\section*{ Parameter passing in different programming languages }
+
+Different programming languages adopt different strategies for passing (and evaluating) parameters during function calls. Such strategies can be split into two categories:
+\begin{itemize}
+	\item  \textit{applicative}
+	\item  \textit{normal}
+\end{itemize}
+
+but different blends are possible, depending on how values are stored and passed on. We briefly review some of these strategies:
+
+\subsubsection*{ Call-by-value }
+
+In \textbf{call-by-value}, parameters are passed (stored on the call stack) as \textbf{values}. This is the case in C, as well as Java for primitive values.
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+void swap (int x, int y){
+        int t = y;
+        y = x;
+        x = t;
+}
+
+\end{tcblisting}
+
+
+We illustrate \textbf{call-by-value} using the \texttt{swap} function. In the code below:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+int x = 1, y = 2;
+swap(x,y);
+
+\end{tcblisting}
+
+the values of \texttt{x} and \texttt{y} \textbf{do not change} after the call of \texttt{swap}, since the values have been \textbf{copied} on the call stack. Call-by-value is an \textbf{applicative} evaluation strategy.
+
+\subsubsection*{ Call-by-reference }
+
+\textbf{Call-by-reference} is implemented in C explicitly via pointers, and is the \textbf{default parameter-passing strategy} in Java, for non-primitives (objects). We illustrate call-by-reference in C:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+void swap (int* x, int* y){
+       int t = *x;
+       *y = *x;
+       *x = t;
+  }
+
+\end{tcblisting}
+
+In the code example below:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+int x = 1, y = 2;
+swap(&\&&x,&\&&y);
+
+\end{tcblisting}
+
+the values of \texttt{x} and \texttt{y} have been changed, since \textbf{their addresses} (instead of their values) have been passed on the call stack. Call-by-reference is an \textbf{applicative} evaluation strategy.
+
+\subsubsection*{ Call-by-macro expansion }
+
+Consider the following macro-definition in C:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+#define TWICE(X,Y) {Y = X + X;}
+
+\end{tcblisting}
+
+
+In the code example:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+int y;
+TWICE(1+1,y);
+
+\end{tcblisting}
+
+
+the macro is \textbf{textually-expanded without parameter evaluation}, yielding \texttt{y = 1 + 1 + 1 + 1} (instead of \texttt{y = 2 + 2}). Call-by-macro is a \textbf{normal} evaluation strategy, and behaves \textbf{exactly} like \textbf{normal evaluation from the lambda calculus}. Note however that macros in C are more limited than functions and do not rely on a call-stack.
+
+\subsubsection*{ Call-by-name }
+
+\textbf{Call-by-name} is a \textbf{normal} evaluation strategy, which, similar to \textbf{call-by-macro expansion}, reproduces lambda calculus's \textbf{normal evaluation}. It is not implemented \textbf{per-se} in programming languages, because it is inefficient. We illustrate this, by the following example:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+int g(by-name int x, by-name int y){
+    return x + y;
+}
+int f(by-name x){
+    if (x == 0)
+        return 0;
+    return f(g(x,x)-4);
+}
+
+main{
+    f(3);
+}
+
+\end{tcblisting}
+
+where we have introduced a \textit{fictitious} \textit{by-name} directive, which forces the parameter at hand to be evaluated using the normal strategy.
+
+The call \texttt{f(3)} will have the following behaviour:
+\begin{itemize}
+	\item  since \texttt{3 == 0} is false, the following call is made:
+	\item  \texttt{f(g(3,3)-4)}
+
+  \begin{itemize}
+  	\item  the condition \texttt{g(3,3)-4 == 0} triggers a call to \texttt{g}. The condition is false. Thus, the following call is made:
+  	\item  \texttt{f(g(g(3,3)-4,g(3,3)-4)-4)}. Note that, even though the parameter of \texttt{f} was evaluated during the condition check (to \texttt{2}), \textit{call-by-name} requires that it is \textbf{evaluated again}:
+
+    \begin{itemize}
+    	\item  the condition \texttt{g(g(3,3)-4,g(3,3)-4)-4 == 0} triggers three calls of \texttt{g}, and is true. Hence the program returns \texttt{0}.
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+Note that, during the call of \texttt{f(3)}, we had a total number of 4 function calls of \texttt{g}, when actually 2 would have been sufficient.
+
+\subsubsection*{ Call-by-need (lazy) }
+
+\textbf{Call-by-need} is a \textbf{normal evaluation strategy} which improves \textbf{call-by-name} by \textbf{storing a result once it is computed}.
+
+Returning to our previous example, let us replace the \textit{by-name} directive with \textit{by-need}. Then, the call \texttt{f(3)} will have the following behaviour:
+\begin{itemize}
+	\item  since \texttt{3 == 1} is false, we have the following call:
+	\item  \texttt{f(g(3,3)-4)}. The expression \texttt{g(3,3)-4} is evaluated to \texttt{2} during the comparison (which fails), and the following call is triggered:
+	\item  \texttt{f(g(g(3,3)-4,g(3,3)-4)-4)}. During this call, to evaluate the comparison with 0, we need to evaluate \texttt{g(g(3,3)-4,g(3,3)-4)-4}. However, technically, this expression is viewed by the runtime as: \texttt{g(thunk,thunk)-4}, where \texttt{thunk} is a \textbf{pointer} to the expression \texttt{g(3,3)-4}. This expression has already been evaluated, hence we have the call \texttt{g(2,2)-4}, and the comparison succeeds.
+\end{itemize}
+
+Note that, during \textit{call-by-need}, we only have two function calls of \texttt{g} (instead of 4).
+
+\subsection*{ Lazy evaluation in Haskell }
+
+The default evaluation strategy in Haskell is \textbf{lazy} or \textbf{call-by-need}. Each expression in Haskell can be viewed as a \textit{thunk}: a pointer which holds the expression itself, as well as its value, once it is evaluated. 
+
+We illustrate lazy evaluation by looking at the following calls:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+foldr (&\&&&\&&) True [True,False,True,True]
+
+\end{tcblisting}
+
+Let us consider that the implementation of \texttt{(\&\&)} is as follows:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+True &\&&&\&& True = True
+_ &\&&&\&& _ = False
+
+\end{tcblisting}
+
+This expression will produce the following sequence of calls:
+\begin{itemize}
+	\item  \texttt{True \&\& (foldr (\&\&) True [False,True,True]}
+	\item  \texttt{True \&\& (False \&\& (foldr (\&\&) True [True,True]))}
+	\item  \texttt{True \&\& False}
+	\item  \texttt{False}
+\end{itemize}
+
+In the second pattern of \texttt{\&\&}, the function returns \texttt{False} without irrespective of the parameters. Hence, the call \texttt{(False \&\& (foldr (\&\&) True [True,True]))} returns \texttt{False} without evaluating \texttt{(foldr (\&\&) True [True,True])}.
+
+As it turns out, \texttt{foldr} may be efficient even if it is not tail-recursive, in situations where reducing a list does not require exploring all its elements.
+
+Let us also the evaluation of:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+foldl (&\&&&\&&) True [True,False,True,True]
+
+\end{tcblisting}
+
+
+which triggers:
+\begin{itemize}
+	\item  \texttt{foldl (\&\&) (True \&\& True) [False,True,True]}
+	\item  \texttt{foldl (\&\&) ((True \&\& True) \&\& False) [True,True]}
+	\item  \texttt{foldl (\&\&) (((True \&\& True) \&\& False) \&\& True) [True]}
+	\item  \texttt{foldl (\&\&) ((((True \&\& True) \&\& False) \&\& True) \&\& True) []}
+	\item  \texttt{((((True \&\& True) \&\& False) \&\& True) \&\& True)}
+	\item  \texttt{(((True \&\& False) \&\& True) \&\& True)}
+	\item  \texttt{((False \&\& True) \&\& True)}
+	\item  \texttt{(False \&\& True)}
+	\item  \texttt{False}
+\end{itemize}
+
+Since the evaluation is lazy, the accumulator is only evaluated when needed, that is, when \texttt{foldl} returns. The result shows that \texttt{foldl} may be less eficient than \texttt{foldr} in Haskell, even if the former is tail-recursive.
+
+
+ 

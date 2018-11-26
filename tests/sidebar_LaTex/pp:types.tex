@@ -1,0 +1,353 @@
+\section*{ Types in functional programming }
+
+\subsection*{ Typing in programming languages }
+
+\subsubsection*{ Strong vs weak typing }
+
+Consider the following example from Javascript, where the operator \texttt{+} is applied on arguments of different types. The result is given below:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+[] + []  =  ""  
+[] + {}  = "[object]"
+{} + []  = 0
+{} + {}  = null
+
+\end{tcblisting}
+ 
+
+where \texttt{[]} is the empty array and \texttt{\{\}} is the empty object. The result is quite surprising, and unpredictable. To explain it, we need to look at the implementation of the Javascript interpreter. In Javascript, there is a distinction between \textbf{primitive} and \textbf{non-primitive} values. Arrays (like \texttt{[]}) and objects (like \texttt{\{\}}) are considered non-primitive. Since the operation \texttt{+} is performed on primitive values, Javascript attempts to \textbf{convert} the operands to primitive. A pseudocode for this is shown below:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+     Convert(value) {
+        if (value.valueOf() is a primitive) return it          //conversion to integer works?
+        else if (value.toString() is a primitive) return it    //else convert to string, if possible 
+             else error
+     }
+
+\end{tcblisting}
+
+
+The conversion of \texttt{[]} to string yields the empty string, while the conversion of \texttt{\{\}} to string yields "[object]". This explains the first two results.
+
+For the latter, we must know that \texttt{\{\}} can also be interpreted as a code-block, and this is the case here. Hence, the Javascript interpreter sees:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable} 
++ []
++ {}
+
+\end{tcblisting}
+
+
+where \texttt{+} is interpreted as a \textbf{unary} operator. JavaScript has such an implementation overloading for \texttt{+}. Without going into more details, \texttt{+ x} behaves like a \textit{conversion to Number} for x. Thus, \texttt{[]} converted to \texttt{Number} is \texttt{0}, while \texttt{\{\}} converted to \texttt{Number} is \texttt{NaN} (not a number).
+
+\paragraph{ Morale }\hfill\\
+
+The Javascript treatment of \texttt{+} is unimportant by itself, and it has some advantages for the programmer (although our example shows otherwise). However, we can note that, by allowing any \textbf{kind/type} of operand for \texttt{+}:
+\begin{itemize}
+	\item  \textbf{complicates the semantics} of the language (the programmer needs to known about conversion to primitives and conversion to numbers)
+	\item  \textbf{reduces errors} (no Javascript error was signalled above), but \textbf{makes programs more prone to bugs}.
+	\item  makes a program \textbf{more expressive} (\texttt{+} can be used in several ways) but sometimes difficult to use.
+\end{itemize}
+
+
+In programming language design, there is a fundamental tension between \textbf{expressiveness} and \textbf{typing}. Typing is a means for \textbf{enforcing constraints on what is deemed as a \textit{correct program}}. It may be the case that, \textit{conceptually correct} programs may not be accepted as \textbf{correct} from a typing perspective (this situation does seldom occur in Haskell).
+
+A \textbf{strongly-typed} programming language, is more coercive with respect to \textbf{typing constraints}. In functional programming:
+\begin{itemize}
+	\item  Haskell
+	\item  Scala
+\end{itemize}
+are considered \textbf{strongly-typed}. In imperative / OOP programming, the languages:
+\begin{itemize}
+	\item  Java
+	\item  C++
+	\item  Scala
+\end{itemize}
+are considered \textbf{strongly-typed}.
+
+A \textbf{weakly-typed} programming language is more relaxed w.r.t. \textbf{typing constraints}. For instance, in functional programming:
+\begin{itemize}
+	\item  Racket (Lisp)
+	\item  Clojure
+\end{itemize}
+are considered \textbf{weakly-typed}. In imperative / OOP programming, the languages:
+\begin{itemize}
+	\item  C
+	\item  Python
+	\item  PHP
+	\item  Javascript
+\end{itemize}
+
+(and especially the latter) are considered weakly-typed. In the latter languages, types are usually reduced to primitive constructs (programmers cannot create new types), or the type construction procedure is very simplistic. For instance, in \texttt{Racket} (formerly known as \texttt{Scheme}), which weakly-typed:
+\begin{itemize}
+	\item  lists can hold any values (e.g.) \texttt{'(1 \#t "String")}, which means that the type for lists is \textbf{primitive} (not composed), and is simply \texttt{list}.
+	\item  functions can return values of different types - the type for functions is also \textbf{primitive} - \texttt{\#procedure}. 
+\end{itemize}
+
+However, type verification is not absent in weakly-typed languages, including Racket/Scheme. For instance, the call \texttt{(+ 1 '())} will produce an error since the plus operator is called on values with invalid types.
+
+We shall discuss Scheme/Racket in more detail later. It is worth noting that, in Racket there exists extensions (Typed Racket) which allow programmers to define and compose types to some extent.
+
+The \textbf{weakly-typed} vs \textbf{strongly-typed} classification is not rigid and is subject to debate and discussion. There is no objective \textit{right-answer}. For instance, here, the language \texttt{C} is viewed as weakly-typed. We illustrate a small motivating example:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+int f (int x) {
+    if (x != 0)
+        return 1;
+    return malloc(100);
+}
+
+\end{tcblisting}
+
+
+In principle, the function \texttt{f} can return an integer, or a pointer to any object (of any type), and this is allowed by the compiler (which does issue a warning). Compared to, e.g. Java, this makes the \texttt{C} type system more relaxed.
+
+There are valid arguments for considering \texttt{C} as strongly-typed and, as said before, there is no right answer.
+
+\subsubsection*{ Compile-time vs runtime typing }
+
+This classification is done w.r.t. \textbf{the moment} when type inference occurs:
+\begin{itemize}
+	\item  during the \textbf{compilation} of a program
+	\item  at \textbf{runtime}
+\end{itemize}
+
+The former is also called \textbf{static typing}, while the latter - \textbf{dynamic typing}. In the literature, \textbf{static} and \textbf{dynamic} typing are also used with other meanings, hence, here, we prefer the terms \textbf{compile-time} and \textbf{runtime}.
+
+The imperative/OOP languages:
+\begin{itemize}
+	\item  Java
+	\item  Scala
+	\item  C\textbackslash C++
+\end{itemize}
+
+perform compile-time type checking, as well as the functional languages:
+\begin{itemize}
+	\item  Haskell 
+	\item  Scala
+\end{itemize}
+
+The imperative/OOP languages:
+\begin{itemize}
+	\item  Python
+	\item  PHP
+	\item  Javascript
+\end{itemize}
+
+perform runtime type checking, as well as the functional languages:
+\begin{itemize}
+	\item  Scheme/Racket (Lisp)
+	\item  Clojure
+\end{itemize}
+
+Compile-time type checking is preferred for strongly-typed languages: the complexity of type verification is delegated to the compiler. Conversely, in weakly-typed languages, type verification is simpler, hence it can be performed by the interpreter, at runtime. Sometimes, a compiler may be absent. This is not a golden rule but merely an observation.
+
+While runtime type checking is simpler to deploy, it has the disadvantage of not capturing typing bugs. Consider the following program in Racket:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+(define f (lambda (x) (if x 1 (+ 1 '()))))
+(f #t)
+
+\end{tcblisting}
+
+
+The function receives a value \texttt{x} which must be a boolean. In the program above there is no error, even though \texttt{(+ 1 '())} is an incorrectly-typed function call. However, in the execution of the program (i.e. \texttt{(f \#t)}), the else branch of the function is not reached, hence no typing verification is performed.
+
+Hence, runtime type checking only catches bugs \textbf{on the current program execution trace}.
+
+
+\subsection*{ Typing in Haskell }
+
+\subsection*{ Type inference in Haskell }
+
+Haskell implements the \texttt{ Hindley-Milner type inference algorithm} \footnote{\url{https://en.wikipedia.org/wiki/Hindley\%E2\%80\%93Milner\_type\_system }}. In what follows, we present a simplified, and more easy-to-follow, but incomplete algorithm which serves as an illustration for the main concepts underlying the original one. 
+
+\subsubsection*{ Intro }
+
+Consider the following expressions, and their types:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+\x -> x + 1 :: Integer -> Integer
+\x -> if x then 0 else 1 :: Bool -> Integer
+zipWith (:) :: [a] -> [[a]] -> [[a]]
+\f -> (f 1) + (f 2) :: (Integer -> Integer) -> Integer
+
+\end{tcblisting}
+
+
+We can see via the above example that types are constructed according to the following grammar:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+type ::= <const_type> | <type_var> | (<type>) | type -> type | [<type>]
+
+\end{tcblisting}
+
+
+This grammar only tells half the story regarding Haskell typing, however, for the purposes of this lecture, this view suffices. According to the above grammar, types can be:
+\begin{itemize}
+	\item  \textbf{constant types} (e.g. \texttt{Integer}, \texttt{String})
+	\item  \textbf{type variables} (e.g. \texttt{a} - which are usually used to designate \textbf{any} possible type, as in \texttt{[a]})
+	\item  \textbf{function types} (e.g. \texttt{Integer -\textgreater  Integer} or \texttt{(Integer -\textgreater  Integer)} if this type appears in a larger type expression)
+	\item  \textbf{list types} (e.g. \texttt{[a]}).
+	\item  any combination of the above rules.
+\end{itemize}
+
+
+\subsubsection*{ Expression trees }
+
+We assume each Haskell expression is constructed via the following \textit{construction rules}:
+\begin{itemize}
+	\item  \textbf{functional application} (e.g. \texttt{take 2 [1,2,3]})
+	\item  \textbf{function definition} (e.g. \texttt{\textbackslash x-\textgreater [x+1]})
+\end{itemize}
+
+We note that many Haskell definitions can be seen as such. For instance:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+g f = (f 1) + 1
+<code>
+
+can be seen as:
+
+<code haskell>
+g = \f -> (f 1) + 1
+
+\end{tcblisting}
+
+
+Hence, we can take any Haskell expression, and construct a \textbf{tree}, in which each node represents a \textbf{construction rule}, and children represent sub-expressions:
+\begin{itemize}
+	\item  for functional applications, the children are the \textbf{function name} and \textbf{the parameters}
+	\item  for function definition, the children are \textbf{the variable/variables} and the \textbf{function body}.
+\end{itemize}
+
+For example, consider the expression tree for the function \texttt{g} shown previously (we use tabs to illustrate parent/child relationship):
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+\f -> (f 1) + 1
+  f
+  (f 1) + 1
+    (+)
+    (f 1)
+       f 
+       1
+    1
+
+\end{tcblisting}
+
+
+In what follows, we shall use expression trees to perform type inference.
+
+\subsubsection*{ Typing rules }
+
+We introduce the following \textbf{typing rules}:
+
+\paragraph{ Rule (TVar) }\hfill\\
+
+If \texttt{v} is bound to a constant expression e of type \texttt{ct}, then \texttt{v :: ct}
+
+\paragraph{ Rule (TFun) }\hfill\\
+
+If \texttt{x :: t1} and \texttt{e :: t2} then \texttt{\textbackslash x -\textgreater  e  :: t1 -\textgreater  t2}
+
+\paragraph{ Rule (TApp) }\hfill\\
+
+If \texttt{f :: t1 -\textgreater  t2} and \texttt{e :: t1} then \texttt{(f e) :: t2}
+
+The above rule can be naturally generalised:
+
+If \texttt{f :: t1 -\textgreater  t2 -\textgreater  ... -\textgreater  tn -\textgreater  t} and \texttt{e1 :: t1}, ..., \texttt{en :: tn} then \texttt{(f e1 ... en) :: t}
+
+In what follows, we will use these rules to make judgements on our types. These rules have a twofold usage:
+\begin{itemize}
+	\item  \textbf{deduce} the type of an expression, based on \textit{existing knowledge}
+	\item  \textbf{make hypotheses} regarding the type of an expression (we shall not focus on this aspect in the presentation))
+\end{itemize}
+
+\subsubsection*{ Type inference stage 1: Expression tree construction }
+
+Type inference for an expression \texttt{e} can be seen as having two stages. In the first stage, we:
+\begin{itemize}
+	\item  construct the expression tree of \texttt{e}
+	\item  make \textbf{hypotheses} regarding the types of \textbf{yet untyped} expressions (e.g. variables).
+\end{itemize}
+
+We illustrate the first stage on the previous definition of \texttt{g}:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+\f -> (f 1) + 1 :: ?
+  f :: tf (here we introduce tf as the type of f. This is a type hypothesis)
+  (f 1) + 1 :: ?
+    (+) :: ?
+    (f 1) :: ?
+       f :: t1 -> t2 (this is another hypothesis, stemming from the fact that f is applied on 1)
+       1 :: ?
+    1 :: ?
+
+\end{tcblisting}
+
+
+\subsubsection*{ Type inference stage 2: Rule application }
+
+In this stage, we start from the previously-build tree, and:
+\begin{itemize}
+	\item  \textbf{apply typing rules} to deduce types for new sub-expressions
+	\item  \textbf{perform type unification}: This is one aspect that we shall not elaborate on, in this lecture. 
+\end{itemize}
+
+This is equivalent to a \textbf{bottom-up} tree traversal: We start from the leaves, and progress to the root (i.e. the expression to be typed).
+
+Without delving into details, \textbf{type unification} is an important ingredient, because it allows us to infer \textbf{the most general} type of an expression. Consider the following Haskell expression: \texttt{\textbackslash f x -\textgreater  (f x,f 1)}, which defines a function that takes another function \texttt{f}, a value \texttt{x} and returns a pair: the first element of the pair is the application \texttt{f x}, while the second - \texttt{f 1}:
+\begin{itemize}
+	\item  initially, we do not know what \texttt{f} is, hence it has \textbf{the most general type} (say) \texttt{tf} - it can be anything;
+	\item  judging by the application \texttt{f x}, we deduce that \texttt{f} must be a function, of type \texttt{a-\textgreater b}, where \texttt{x::a}
+	\item  judging by the application \texttt{f 1}, we deduce that \texttt{a} must be an \texttt{Integer}
+\end{itemize}
+The unification process combines the information collected so far:
+\begin{itemize}
+	\item  \texttt{tf} must unify (coincide with) \texttt{a -\textgreater  b}
+	\item  \texttt{a} must unify with \texttt{Integer}
+\end{itemize}
+
+The final type for the expression is: \texttt{(Integer -\textgreater  b) -\textgreater  Integer -\textgreater  (b, b)}
+
+We illustrate the second stage of the type inference on the same example:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+\f -> (f 1) + 1 :: tf -> Integer
+  f :: tf (via (TFun))
+  (f 1) + 1 :: Integer (via (TApp))
+    (+) :: Integer -> Integer -> Integer (this we know from Prelude, after the type synthesis of (+), also t2 must unify with Integer)
+    (f 1) :: t2 (via (TApp); also, t1 must unify with Integer)
+       f :: t1 -> t2
+       1 :: Integer (via (TVar), from Prelude)
+    1 :: Integer (via (TVar), from Prelude)
+
+\end{tcblisting}
+
+
+The (pseudo)-algorithmic procedure concludes with the following answer:
+\begin{itemize}
+	\item  \texttt{g :: tf -\textgreater  Integer}, where
+
+  \begin{itemize}
+  	\item  \texttt{tf} unifies with \texttt{t1 -\textgreater  t2}
+  	\item  \texttt{t2} unifies with \texttt{Integer}
+  	\item  \texttt{t1} unifies with \texttt{Integer}
+  \end{itemize}
+\end{itemize}
+
+After unification, the result is shown to the programmer: \texttt{ g :: (Integer -\textgreater  Integer) -\textgreater  Integer}
+
+Exercises. Find the type of the following expressions, by applying the type synthesis pseudo-algorithm:
+\begin{itemize}
+	\item  \texttt{map (\textbackslash x-\textgreater [x+1])}
+	\item  \texttt{\textbackslash f x-\textgreater  if x then f x else x}
+	\item  \texttt{g f x = x \&\& (f x)}
+	\item  \texttt{g f = f (g f)}
+\end{itemize}
+

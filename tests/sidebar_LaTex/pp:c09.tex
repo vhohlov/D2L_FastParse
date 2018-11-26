@@ -1,0 +1,346 @@
+\section*{ Formal syntax, Unification, Backtracking, Cut, Negation }
+
+\subsection*{ Prolog syntax }
+
+The basic programming building block in Prolog is the \textbf{clause}. To define it formally, we first introduce:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+<var> ::= alphanumeric sequence starting with capital
+<term> ::= <number> | <atom> | <var> | <predicate>(<term1> ..., <term_n>)  
+
+\end{tcblisting}
+
+
+The definition of \textbf{terms} is slightly restrictive. For instance, terms are also arithmetic expressions (e.g. \texttt{1 + X}), list \textit{patterns} (e.g. [1\textbar[]]), etc. But each such term can be expressed as a \textbf{predicate}, as already illustrated for lists, in the previous lecture.
+
+A clause is defined via the following grammar:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+<clause> ::= <res> :- <goal_1>, ..., <goal_m>.
+<res> ::= <predicate>(<var_1>, ... <var_k>)
+<goal_i> ::= <predicate>(<var_1>, ... <var_k>) |
+             <term> = <term> |                     // unification
+             <var> is <term> |                     // arithmetic assignment
+             <term> =:= <term> |                   // arithmetic comparison
+             true |                                // default satisfying goal
+             fail |                                // default-failing goal
+             ! |                                   // cut (discussed below)
+
+\end{tcblisting}
+
+
+Let:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+q(X,Y) :- r(X), p(Y).
+
+\end{tcblisting}
+
+
+serve as an example. Then \texttt{q(X,Y)} is called \textbf{resolvent}, or \textbf{goal}. Also, in, any query e.g. \texttt{-? q(X,Y).}, \texttt{q(X,Y)} is termed \textbf{goal} (which Prolog tries to \textit{prove}). \texttt{r(X)} and \texttt{p(Y)} are called sub-goals (which Prolog needs to prove, in order to prove \texttt{q(X,Y)}.
+
+There exist special coals, such as \texttt{=} (unification), \texttt{is} (assignment) or \texttt{=:=} (comparison):
+\begin{itemize}
+	\item  the goal \texttt{\textless term1\textgreater  = \textless term2\textgreater } will be satisfied iff the two terms unify. Under unification \textbf{variables become bound by a substitution}.
+	\item  the goal \texttt{\textless var\textgreater  is \textless term\textgreater } will be satisfied iff there is no type error, and will result in binding the variable to the \textbf{evaluation} of the term.
+	\item  the goal \texttt{\textless term1\textgreater  =:= \textless term2\textgreater } will be satisfied iff \textbf{the evaluation of each term} yields the same value.
+\end{itemize}
+
+We also note that the above syntax is not complete, but covers most of the Prolog programming aspects of this lecture.
+
+\subsubsection*{ Shorthands }
+
+Clauses such as:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+P(X,Y) :- true.
+
+\end{tcblisting}
+
+
+can also be written as:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+P(X,Y).
+
+\end{tcblisting}
+
+
+Also, a clause which involves unification such as:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+P(X) :- X = f(a). 
+
+\end{tcblisting}
+
+
+can also be written as:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+P(f(a),Y).
+
+\end{tcblisting}
+
+
+Shorthanded unification is often used for lists, and looks similar to Haskell pattern matching, e.g.
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+size([],0).
+size([_|T],R) :- size(T,R1), R is R1 + 1.
+
+\end{tcblisting}
+
+
+\subsubsection*{ Common pitfalls }
+
+The following two clauses:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+... :- ..., X=p(A,B) , ...
+... :- ..., p(A,B) , ...
+
+\end{tcblisting}
+
+
+may look similar, but their subgoals are actually very different:
+\begin{itemize}
+	\item  the first is satisfied if the unification of \texttt{X} with \texttt{p(A,B)} succeeds (hence \texttt{p(A,B)} is merely a term here).
+	\item  the second is satisfied if \texttt{p(A,B)} is satisfied.
+\end{itemize}
+
+\subsection*{ Unification }
+
+We write $t =_S t'$ to express that \textit{term $t$ unifies with $t'$ under substitution $S$}.
+
+A \textbf{substitution} is a set of pairs $(X,t)$, where $X$ is a variable and $t$ is a term. As a shorthand, we write $t/X$ instead of $(X,t)$.
+
+A \textbf{substitution} $S$ is \textbf{consistent} iff for all pairs $t_1/X$ and $t_2/X$, $t_1 =_S t_2$ (the variable $X$ cannot be bound to different terms which do not unify).
+
+
+\subsubsection*{ Unification rules }
+
+In what follows, we give some basic unification rules which serve the purpose of illustration. These rules are not implemented per.se. in the Prolog unification process.
+
+$\displaystyle\frac{}{atom =_S atom}$
+
+$\displaystyle\frac{S \cup \{t/X\} \text{ is consistent }}{X =_S t}$
+
+For instance, $X=_{\{cons(H,T)/X\}} cons(1,void)$ since $\{cons(H,T)/X, cons(1,void)/X\}$ is consistent. However $X =_{\{void/X\}} cons(1,void)$ is false ($X$ cannot at the same time be the empty list, and a list with one element).
+
+$\displaystyle\frac{p_1=p_2, n = m, t_1 =_{S_1} t'_1, \ldots, t_n =_{S_1} t'_n, S = S_1 \cup \ldots \cup S_n \text{ is consistent} }{p_1(t_1, ..., t_n) =_S p_2(t'_1, \ldots, t'_m)}$
+
+For instance:
+
+$p(a,q(X,Y),Z) =_S p(X,q(Y,Y),q(X))$, where $S$ is $\{a/X,a/Y,q(a)/Z\}$.
+
+The unification algorithm from Prolog will compute \textbf{the most general substitution} or \textbf{the most general unifier} (MGU). In this lecture, we will not provide a formal definition for the MGU. However, we illustrate the concept via an example.
+
+$p(X,q(X,Z)) =_S p(Y,q(Y,Z)$ for $S = \{Y/X,X/Z\}$ however $S$ is not an MGU. The constraint that $Y$ unifies with $Z$ is superfluous. Here, an MGU is $S = \{Y/X\}$.
+
+\subsubsection*{ Recursive substitutions }
+
+Does \texttt{X=f(X)} produce a valid substitution? Intuitively, such a substitution would contain $f(f(...))/X$. Prolog's unification algorithm is able to detect such recursive substitutions and will not loop. \textbf{Depending on the Prolog implementation (version)} at hand, the unification may fail or succeed.
+
+\subsubsection*{ Goal satisfaction (Backtracking) }
+
+During the satisfaction of a goal, Prolog keeps a current substitution which it iteratively updates. When a sub-goal is satisfied, a new "current substitution" is created.
+
+Let us look in more depth at this.
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+contains(E,[E|_]).
+contains(E,[H|T]) :- E \= H, contains(E,T).
+
+\end{tcblisting}
+
+
+The execution tree for the goal \texttt{-? contains(2,[1,2,3]).} is given below:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+contains(2,[1|[2,3]])
+    2 \= 1
+    contains(2,[2|_]) -> true (continue goal satisfaction)
+    contains(2,[2|[3]])   
+       2 \= 2 -> false. (re-satisfaction not possible).
+
+\end{tcblisting}
+
+
+Alternatively, let us look at how \texttt{member} is implemented:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+member(X,[X|_]).
+member(X,[_|T]) :- member(X,T).
+
+\end{tcblisting}
+
+
+The execution tree for \texttt{member(2,[1,2,3])} is shown below:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+member(2,[_|[2,3]])
+   member(2,[2|_]) -> true (continue goal satisfaction).
+   member(2,[_|[3])
+      member(2,[_|[]])
+         member(2,[]) -> false (re-satisfaction not possible).
+
+\end{tcblisting}
+
+
+The difference between \texttt{contains} and \texttt{member} is that, while the former stops once an element in the list has been found, the second continues search. Is there a good motivation for the \texttt{member} implementation?
+\begin{itemize}
+	\item  build a goal tree for \texttt{member(X,[1,2,3])}
+	\item  build a goal tree for \texttt{contains(X,[1,2,3])}.
+\end{itemize}
+
+
+\paragraph{ Backtracking }\hfill\\
+
+Note that goal satisfaction in Prolog is similar to \textit{pruned backtracking}. 
+
+\subsubsection*{ Cut (!) - pruning the goal tree }
+
+Consider the following program:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+f(a).
+f(b).
+g(a).
+g(b).
+     
+q(X) :- f(X), g(X).
+
+\end{tcblisting}
+
+
+The proof tree for \texttt{-? q(X)} is:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+f(X)
+  X = a (subgoal satisfied). Current substitution is {a/X}
+    g(X)
+      g(a) true. The goal q(X) is satisfied under {a/X}. Attempt re-satisfaction ...
+      ... resatisfaction not possible for g(X) under {a/X}.
+  X = b. Current substitution is {b/X}
+     g(X)
+       g(b) true. Attempt re-satisfaction....
+       ... not possible
+  not possible to re-satisfy f(X). 
+not possible to re-satisfy q(X). stop.  
+
+\end{tcblisting}
+
+
+In Prolog, the special goal \textit{cut} written \texttt{!}is satisfied according to the following rules:
+\begin{enumerate}
+	\item  when it is first received, it is \textbf{implicitly satisfied}.
+	\item  when there is an attempt to \textbf{re-satisfy it}, it \textbf{fails}.
+\end{enumerate}
+
+Let us modify the previous clause to:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+q(X) :- f(X), !, g(X).
+
+\end{tcblisting}
+
+
+The corresponding proof tree is:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+f(X)
+  X = a (subgoal satisfied). Current substitution is {a/X}
+    ! (implicitly satisfied)
+    g(X)
+      g(a) true. The goal q(X) is satisfied under {a/X}. Attempt re-satisfaction ...
+      ... resatisfaction not possible for g(X) under {a/X}.
+  X = b. Current substitution is {b/X}
+    ! (implicitly fails). 
+q(X) cannot be re-satisfied. stop
+
+\end{tcblisting}
+
+
+We turn to a more elaborate example:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+f(a).
+f(b).
+g(a,c).
+g(a,d).
+g(b,c).
+g(b,d).
+  
+q(X,Y) :- f(X), !, g(X,Y).
+q(test,test).
+
+\end{tcblisting}
+
+
+The example illustrates a side-effect of the cut semantics: \texttt{q(X,Y)} will not be satisfied for $\{test/X,test/Y\}$. This shows that the effect of cut also extends \textbf{to the current goal}, not only \textbf{the current clause of the current goal}.
+
+Similarly, we have:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+q(test,test) :- !.
+q(X,Y) :- f(X), !, g(X,Y).
+
+\end{tcblisting}
+
+
+where cut prevents the re-satisfaction of \texttt{q} via the second clause (the second cut will not even be reached). 
+
+Also, consider the following code which extends the previous example:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+r(X,Y) :- q(X,Y).
+r(1,2).
+
+\end{tcblisting}
+
+
+The goal \texttt{-? r(X,Y)} will be satisfied for $\{1/X,2/Y\}$, which shows that cut does not have any effect on \texttt{r} - thus, cut should not be interpreted as a \textit{\textbf{global proof tree pruner}}.
+
+\subsubsection*{ Negation }
+
+Prolog implements negation as \textbf{negation-as failure}. This is also called \textbf{the closed-world assumption}. In short, the negation \texttt{not(G)} should be interpreted as \textit{G cannot be proved in the current program}. 
+
+Note that, in First-Order Logic, the negation of a sentence $p$ is interpreted more generally:
+\begin{itemize}
+	\item  it has its own \textit{proof tree} which is independent of that for $p$
+	\item  it is possible to have \textit{theories} (programs) where both $p$ and $~p$ are true. Such theories are called \textbf{inconsistent}. It is also possible that $p$ is provable while $~p$ is not. Such a theory is called \textbf{incomplete}.
+\end{itemize}
+
+The Prolog implementation of not is given below:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+not(G) :- G,!,fail.
+not(_).
+
+\end{tcblisting}
+
+
+It is also a good illustration of a \textbf{design pattern} for logical programming, which is often used in Prolog:
+\begin{itemize}
+	\item  The key property of \texttt{not} is that \textbf{it satisfies without modifying the current substitution}, \textbf{even if G may bound variables}: 
+
+  \begin{itemize}
+  	\item  In the first clause, if G is satisfied, cut is reached for the first time (satisfies). Subsequently failure occurs and re-satisfaction is prevented. The second clause is never reached. 
+  	\item  However, if G is not satisfied, the cut is never reached, and \texttt{not} succeeds trivially, \textbf{without binding any variable from G}. 
+  \end{itemize}
+\end{itemize}
+
+
+The reason while \texttt{X \textbackslash = H} fails in our \texttt{contains} example is that it is actually a syntactic sugar for \texttt{not(X = H)}.
+
+More precisely, note that, in: \texttt{-? H = 1, not(X = H).}
+\begin{itemize}
+	\item  \texttt{X = H} succeeds hence \texttt{not(X = H)}, fails.
+	\item  re-satisfaction of \texttt{not(X = H)} is not possible, hence any supergoal having \texttt{not(X = H)} on a branch will fail also.
+\end{itemize}

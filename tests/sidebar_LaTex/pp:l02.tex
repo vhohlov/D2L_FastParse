@@ -1,0 +1,312 @@
+\section*{ Funcții }
+
+Scopul laboratorului:
+\begin{itemize}
+	\item  Semnificația termenului \textit{aplicație}
+	\item  Definirea funcțiilor anonime în Haskell
+	\item  Curry vs uncurry (și de ce nu contează în Haskell)
+	\item  Combinatori vs Închideri funcționale
+\end{itemize}
+\subsection*{ Funcții de ordin superior }
+
+Funcțiile de ordin superior sunt funcții care lucrează cu alte funcții: le primesc ca parametrii sau le returnează.
+
+Pentru a înțelege importanța lor, vom da următorul exemplu: ne propunem să scriem două funcții care primesc o listă și returnează, într-o nouă listă
+\begin{itemize}
+	\item  toate elementele pare
+	\item  toate elementele mai mari decât 10
+\end{itemize}
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+evenElements [] = []
+evenElements (x:xs) = if even x
+                      then x : evenElements xs
+                      else evenElements xs
+                      
+greaterThan10 [] = []
+greaterThan10 (x:xs) = if x > 10
+                       then x : greaterThan10 xs
+                       else greaterThan10 xs
+
+\end{tcblisting}
+
+
+\begin{tcolorbox}[colback=blue!10, colframe=blue!20]
+În loc de \texttt{if}, puteți folosi următoarea sintaxă:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+myFunction x
+        | x < 10    = "One digit"
+        | x < 100   = "Two digits"
+        | x < 1000  = "Three digits"
+        | otherwise = "More than four digits"
+
+\end{tcblisting}
+
+\end{tcolorbox}
+
+Testăm funcțiile scrise:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+*Main> evenElements [1..20]
+[2,4,6,8,10,12,14,16,18,20]
+*Main> greaterThan10 [1..20]
+[10,11,12,13,14,15,16,17,18,19,20]
+
+\end{tcblisting}
+
+
+Observăm că funcțiile definite mai sus sunt foarte asemănătoare. De fapt, doar condiția verificată în \texttt{if} diferă. Scriem, deci, o funcție generală care primește o funcție pentru testarea elementelor:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+-- In primul pattern, nu folosim functia de testare, deci nu ne intereseaza ca aceasta
+-- sa fie legata la un nume, lucru marcat prin "_"
+myFilter _ [] = []
+myFilter test (x:xs) = if test x
+                       then x : myFilter test xs
+                       else myFilter test xs
+
+\end{tcblisting}
+
+
+Acum putem rescrie funcțiile noastre, într-un mod mai elegant, utilizând funcția de filtrare:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+evenElements = myFilter even
+
+greaterThan10 = myFilter (> 10)
+
+\end{tcblisting}
+
+
+
+\subsection*{ Currying vs. uncurrying }
+
+Currying (numit după \texttt{tizul Haskell-ului} \footnote{\url{https://en.wikipedia.org/wiki/Haskell\_Curry}}) este procesul prin care, dintr-o funcție care ia mai multe argumente, se obține o secvență de funcții care iau un singur argument.
+
+De exemplu, dintr-o funcție de două argumente \texttt{f : X × Y → Z} se obține o funcție\\\texttt{curry(f) : X → (Y → Z)}. Noua funcție \texttt{curry(f)} primește un argument de tipul \texttt{X} și întoarce o funcție de tipul \texttt{Y → Z} (adică o funcție care primește un argument de tipul \texttt{Y} și întoarce un rezultat de tip \texttt{Z}). Considerând operatorul \texttt{→} asociativ la dreapta, putem omite parantezele, i.e. \texttt{curry(f) : X → Y → Z}.
+
+Operația inversă se numește "uncurry": \texttt{f : X → Y → Z,   uncurry(f): X × Y → Z}.
+
+Întorcându-ne la funcția de filtrare definită mai devreme, care este tipul ei?
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+*Main> :t myFilter
+myFilter :: (a -> Bool) -> [a] -> [a]
+
+\end{tcblisting}
+
+
+Și în \texttt{laboratorul trecut} \footnote{\url{http://www.cfvbfbtlotto.com/dokuwiki/doku.php?id=pp:l01}}, am observat că nu există o separare între domeniu și codomeniu, de genul\\\texttt{(a -\textgreater  Bool) x [a] -\textgreater  [a]}.
+
+\begin{tcolorbox}[colback=yellow!40, colframe=yellow!60, breakable]
+Acest lucru se datorează faptului că, în Haskell, \textbf{toate funcțiile iau un singur argument}. Alternativ, putem spune despre ele că sunt \textit{curried}.
+
+Tipul funcției noastre trebuie interpretat astfel:\\primește ca argument o funcție de tipul \texttt{a -\textgreater  Bool} (ia un argument și întoarce o booleană) și întoarce o funcție de tipul \texttt{[a] -\textgreater  [a]} (ia o listă și întoarce o listă de același tip).
+
+De aceea, în exemplul de mai sus am putut definit \texttt{evenElements} (o funcție care ia o listă și returnează o listă) ca fiind \texttt{myFilter even} care are exact acest tip, i.e. \texttt{[a] -\textgreater  [a]}.
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=blue!10, colframe=blue!20]
+Haskell pune la dispoziție funcțiile \texttt{curry} și \texttt{uncurry}. 
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+*Main> :t curry
+curry :: ((a, b) -> c) -> a -> b -> c
+*Main> :t uncurry
+uncurry :: (a -> b -> c) -> (a, b) -> c
+
+\end{tcblisting}
+
+
+Funcțiile primite, respectiv returnate de \texttt{curry} și \texttt{uncurry} iau tot un singur argument, numai că acesta este un tuplu.
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+*Main> let evenElements = (uncurry myFilter) even
+
+<interactive>:12:39:
+    Couldn't match expected type '(a0 -> Bool, [a0])'
+                with actual type 'a1 -> Bool'
+    In the second argument of 'uncurry', namely 'even'
+    In the expression: (uncurry myFilter) even
+    In an equation for 'evenElements':
+        evenElements = (uncurry myFilter) even
+*Main> let evenElements l = (uncurry myFilter) (even, l)
+*Main>
+
+\end{tcblisting}
+
+\end{tcolorbox}
+
+\subsection*{ Funcții anonime }
+
+Ne propunem să scriem o funcție care primește o listă și întoarce toate elementele ei divizibile cu 5. Având deja o funcție de filtrare, putem scrie:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+testDiv5 x = mod x 5 == 0
+multiplesOf5 = myFilter testDiv5
+
+\end{tcblisting}
+
+
+Această abordare funcționează, însă am poluat spațiul de nume cu o funcție pe care nu o folosim decât o singură dată - \texttt{testDiv5}.
+
+Funcțiile anonime (cunoscute și ca expresii lambda) sunt funcții fără nume, folosite des în lucrul cu funcții de ordin superior.
+
+În Haskell, se folosește sintaxa: \texttt{\textbackslash x -\textgreater  x + 5}. Funcția definită ia un parametru și returnează suma dintre acesta și 5. Caracterul \texttt{\textbackslash } este folosit pentru că seamănă cu λ (lambda).
+
+Rescriind funcția noastră, obținem:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+multiplesOf5 = myFilter (\x -> mod x 5 == 0)
+
+\end{tcblisting}
+
+
+Următoarele expresii sunt echivalente:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+f x y = x + y
+f x = \y -> x + y
+f = \x y -> x + y
+
+\end{tcblisting}
+
+
+\begin{tcolorbox}[colback=blue!10, colframe=blue!20]
+Nu există vreo diferență între \texttt{\textbackslash x y -\textgreater  x + y} și \texttt{\textbackslash x -\textgreater  \textbackslash y -\textgreater  x + y}.
+\end{tcolorbox}
+
+\subsection*{ Combinatori și închideri funcționale }
+
+Un \textbf{combinator} este o funcție care nu se folosește de \textit{variabile libere}.  O variabilă este liberă în definiția unei funcții dacă nu se \textit{referă} la niciunul dintre parametrii formali ai acesteia.
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+-- Exemple de combinatori
+f1 = \a -> a 
+         -- prin f1 &î&i d&ă&m un nume func&ț&iei anonime de dup&ă& egal
+         -- aceast&ă& func&ț&ie anonim&ă& are un parametru formal, "a"
+         -- defini&ț&ia ei con&ț&ine doar evaluarea lui a
+         -- este un combinator deoarece nu folose&ș&te nicio alt&ă& variabil&ă& &î&n afar&ă& de a
+
+f2 = \a -> \b -> a
+f3 = \f -> \a -> \b -> f b a
+
+-- Exemple de "ne-combinatori"
+f1_no = \a -> a + x
+  where x = some_other_expr
+  -- x este o variabil&ă& liber&ă& &î&n contextul defini&ț&iei func&ț&iei anonime de dup&ă& egal
+
+-- Pentru mai multe exemeple, continu&ă& s&ă& cite&ș&ti
+
+\end{tcblisting}
+
+
+Închiderile funcționale (\textbf{closures}) sunt opusul combinatorilor - se folosesc de variabile libere în definiția lor.  Cu alte cuvinte, sunt funcții care, pe lângă definiție, conțin și un \textbf{environment} de care se folosesc; acest environment conține variabilele libere despre care vorbeam.  Denumirea provine din faptul că environment-ul nu este menționat explicit, el este determinat implicit; spunem că funcția \textbf{se închide} peste variabilele (\textit{libere}) \textbf{a}, \textbf{b}, etc.  
+
+Diferența dintre combinatori și închideri funcționale este de multe ori subtilă.  Să aruncăm o privire asupra unuia dintre exemplele de mai sus.
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+flip = \f -> \a -> \b -> f b a -- was f3
+
+\end{tcblisting}
+
+
+După cum am spus, acesta este un combinator.  Ținând cont de faptul că în Haskell \textbf{currying}-ul funcțiilor (gândiți-vă la \textit{parantezarea tipului}) nu contează, putem rescrie această funcție astfel:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+flip f = \a -> \b -> f b a
+      -- ^^^^^^^^^^^^+^^^^ 
+      --     f este o variabil&ă& liber&ă& &î&n contextul func&ț&iei anonime de dup&ă& egal
+
+\end{tcblisting}
+
+
+Ce ne returnează funcția flip, atunci când îi dăm un singur argument?  O \textit{închidere funcțională} \textbf{peste f}.  Prin urmare, funcția \textbf{mod\_flipped} de mai jos este o închidere funcțională care atunci când primește 2 parametrii va folosi funcția \textbf{mod} (stocată - într-un mod neobservabil -- în \textbf{contextul} său) și va returna restul împărțirii celui de-al doilea la primul.
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+mod_flipped = flip mod
+
+\end{tcblisting}
+
+
+Alte exemple de închideri funcționale:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+mod3 x = mod x 3 -- &î&nchidere func&ț&ional&ă& peste func&ț&ia mod din Prelude &ș&i constanta 3
+plus5 x = x + 5  -- &î&nchidere func&ț&ional&ă& peste func&ț&ia (+) &ș&i constanta 5
+(+5)             -- aceea&ș&i ca mai sus;
+                 --     (+) este o func&ț&ie care prime&ș&te 2 argumente &ș&i se evalueaz&ă& la suma lor
+                 --     (+5) este &î&nchiderea func&ț&ional&ă& rezultat&ă& &î&n urma "hardcod&ă&rii" unuia dintre argumente
+
+\end{tcblisting}
+
+
+Mai multe detalii teoretice despre închideri funcționale, variabile legate/nelegate și combinatori se vor discuta în cadrul cursului.
+
+\begin{tcolorbox}[colback=cyan!5, colframe=cyan!10, breakable]
+Puteți găsi și alte exemple de închideri funcționale care se găsesc în acest suport de laborator?
+\end{tcolorbox}
+\subsection*{ Exerciții updated }
+1. Scrieți o funcție ce primește un număr $ x$ și o listă de numere de forma $ [a_1, a_2, ... a_n]$ ca parametrii și calculează $ x - a_1 - a_2 - ... - a_n$.
+
+2. Inversați o listă folosind foldl.
+
+3. Scrieți o închidere funcțională care elimină caracterul 'a' dintr-un string primit ca parametru. Scrieți o implementare ce utilizează o funcție de tip fold și alta care se folosește funcția filter.
+
+4. Implementați o funcție ce primește ca parametru o lista de string-uri și returnează concatenarea lor folosind fold.
+
+5. Se dau două cuvinte de aceeași lungime. Să se numere câte caractere sunt diferite în cele doua șiruri.
+
+6. Implementați o funcție ce primește 2 parametri: un șir de cifre de forma "111222111333112" și un număr K. Această funcție trebuie să facă următorii pași de K ori:
+\begin{enumerate}
+	\item  se grupează cifrele identice în felul următor "111222111333112" -\textgreater  ["111", "222", "111", "333", "11", "2"]
+	\item  pentru fiecare element din lista rezultată se generează un element de forma (numărul de apariții al cifrei din șir, cifra din șir) ex:  ["111", "222", "111", "333", "11", "2"] -\textgreater  [("3", "1"), ("3", "2"), ("3", "1"), ("3", "3"), ("2", "1"), ("1", "2")]
+	\item  se face flatten pe lista rezultată la pasul anterior ex: [("3", "1"), ("3", "2"), ("3", "1"), ("3", "3"), ("2", "1"), ("1", "2")] -\textgreater   "313231332112"
+\end{enumerate}
+
+\subsection*{ Exerciții}
+1. Definiți o închidere funcțională care prefixează [1,2,3] la o listă primită ca parametru.
+
+2. Definiți o funcție de ordin superior care primește o funcție și un număr, și aplică de două ori funcția pe numărul respectiv.
+
+3. Definiți o funcție care primește un operator binar, și întoarce același operator în care ordinea parametrilor a fost inversată \textit{(e.g. 1/3 -\textgreater  3/1)}
+
+4. Implementați și testați funcțiile:
+\begin{enumerate}
+	\item  foldl
+	\item  foldr
+	\item  map
+	\item  filter
+	\item  zipWith
+	\item  compunerea de funcții (operatorul \texttt{.} din Haskell)
+\end{enumerate}
+
+\begin{tcolorbox}[colback=cyan!5, colframe=cyan!10, breakable]
+Dacă nu cunoașteți vreuna dintre funcții, o puteți căuta pe Hoogle pentru a vedea tipul și scopul ei.
+\end{tcolorbox}
+
+5. Implementați, folosind foldl sau foldr:
+\begin{enumerate}
+	\item  map
+	\item  filter
+\end{enumerate}
+\subsection*{ Linkuri utile }
+\begin{itemize}
+	\item  \texttt{Hoogle - motor de căutare pentru funcții Haskell} \footnote{\url{https://www.haskell.org/hoogle/}}
+	\item  \texttt{Higher order functions - haskell.org} \footnote{\url{https://wiki.haskell.org/Higher\_order\_function}}
+	\item  \texttt{Higher order functions - learnyouahaskell.com} \footnote{\url{http://learnyouahaskell.com/higher-order-functions}}
+\end{itemize}

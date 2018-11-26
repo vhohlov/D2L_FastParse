@@ -1,0 +1,285 @@
+\section*{ Clase de tipuri (Type-classes) }
+
+Scopul laboratorului:
+\begin{itemize}
+	\item  Familiarizarea studenților cu tipuri de clase
+	\item  Familiarizarea studenților cu constrângeri de tip
+\end{itemize}
+
+\subsection*{ Typeclasses }
+
+O clasă de tipuri (typeclass) este un fel de interfață care definește un comportament. Dacă un tip de date face parte dintr-o anume clasă de tipuri, atunci putem lucra pe tipul respectiv cu operațiile definite în clasă.
+
+\begin{tcolorbox}[colback=blue!10, colframe=blue!20]
+Conceptul de clasă de tipuri este diferit de conceptul de clasă din programarea orientată pe obiecte. O comparație mai pertinentă este între clasele de tip din Haskell și interfețele din Java.
+\end{tcolorbox}
+
+O clasă des întâlnită este clasa \texttt{Eq}. Orice tip care este o instanță a acestei clase poate fi comparat, utilizând funcțiile \texttt{==} și \texttt{/=}. Clasa \texttt{Eq} este definită mai jos. Observați sintaxa Haskell:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+class Eq a where  
+    (==) :: a -> a -> Bool  
+    (/=) :: a -> a -> Bool  
+    x == y = not (x /= y)  
+    x /= y = not (x == y)  
+
+\end{tcblisting}
+
+
+Observăm că definițiile pentru \texttt{==} și \texttt{/=} depind una de cealaltă. Acest lucru ne ușurează munca atunci când vrem să înrolăm un tip acestei clase, pentru că trebuie să redefinim doar unul dintre cei doi operatori.
+Pentru a vedea cum lucrăm cu clase, vom defini un tip de date simplu și îl vom înrola în \texttt{Eq}:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+data Color = Red | Green | Blue
+
+instance Eq Color where
+    Red == Red = True
+    Green == Green = True
+    Blue == Blue = True
+    _ == _ = False
+
+\end{tcblisting}
+
+
+Am redefinit \texttt{==}, iar definiția lui \texttt{/=} rămâne neschimbată (\texttt{x /= y = not (x == y)}), ceea ce e suficient ca să folosim ambii operatori.
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+*Main> Red == Red
+True
+*Main> Red /= Red
+False
+
+\end{tcblisting}
+
+
+\begin{tcolorbox}[colback=blue!10, colframe=blue!20]
+În acest caz, puteam obține același comportament folosind implementarea default oferită de cuvântul cheie \texttt{deriving}, i.e.\\\texttt{data Color = Red \textbar Green \textbar Blue deriving (Eq)}.
+\end{tcolorbox}
+
+\subsection*{ Constrângeri de clasă }
+
+În laboratoarele trecute, analizând tipurile unor expresii, ați întâlnit notații asemănătoare:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+Prelude> :t elem
+elem :: (Eq a) => a -> [a] -> Bool
+
+\end{tcblisting}
+
+
+Partea de după \texttt{=\textgreater } ne spune că funcția \texttt{elem} primește un element de un tip oarecare, \texttt{a} și o listă cu elemente de același tip și întoarce o valoare booleană.
+
+\texttt{(Eq a)} precizează că tipul de date \texttt{a} trebuie să fie o instanță a clasei \texttt{Eq} și nu orice tip. De aceea se numește o \textbf{constrângere de clasă} (class constraint).
+
+\begin{tcolorbox}[colback=blue!10, colframe=blue!20]
+Toate constrângerile de clasă sunt trecute într-un tuplu, înaintea definiției funcției, separate de \texttt{=\textgreater }.
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+*Main> :t (\x -> x == 0)
+(\x -> x == 0) :: (Eq a, Num a) => a -> Bool
+
+\end{tcblisting}
+
+\end{tcolorbox}
+
+O definiție posibilă a funcției \texttt{elem} este:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+elem :: (Eq a) => a -> [a] -> Bool
+elem _ [] = False
+elem e (x:xs) = e == x || elem e xs
+
+\end{tcblisting}
+
+
+Ceea ce înseamnă că, odată înrolat tipul nostru clasei \texttt{Eq}, putem folosi, printre altele, și functia \texttt{elem}:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+Prelude> elem Red [Blue, Green, Green, Red, Blue]
+True
+
+\end{tcblisting}
+
+
+
+\subsection*{ Clase de tipuri și tipuri de date polimorfice }
+
+Să considerăm tipul de date polimorfic \texttt{Either}:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+data Either a b = Left a | Right b
+
+\end{tcblisting}
+
+
+Țineți minte că \texttt{Either} nu este un tip, ci un \textit{constructor de tip}. \texttt{Either Int String}, \texttt{Either Char Bool} etc. sunt tipuri propriu-zise.
+
+O clasă utilă de tipuri este clasa \texttt{Show}, care oferă funcția \texttt{show} care primește un parametru și întoarce reprezentarea acestuia sub formă de șir de caractere.
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+show :: (Show a) => a -> String
+
+\end{tcblisting}
+
+
+
+Pentru a înrola tipul \texttt{Either} în clasa \texttt{Show}, vom folosi sintaxa:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+instance (Show a, Show b) => Show (Either a b) where
+    show (Left x) = "Left " ++ show x
+    show (Right y) = "Right " ++ show y
+
+\end{tcblisting}
+
+
+\begin{tcolorbox}[colback=yellow!40, colframe=yellow!60, breakable]
+Observați constrângerile de clasă \texttt{(Show a, Show b)}! În implementarea funcției \texttt{show} pentru tipul \texttt{Either a b}, folosim aplicațiile \texttt{show x} și \texttt{show y}, deci aceste elemente trebuie să aibă, la rândul lor, un tip înrolat în clasa Show.
+\end{tcolorbox}
+
+\subsection*{ Informații despre clase în ghci }
+
+Din cadrul ghci, puteți obține informații despre o clasă anume folosind comanda \texttt{:info \textless typeclass\textgreater } (\texttt{:i \textless typeclass\textgreater }):
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+Prelude> :info Ord
+class Eq a => Ord a where
+  compare :: a -> a -> Ordering
+  (<) :: a -> a -> Bool
+  (<=) :: a -> a -> Bool
+  (>) :: a -> a -> Bool
+  (>=) :: a -> a -> Bool
+  max :: a -> a -> a
+  min :: a -> a -> a
+  {-# MINIMAL compare | (<=) #-}
+        -- Defined in &‘&GHC.Classes&’&
+instance Ord a => Ord [a] -- Defined in &‘&GHC.Classes&’&
+instance Ord Word -- Defined in &‘&GHC.Classes&’&
+instance Ord Ordering -- Defined in &‘&GHC.Classes&’&
+instance Ord Int -- Defined in &‘&GHC.Classes&’&
+...
+
+\end{tcblisting}
+
+
+Putem observa mai multe informații utile:
+
+\begin{itemize}
+	\item  constrângerea de clasă \texttt{Eq a =\textgreater } arată că un tip de date trebuie să fie membru al clasei \texttt{Eq} pentru a putea fi membru al clasei \texttt{Ord}.
+	\item  putem observa toate funcțiile și operatorii oferiți de clasa \texttt{Ord}: \texttt{compare}, \texttt{\textless }, \texttt{\textless =} etc.
+	\item  linia \texttt{\{-\# MINIMAL compare \textbar (\textless = ) \#-\}} ne informează că e suficient să implementăm fie funcția \texttt{compare}, fie operatorul \texttt{\textless =}, pentru a putea utiliza toate funcțiile puse la dispoziție de clasa \texttt{Ord} (amintiți-vă de clasa \texttt{Eq} și cum \texttt{/=} rămânea definit în funcție de \texttt{==}).
+	\item  linia \texttt{-- Defined in ‘GHC.Classes’} indică locul în care această clasă e definită. O căutare a numelui ne duce \texttt{aici} \footnote{\url{https://github.com/ghc/ghc/blob/master/libraries/ghc-prim/GHC/Classes.hs\#L273}}, unde putem observa implementarea clasei, exact așa cum este folosită în ghc.
+	\item  următoarele linii reprezintă o înșirare a tuturor tipurilor de date despre care ghci știe că sunt înrolate în clasa \texttt{Ord}, precum și unde se găsește această înrolare. E.g. prima linie arată că listele ce conțin elemente ordonabile sunt și ele ordonabile, comportament definit în \texttt{GHC.Classes}: \url{https://githubcom}/ghc/ghc/blob/master/libraries/ghc-prim/GHC/Classes.hs\#L330
+\end{itemize}
+
+\subsection*{ Exerciții }
+
+1. În \texttt{laboratorul anterior} \footnote{\url{http://www.cfvbfbtlotto.com/dokuwiki/doku.php?id=pp:l04}}, ați definit un tip pentru a modela numerele naturale extinse cu un punct la infinit, precum și niște operații pe acestea. Dorim să facem implementarea elegantă, pentru a putea folosi operatori deja existenți (e.g. \texttt{==} pentru comparare) și pentru a putea folosi alte funcții existente care impun constrângeri de tip (e.g. \texttt{Data.List.sort :: Ord a =\textgreater  [a] -\textgreater  [a]}). Astfel, ne dorim să înrolăm tipul de date în următoarele clase:
+
+\begin{itemize}
+	\item  Show (astfel încât să afișăm numerele fără a fi precedate de vreun nume de constructor, iar infinitul ca "Inf")
+	\item  Eq
+	\item  Ord
+	\item  Num
+\end{itemize}
+
+2. Definiți un tip de date asociat următoarei gramatici:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+   <expr> ::= <value> | <variable> | <expr> + <expr> | <expr> * <expr> 
+
+\end{tcblisting}
+
+unde o valoare poate avea orice tip.
+
+3. Considerăm următorul constructor de tip:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+type Dictionary a = [(String, a)]
+
+\end{tcblisting}
+
+care modeleaza \textit{dicționare} - mapări de tip "nume-variabilă"-"valoare polimorfica"
+
+Definiți funcția:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}valueof :: Dictionary a -> String -> Maybe a
+\end{tcblisting}
+
+care intoarce valoarea asociata unui nume-variabilă, dintr-un dicționar
+
+4. Definiți următoarea clasă:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+class Eval t a where
+    eval :: Dictionary a -> t a -> Maybe a
+
+\end{tcblisting}
+
+
+Spre deosebire de clasele prezentate în exemplele anterioare, care desemnează o \textit{proprietate} a unui tip sau constructor de tip, \texttt{Eval} stabilește o \textbf{relație} între un constructor de tip \texttt{t} și un tip \texttt{a}. Relația spune că orice container de tip \texttt{t a} poate fi evaluat in prezența unui dicționar cu valori de tip \texttt{a}, la o valoare de tip \texttt{Maybe a}.
+
+\begin{tcolorbox}[colback=blue!10, colframe=blue!20]
+Acest tip de clasă reprezintă o extensie a limbajului, \textbf{Multi-parameter type-class}.  Cel mai probabil este nevoie de următoarele directive pentru a o defini și pentru a înrola tipuri la ea:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
+
+class Eval t a where
+    eval :: Dictionary a -> t a -> Result a
+
+\end{tcblisting}
+
+
+Mai multe despre acestea, precum și despre \textbf{Functional Dependencies}, un alt feature care este strâns legat de clasele de tipuri cu mai mulți parametrii puteți găsi \texttt{aici} \footnote{\url{https://en.wikibooks.org/wiki/Haskell/Advanced\_type\_classes}}.
+\end{tcolorbox}
+
+5. Înrolați \texttt{Expr} și \texttt{Integer} în clasa \texttt{Eval}. Care este semnificația evaluării?
+
+6. Înrolați \texttt{Expr} și \texttt{FIFO a} în clasa \texttt{Eval}. Semnificația înmulțirii este \textit{concatenarea} a două FIFO. 
+
+\subsection*{ Alte exerciții }
+
+1. Ați definit, în laboratorul anterior, tipurile polimorfice \texttt{List a} și \texttt{Tree a}. Pentru le putea reprezenta, ați folosit implementarea implicită a funcției \texttt{show}, oferită de \texttt{deriving (Show)}. Aceasta nu era însă o reprezentare citibilă.
+
+Ne dorim să reprezentăm tipul listă, la fel ca cel existent în Haskell:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+Prelude> show (Cons 1 (Cons 2 (Cons 3 Nil)))
+[1,2,3]
+
+\end{tcblisting}
+
+
+(Pentru arbori există multe reprezentări posibile, puteți alege orice reprezentare preferați).
+
+2. Înrolați aceleași tipuri în clasa \texttt{Eq}.
+
+3. Implementați sortarea pentru \texttt{List a}, unde \texttt{a} e un tip oarecare înrolat în clasa \texttt{Ord}.
+ 
+4. Implementați căutarea binară pentru \texttt{Tree a}, unde \texttt{a} e un tip oarecare înrolat în clasa \texttt{Ord}.
+
+5. Înrolați tipurile de date \texttt{List} și \texttt{Tree} în clasa \texttt{Functor}.
+
+\subsection*{ Resurse }
+
+\begin{itemize}
+	\item  \texttt{Type Classes and Overloading - Haskell wiki} \footnote{\url{https://www.haskell.org/tutorial/classes.html}}
+	\item  \texttt{Typeclassopedia - Haskell wiki} \footnote{\url{https://wiki.haskell.org/Typeclassopedia}}
+	\item  \texttt{Typeclasses 101 - Learnyouahaskell} \footnote{\url{http://learnyouahaskell.com/types-and-typeclasses\#typeclasses-101}}
+	\item  \texttt{Typeclasses 102 - Learnyouahaskell} \footnote{\url{http://learnyouahaskell.com/making-our-own-types-and-typeclasses\#typeclasses-102}}
+\end{itemize}

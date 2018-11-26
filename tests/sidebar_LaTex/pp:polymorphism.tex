@@ -1,0 +1,521 @@
+\section*{ Polymorphism in functional languages }
+
+\subsection*{ Polymorphism in Object-Oriented languages }
+
+Translated literally, the term \textbf{polymorphism} means \textbf{multiple shapes}. Polymorphism in programming languages is a powerful modularisation tool, which allows programmers to:
+\begin{itemize}
+	\item  \textbf{abstract from implementation details} (in the case of ad-hoc polymorphism)
+	\item  \textbf{define a unique implementation for a range of types} (in the case of parametric polymorphism / genericity)
+\end{itemize}
+
+Polymorphism is a mechanism supported by virtually any strongly-typed programming language, including functional and object-oriented ones.
+
+\subsubsection*{ Ad-hoc polymorphism }
+
+In an Object-Oriented language (say, Java), \textbf{ad-hoc polymorphism} allows the programmer to \textit{(dynamically) select the implementation of a function, based on the type(s) of the variable(s) on which the former is applied}.
+
+Consider the following class definitions:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+class Animal {
+  public void talk (){
+    System.out.println("I am an Animal");
+  }
+}
+
+class Bird extends Animal {
+  public void talk (){
+    System.out.println("Cip-cirip");
+  }
+}
+
+\end{tcblisting}
+
+
+Finally, consider the following code:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+ Animal [] v = new Animal [2];
+    v[0] = new Animal();
+    v[1] = new Bird();
+    for (Animal a:v)
+      a.talk();
+
+\end{tcblisting}
+
+
+whose output is:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+I am Animal
+Cip-cirip
+
+\end{tcblisting}
+
+
+The example illustrates \textbf{ad-hoc polymorphism}, or \textbf{method overriding}:
+\begin{itemize}
+	\item  the \texttt{talk} method from the class \texttt{Animal} has been overridden in the class \texttt{Bird} which extends \texttt{Animal}.
+	\item  moreover, establishing the implementation of \texttt{a.talk()} is done \textbf{at runtime}, based on the \textbf{actual} (here \texttt{Bird}) \textbf{not declared} (\texttt{Animal}) type of \texttt{a}.
+\end{itemize}
+
+Method overriding should not be confused with \textbf{method overloading} which means that the same function name can be used for different function implementations, each having a different signature. The following code, which continues the previous example, illustrates \textbf{overloading}:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+  public void listen_to(Animal a){
+    System.out.println("An animal is listening:");
+    a.talk();
+  }
+  public void listen_to(Bird b){
+    System.out.println("A bird is listening:");
+    b.talk();
+  }
+
+\end{tcblisting}
+
+The function \texttt{listen\_to} has been overloaded. Now, consider the calls:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+listen_to(v[0]);
+listen_to(v[1]); 
+listen_to(new Bird());
+
+\end{tcblisting}
+
+
+The output is:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+An animal is listening:
+I am an Animal
+An animal is listening:
+Cip-cirip
+A bird is listening:
+Cip-cirip
+
+\end{tcblisting}
+
+
+The interesting call is \texttt{listen\_to(v[1])}. Note that the code for \texttt{listen\_to(Animal a)} has been called (which outputs \texttt{An animal is listening:}, although the actual type of \texttt{v[1]} is \texttt{Bird}, as shown by the next line of the output \texttt{Cip-cirip}. The example illustrates an important point:
+
+\begin{itemize}
+	\item  \textbf{method overloading} is performed at \textbf{compile-time}, based on the \textbf{declared} not the actual type of the parameters.
+\end{itemize}
+
+To illustrate this design decision, consider yet another example:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+class Who implements Interface1, Interface2 {}
+
+interface Interface1 {}
+
+interface Interface2 {}
+
+public class X {
+    private static void method(Object o)     {}
+    private static void method(Interface1 i) {}
+    private static void method(Interface2 i) {}
+}
+
+\end{tcblisting}
+
+
+Suppose for a moment that overloading relies on the actual type of an object, instead of the declared one. Now consider the following code:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+   Object o = new Who();
+   method(o);
+
+\end{tcblisting}
+
+
+Since \texttt{Who} implements both \texttt{Interface1} and \texttt{Interface2}, the compiler cannot make a decision about \texttt{o}'s actual type.
+
+\textbf{Question:} What is the actual behaviour of the above code?
+
+One final note regarding ad-hoc polymorphism is that the function signature \textbf{cannot differ only in the returned type}. This holds in both Java, and Cpp and Scala. To see why this is the case, consider the following definitions:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+class Parent {}
+class Child extends Parent {}
+
+\end{tcblisting}
+
+
+and the methods:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+public Parent method() {}
+public Child method() {}
+
+\end{tcblisting}
+
+
+as well as the invocation:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+Object o = new Parent ();
+o = method();
+
+\end{tcblisting}
+
+
+The compiler cannot decide which implementation should be called in this particular case.
+
+\subsubsection*{ Genericity }
+
+While ad-hoc polymorphism (overriding) allows for \textbf{several different implementations} to be defined \textbf{under the same function name}, \textbf{genericity} in Java (and \textbf{parametric polymorphism} in general), allows for:
+\begin{itemize}
+	\item  \textbf{a unique implementation to be defined over range of types}
+\end{itemize}
+
+For instance, in:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+static <T> int count (List<T> l){
+    int i = 0;
+    for (T e:l)
+        i++;
+    return i;
+}
+
+\end{tcblisting}
+
+
+the method \texttt{count} is defined w.r.t. lists containing any type of element (\texttt{T}). Technically, \textbf{genericity} in Java is a mechanism for ensuring \textit{\textbf{cast-control}} and is not a part of Java's type system. For instance, in the compilation phase, the above code is translated to:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+static int count (List l){
+    int i = 0;
+    for (Object e:l)
+        i++;
+    return i;
+}
+
+\end{tcblisting}
+
+
+This process is called \textbf{type erasure}. Consider another example, before type erasure:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+List<Animal> l = ...
+Animal e = l.get(i)
+
+\end{tcblisting}
+
+
+and after:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+List l = ...
+Animal e = (Animal)l.get(i)
+
+\end{tcblisting}
+
+
+Thus, type-safety is achieved via automatic casts.
+
+\subsubsection*{ Others }
+
+There are other types of polymorphism which may appear in the literature, e.g. \textbf{subtype polymorphism} which simply means that \textbf{a variable \texttt{v} of type \texttt{T} is allowed to refer to an object of \textit{any type derived from \texttt{T}}}. Thus, subtype polymorphism is a basic OOP feature.
+
+\subsection*{ Polymorphism in Haskell }
+
+\subsubsection*{ Parametric polymorphism }
+
+Parametric polymorphism is a fundamental trait of typed functional programming in general, and Haskell in particular. It manifests via the presence of \textbf{type variables} which stand for \textbf{any type}. Numerous functions defined so far are parametrically polymorphic:
+\begin{itemize}
+	\item  foldl
+	\item  foldr
+	\item  map
+	\item  zipWith
+\end{itemize}
+
+they define \textbf{unique} implementations which \textbf{are independent} of:
+\begin{itemize}
+	\item  the type of the contained elements of a list
+	\item  the function type which is applied on elements from a list
+	\item  etc.
+\end{itemize}
+
+Unlike Java, in Haskell, parametric polymorphism is an intrinsic (and key) feature of the type-system. To explore it in more depth, we start with a discussion regarding \textbf{polymorphic types}:
+
+\subsubsection*{ Polymorphic types }
+
+We illustrate Haskell polymorphic types by constructing \textbf{polymorphic lists} precisely in the same way they are defined in Prelude:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+data List a = Void | Cons a (List a)
+
+\end{tcblisting}
+
+
+compared to the \textbf{monomorphic lists} defined in the previous lecture, we observe:
+\begin{itemize}
+	\item  the newly defined type is \texttt{List a}, where \texttt{a} is a \textbf{type-variable}
+	\item  \texttt{Void :: (List a)} which means that \texttt{Void} is a \textbf{polymorphic value} (i.e. \texttt{Void} can be the empty list for list of integers or lists of strings etc.)
+	\item  \texttt{Cons :: a -\textgreater  (List a) -\textgreater  (List a)}, i.e. \texttt{Cons} takes a value of type \texttt{a}, a list of type \texttt{(List a)} (not \texttt{[a]}) and returns a list of type \texttt{(List a)}
+\end{itemize}
+
+We also illustrate a recursive conversion function, as an example:
+
+listConvert :: (List a) -\textgreater  [a]
+listConvert Void = []
+listConvert (Cons h t) = h:(listConvert t)
+
+Pairs (and tuples in general) are a very useful data structure, and they can be defined as follows:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+data Pair a b = Pair a b
+
+\end{tcblisting}
+
+
+this definition requires more care in reading it:
+\begin{itemize}
+	\item  \texttt{data Pair a b} defines a polymorphic type, where \textbf{two independent type variables} occur: the type of the first element of the pair, and that of the second. These two types need not coincide;
+	\item  \texttt{Pair :: a -\textgreater  b -\textgreater  Pair a b} is the unique data constructor for pairs: it takes an element of type \texttt{a}, one of type \texttt{b} and produces an element of type \texttt{Pair a b}.
+\end{itemize}
+
+As before, we write an illustrative conversion function:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+pairconvert :: Pair a b -> (a,b)
+pairconvert (Pair x y) = (x,y)
+
+\end{tcblisting}
+
+
+The programmer should not mistake the keyword \texttt{Pair} from the type \texttt{Pair a b}, with the data constructor \texttt{Pair :: a -\textgreater  b -\textgreater  Pair a b}. Similar to the language C, where two namespaces exist: one for structures and one for types (with the \texttt{typedef} instruction to create new types), here we also have two \textit{namespaces}:
+\begin{itemize}
+	\item  one for \textbf{types} (where \texttt{Pair} has been defined via the l.h.s. of the \texttt{=} in the \texttt{data} definition)
+	\item  one for \textbf{values (and functions)} (where the data constructor \texttt{Pair} has been defined)
+\end{itemize}
+
+We also define the polymorphic tree datatype:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+data Tree a = Leaf | Node (Tree a) a (Tree a)
+
+\end{tcblisting}
+
+
+\paragraph{ Type constructors }\hfill\\
+
+Let us recall the \textbf{syntax} for types, as presented in the previous lecture. It mainly consisted of type-variables (anything), \textit{function-types} as well as \textit{list types}. To this list we may add any other type introduced via \texttt{data}.
+
+However, there is a more uniform and elegant way for describing these types. This approach relies on a \textbf{functional approach to type construction}:
+\begin{itemize}
+	\item  We require special functions called \textbf{type constructors}, which take \textbf{types} as parameter and \textbf{return types} 
+	\item  To construct new types, we apply \textbf{type constructors} on type expressions (e.g. monomorphic types or type variables).
+\end{itemize}
+
+\paragraph{ The List type constructor }\hfill\\
+
+In our previous \texttt{data List a = ...} definition:
+\begin{itemize}
+	\item  \texttt{List} is a \textbf{type constructor}
+	\item  Since - conceptually, \texttt{List} is also a function, it must have a \textbf{type}. The \textbf{type} of a \textbf{type constructor} is called \textbf{kind} in Haskell. Thus, the kind of \texttt{List} is written as: \texttt{List :: * =\textgreater  *}, which reads: \textit{List receives a type and returns a type}
+	\item  The polymorphic type \texttt{List a} is actually a \textbf{type function application}. The function is \texttt{List} and the parameter is the variable \texttt{a}.
+	\item  Similarly, the monomorphic type \texttt{List Integer} (or similarly \texttt{[Integer]}) is constructed as an application of \texttt{List} on the monomporphic type \texttt{Integer}.
+\end{itemize}
+
+\textbf{Exercise}: Describe the construction of the following types. For what do they stand?
+\begin{itemize}
+	\item  \texttt{[(List a)]}
+	\item  \texttt{(List [a])}
+\end{itemize}
+
+\paragraph{ The Pair type constructor }\hfill\\
+
+\begin{itemize}
+	\item  \texttt{Pair :: * =\textgreater  * =\textgreater  *} is a \textbf{type constructor} with kind \texttt{* =\textgreater  * =\textgreater  *}. It takes two types and produces a type.
+	\item  The type \texttt{Pair a Integer} is polymorphic and represents the type of any pair whose second component is an integer.
+\end{itemize}
+
+With this observation, we can improve our syntax for types, as follows:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+<type> ::= <const_type> | <type_var> | <type_constructor_application>
+<type_constructor_application> ::= <type_const_1> <type> | <type_const_2> <type> <type> | ...
+
+\end{tcblisting}
+
+
+where:
+\begin{itemize}
+	\item  \texttt{\textless type\_const\_1\textgreater } is any type constructor having kind \texttt{* =\textgreater  *}
+	\item  \texttt{\textless type\_const\_2\textgreater } is any type constructor having kind \texttt{* =\textgreater  * =\textgreater  *}
+	\item  etc.
+\end{itemize}
+
+To conclude, we observe that \textbf{the function type} is also constructed via the application of the type constructor:
+\begin{itemize}
+	\item  \texttt{(-\textgreater ) :: * =\textgreater  * =\textgreater  *}
+\end{itemize}
+on specific types or type expressions.
+
+
+\subsubsection*{ Ad-hoc polymorphism }
+
+Ad-hoc polymorphism is necessary in typed functional languages, and we illustrate it via a few examples:
+\begin{itemize}
+	\item  to display an object the interpreter is calling the function \texttt{show :: a -\textgreater  String} which takes an arbitrary type and converts it to a String. Naturally, \texttt{show} requires \textbf{type-dependent implemementations}
+	\item  similarly, the \texttt{+} operation has different implementations for Integers, Floats, and may be extended for other objects as well.
+\end{itemize}
+
+\paragraph{ Towards type-classes }\hfill\\
+
+Consider the types \texttt{Nat} and \texttt{List a} defined in previous lectures. To makes objects of type \texttt{Nat} or \texttt{List a} showable, we require functions of signature \texttt{Nat -\textgreater  String} and \texttt{List a -\textgreater  String}, respectively. We define them below:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+showNat :: Nat -> String
+showNat =
+	let c Zero = 0
+	    c (Suc x) = 1 + (c x)
+	    in show . c
+
+showList :: (List a) -> String
+showList = lfoldr (\x y -> (show x)++":"++y) "[]"
+
+\end{tcblisting}
+
+
+The implementation of \texttt{showList} relies on \texttt{lfoldr :: (a -\textgreater  b -\textgreater  b) -\textgreater  b -\textgreater  List a -\textgreater  b}. Also, written in Haskell as-is, \texttt{showList} has problems regarding the call \texttt{(show x)}. Consider that \texttt{x::(List Nat)} or that \texttt{x :: Nat}. Depending on \texttt{x}'s type, we need to call different show functions. What is obvious already is that \textbf{we need a single function name (e.g. show) which should have type-dependent implementations}.
+
+An attempt to solve this issue is by introducing a new type:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+data Showable a = C1 Nat | C2 (List a)
+
+show :: (Showable a) -> String
+show (C1 x) = showNat x
+show (C2 x) = showList y 
+
+\end{tcblisting}
+ 
+
+An object of type \texttt{Showable a} indicates a value which can be displayed. For each showable \textbf{type}, we define separate construction rules (\texttt{C1} resp. \texttt{C2}). The above code still has a problem:
+\begin{itemize}
+	\item  \texttt{showList :: (List a) -\textgreater  String}, however, to be able to call \texttt{(show x)}, x must be showable, hence \texttt{x::Showable a}
+\end{itemize}
+
+To solve this issue, we modify the signature of \texttt{showList}:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+showList :: (List (Showable a)) -> String
+
+\end{tcblisting}
+
+
+as well as the definition of \texttt{Showable a}:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+data Showable a = C1 Nat | C2 (List (Showable a))
+
+\end{tcblisting}
+
+
+Our approach to handling \textbf{ad-hoc polymorphism} suffers from a single drawback:
+\begin{itemize}
+	\item  it relies on \textbf{type-packing}. The programmer needs to handle both user-defined values (e.g. \texttt{Zero :: Nat}), as well as showable values (e.g. \texttt{C1 Zero :: Showable a}); \textbf{we have two, type-dependent representations for the same object}.
+\end{itemize}
+
+\paragraph{ Type-classes }\hfill\\
+
+To solve the above issue, ad-hoc polymorphism is implemented in Haskell via \textbf{type-classes}, which are conceptually different from classes in OOP. In short:
+\begin{itemize}
+	\item  \textbf{a type-class} describes a collection of types, which can be defined by the user
+	\item  \textbf{type-classes} also contain \textit{function signatures} which are traits specific to each type in the type-class
+	\item  \textbf{types can be enrolled in type-classes} by the user
+	\item  \textbf{relationships between type-classes} (e.g. inclusion) can be defined by the user.
+\end{itemize}
+
+We illustrate all the above by introducing the definition for the type-class \texttt{Show}:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+class Show a where
+   show :: a -> String
+
+\end{tcblisting}
+
+
+In the above definition, \texttt{a} is an arbitrary type which is enrolled in class \texttt{Show}. Any such type supports the function \texttt{show}, which is defined as part of the type-class. The following code enrols our previous \texttt{Nat} type in class \texttt{Show}, hence making naturals showable:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+instance Show Nat where
+    show = 
+      let convert Zero = 0
+          convert (Succ n) = 1 + (convert n)
+      in show . convert
+
+\end{tcblisting}
+
+
+In our implementation, the type of \texttt{show . convert} is \texttt{Nat -\textgreater  String}, since \texttt{convert :: Nat -\textgreater  Integer}. This example also shows ad-hoc polymorphism in action. In the above expression (the functional composition), the general type \texttt{show :: (Show a) =\textgreater  a -\textgreater  String} of \texttt{show} becomes via unification \texttt{::Integer -\textgreater  String}. Thus, the compiler knows to call the integer implementation of \texttt{show}, which is part of Prelude.
+
+Also, note the interpretation of the type signature: \texttt{show :: (Show a) =\textgreater  a -\textgreater  String} which tells us that:
+\begin{itemize}
+	\item  \texttt{show :: a -\textgreater  String} where \texttt{a} must be enrolled in the type-class \texttt{Show}
+\end{itemize}
+
+We continue by enrolling \texttt{List a} in class \texttt{Show}. Recall that, to be able to show lists, the elements from the list need to be showable. Hence, the enrollment is:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+instance (Show a) => Show (List a) where
+    show Void = "[]"
+    show (Cons h t) = (show h)++":"++(show t)
+
+\end{tcblisting}
+
+
+Finally, we illustrate another kind of enrollment. It spawns from the observation that both lists and trees support map operations, which have very similar behaviour:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+lmap :: (a -> b) -> (List a) -> (List b)
+tmap :: (a -> b) -> (Tree a) -> (Tree b)
+
+\end{tcblisting}
+
+
+We can define the \textbf{class of mappable types}, which contains a \texttt{fmap} operation. In Haskell, this class is called \texttt{Functor}. A tentative definition \texttt{class Functor t where} raises the question regarding who is \texttt{t}, such that all constraints from the map signatures are preserved:
+\begin{itemize}
+	\item  map transforms \textit{containers of a kind} (e.g. Lists) in \textit{containers} of the \textbf{same kind}
+	\item  if the mapped transformation is \texttt{(a -\textgreater  b)}, then the first container must have elements of type \texttt{a} while the second - of type \texttt{b}.
+\end{itemize}
+
+The solution is:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+class Functor t where
+   fmap :: (a -> b) -> t a -> t b
+
+\end{tcblisting}
+
+where \texttt{t} is a type-constructor with kind \texttt{t :: * =\textgreater  *}. Thus, we have the following enrollments:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+instance Functor List where
+  fmap = ...
+
+instance Functor Tree where
+  fmap = ...
+
+\end{tcblisting}
+

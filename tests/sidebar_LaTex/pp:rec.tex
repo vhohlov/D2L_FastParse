@@ -1,0 +1,491 @@
+\subsection*{ Side-effects }
+
+Programming with side-effects is one defining feature of \textbf{imperative} programming. A procedure produces a \textbf{side-effect} if its call produces a change in the state of a running program (the memory), apart from the returned value.
+
+We (re-)consider the following code discussed in the previous lecture:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+int main (){
+
+	int* v = malloc(sizeof(int)*7);
+	v[0] = 1; v[1] = 9; v[2]=4; v[3]= 15; v[4] = 2; v[5] = 6; v[6] = 0;
+
+        show(v);
+	insertion_sort(v,7);
+        show(v);
+}
+
+\end{tcblisting}
+
+
+The two identical calls on a (hypothetical) \texttt{show} functions will produce different effects. The \textbf{state} of \texttt{v} has changed after the \texttt{insertion\_sort} call.
+
+Programming with side-effects is perhaps one of the most wide-spread styles, and it may seem difficult/unnatural to refrain from using it. However, there are situations where using side-effects may be produce a code prone to bugs.
+
+Consider the following implementation of a \textbf{depth-first traversal} of an oriented graph:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h> 
+ 
+#define NODE_NO 3
+// graph represented as adjacency matrix
+typedef struct Graph {
+	int** m;
+	int nodes;
+}* Graph;
+ 
+Graph make_graph (int** m, int n){
+	struct Graph* g = (struct Graph*)malloc(sizeof(struct Graph));
+	g->m = m;
+	g->nodes = n;
+	return g;
+}
+ 
+int visited[NODE_NO] = {0,0,0};
+ 
+void visit(Graph g, int from){
+	visited[from] = 1;
+	printf(" Visited %i ",from);
+	int i;
+	for (i = 0; i<g->nodes; i++){
+		if (g->m[from][i] &\&&&\&& !visited[i])
+			visit(g,i);
+	}
+}
+
+int main (){
+
+	int** a = (int**)malloc(NODE_NO*sizeof(int*));
+	a[0] = (int*)malloc(NODE_NO*sizeof(int));
+	a[0][0] = 0; a[0][1] = 1; a[0][2] = 0;
+	a[1] = (int*)malloc(NODE_NO*sizeof(int));
+	a[1][0] = 0; a[1][1] = 0; a[1][2] = 1;
+	a[2] = (int*)malloc(NODE_NO*sizeof(int));
+	a[2][0] = 0; a[2][1] = 0; a[2][2] = 0;
+
+	Graph g = make_graph((int**)a,3);
+	visit(g,0);
+
+	//visit(g,1);
+
+}
+
+
+
+\end{tcblisting}
+
+
+\begin{itemize}
+	\item  A graph is represented as an \textbf{adjacency matrix}; nodes are identified by integers.
+	\item  The code relies on the global array \texttt{visited} which marks those nodes which have been visited during the traversal.
+	\item  The procedure \texttt{visit} initiates the traversal: it marks the initial node (\texttt{from}) as visited and recursively visits all adjacent nodes. 
+\end{itemize}
+
+\subsubsection*{ Side-effects may easily introduce bugs }
+
+The problem with this implementation is that \texttt{visited} is modified as a side-effect. As it is, two subsequent calls on \texttt{visit} will produce different results:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+int main () {
+     visit(g,0);  // produces a correct traversal
+     visit(g,1);  // produces an invalid traversal
+}
+
+\end{tcblisting}
+
+
+This happens because \texttt{visited} was not initialised before the second use of \texttt{visit}, and it still holds the visited nodes from the previous traversal.
+
+This bug can be easily solved in different ways:
+\begin{itemize}
+	\item  make sure \texttt{visited} flags all nodes as not visited before each traversal;
+	\item  use a \texttt{visited} array for each traversal;
+\end{itemize}
+
+This example is important because:
+\begin{itemize}
+	\item  side-effects introduce a bug which may be difficult to identify at compile-time (the program will compile) as well as at run-time (the problem only occurs during subsequent traversals, and does not produce a crash).
+	\item  the programmer needs to enforce a \textbf{discipline} regarding the scope of a side-effect (e.g. what variables \textbf{outside of \texttt{visit}} are allowed to be modified by \texttt{visit}). Such a discipline may naturally lead to an object-oriented programming style (relying on encapsulation) or to a functional style (limiting or completely forbidding side-effects).
+\end{itemize}
+
+\subsubsection*{ Side-effects may be unpredictable }
+
+Consider the following code:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+int fx (){ printf("Hello x !\n"); return 1;}
+int fy (){ printf("Hello y !\n"); return 2;}
+
+void test_call(int x, int y){}
+
+int main(){
+     test_call(fx(),fy());
+}
+
+\end{tcblisting}
+
+
+Both functions \texttt{fx} and \texttt{fy} produce a side-effect, since they display a message, apart from the returned value. Programmers would generally assume that \texttt{test\_call} will display:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+Hello x !
+Hello y !
+
+\end{tcblisting}
+
+
+However this is not generally the case. In the C standard, there is no specification on the order in which parameters are evaluated. As it happens, on some compilers, \texttt{test\_call} will produce the above output, while on others (e.g. \texttt{ here} \footnote{\url{https://ideone.com/BAsVzC }}), the messages are in a different order.
+
+This is another situation where side-effects may produce hard-to-find bugs.
+
+
+\subsection*{ Recursion }
+
+Recursion is a natural way of expressing algorithms, for instance the computation of the \textbf{nth Fibbonacci number}:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+int fib (int n){
+        if (n<2)
+                return n;
+        return fib(n-1)+fib(n-2);
+}
+
+\end{tcblisting}
+
+
+\subsubsection*{ Recursion may be inefficient }
+
+The above implementation is inefficient since it triggers an \textbf{exponential} number of \texttt{fib} calls. For instance, the call \texttt{fib(4)} will trigger the following sequence of stack modifications.
+
+In the diagram below, each line represents the state of the \textbf{call stack}. The first function call corresponds to the top of the stack. 
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+f 4
+f 3 | f 4
+f 2 | f 3 | f 4
+f 1 | f 2 | f 3 | f 4  //f(1) returns 1;
+f 0 | f 2 | f 3 | f 4  //f(0) returns 0;
+f 1 | f 3 | f 4        //f(2) returns 1+0;
+f 2 | f 4              //f(1) returns 1; f(3) returns 1+1
+f 1 | f 2 | f 4             
+f 0 | f 2 | f 4        //f(1) returns 1;
+[]                     //f(2) returns 1+0(again), f(4) returns 2 + 1
+
+\end{tcblisting}
+
+
+By solving the recurrence \texttt{T(n) = T(n-1) + T(n-2) + O(1)} we can determine the number of function calls. Conceptually, the problem with this implementation is that it re-computes previously-computed values (e.g. \texttt{f(2)} is computed twice).
+
+\subsubsection*{ Solving the call explosion problem }
+
+We can easily rewrite the implementation of \texttt{fifo} by introducing an accumulator:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+int fib_aux (int f1, int f2, int i, int n){
+        if (i == n)
+                return f2;
+        return fib_aux(f2,f1+f2,i+1,n);
+}
+
+int fib2 (int n){
+        return fib_aux(0,1,0,n);
+}
+
+\end{tcblisting}
+
+
+The call \texttt{fib2(4)} produces the following sequence of calls:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+fib2 4 
+fib_aux 0 1 0 4
+fib_aux 1 1 1 4
+fib_aux 1 2 2 4
+fib_aux 2 3 3 4
+fib_aux 3 5 4 4 
+
+\end{tcblisting}
+
+
+which is linear in the value of \texttt{n}, and does not-recompute values. However, in an imperative language such as C, the call stack can quickly become full for larger \texttt{n}. To solve this problem, many programming languages (e.g. Scala and Haskell, but not C) implement \textbf{tail-call optimisation}. Conceptually, tail-call optimisation relies on the following reasoning.
+
+Consider the following table, in which \texttt{call no} represents the \textit{address} of the function call.
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+Call no.   Stack contents            Return address
+---------- ------------------------- ------------------------------
+1          fib 4                     
+2          fib_aux 0 1 0 4           return to call from 1  value 8   
+3          fib_aux 1 1 1 4           return to call from 2  value 8
+4          fib_aux 1 2 2 4           return to call from 3  value 8
+5          fib_aux 2 3 3 4           return to call from 4  value 8
+6          fib_aux 3 5 4 4           return to call from 5  value 8  
+
+\end{tcblisting}
+
+
+For instance, the call \texttt{fib\_aux 1 2 2 4} has address \texttt{5} and after executing it must return to the address \texttt{4}. An intelligent compiler may realise the following reasoning:
+\begin{itemize}
+	\item  the call \texttt{fib\_aux 1 2 2 4} only returns a value to the subsequent call.
+	\item  hence, it makes no sense to keep this call on the stack. Instead, it may \textbf{directly} replace the call \texttt{fib\_aux 1 2 2 4} by \texttt{fib\_aux 3 5 4 4}.
+\end{itemize}
+ 
+Following this reasoning, after each recursive call, the stack will contain \textbf{only one call} of \texttt{fib\_aux}, as shown below:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+fib 4 | fib_aux 0 1 0 4              // after first recursive call
+fib 4 | fib_aux 1 1 1 4              // after second recursive call
+fib 4 | fib_aux 1 2 2 4              // after 3rd recursive call
+fib 4 | fib_aux 2 3 3 4              // after 4th recursive call
+fib 4 | fib_aux 3 5 4 4              // after 5th recursive call
+fib 4 | 5
+5 
+
+\end{tcblisting}
+
+
+Note that the same reasoning \textbf{does not hold for the implementation of \texttt{fib}}, since the recursive calls: \texttt{fib(n-1) + fib(n-2)} require an additional computation (addition) before returning the value. 
+
+For tail-end optimisation to take place: \textbf{a recursive function must be tail-end}. A recursive function is \textbf{tail-end} if it returns a call \textit{to itself} without any additional computation.
+
+Tail-call optimisation in C may be implemented (for \texttt{fib\_aux}) as follows:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+fib_aux (int f1, int f2, int i, int n){
+start:
+        if (i == n)
+                return f2;
+        int nf1 = f2;
+        int nf2 = f1+f2;
+        int ni = i+1;
+        int nn = n;       //this instruction may be later eliminated by subsequent optimisation stages.
+        f1 = nf1;
+        f2 = nf2;
+        i = ni;
+        nn = n;
+        goto start;
+}
+
+\end{tcblisting}
+
+
+
+\subsection*{ Higher-order functions }
+
+\subsubsection*{ Overview }
+Higher-order functions are a programming style which supports \textbf{modularisation}, by replacing recurring programming patterns by a common procedure. Using higher-order functions is not possible in any programming language, and requires \textbf{being able to pass arbitrary functions as parameter}.
+
+Suppose we have a list implementation in C which is \textit{concealed} by the following constructors and observers:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+int head (List l);
+List tail (List l);
+List cons (int e, List t);
+void show (List l);
+int size (List l);
+
+\end{tcblisting}
+
+
+as well as the implementation of the addition and product functions over list elements:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+int sum (List l){
+    if (l == Nil)
+        return 0;
+    return head(l)+sum(tail(l));
+}
+
+int product (List l){
+    if (l == Nil)
+        return 1;
+    return head(l)*product(tail(l));
+}
+
+\end{tcblisting}
+
+
+Let us ignore the fact that both recursive functions are not tail end (thus inefficient).
+
+Both implementations follow a common pattern, which only differs in two aspects:
+\begin{itemize}
+	\item  the \textbf{value} which is returned when \textbf{the list is empty}
+	\item  the \textbf{operation} which is performed between the first member of the list, and the recursive call
+\end{itemize}
+
+We could express this common pattern by the following implementation:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+int fold (int init, int(*op)(int,int), List l){
+    if (isEmpty(l))
+        return init;
+    return op(head(l),fold(init,op,tail(l)));
+}
+
+\end{tcblisting}
+
+
+The function \texttt{fold} receives as parameter exactly the initial value, and the operation to be performed. Next, addition and product can be rewritten as:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+int op_sum (int x, int y){return x + y;}
+int op_product (int x, int y){return x * y;}
+int op_size (int x, int y){return 1 + y;}
+
+int sum (List l) {return fold(0,op_sum, l);}
+int product (List l) {return fold(1,op_product, l);}
+
+\end{tcblisting}
+
+
+which is a more modular code. \texttt{fold} is called a \textbf{higher-order function}, because its behaviour is defined with respect to another function (here \textbf{op}). We shall review and improve this definition later on.
+
+One possible criticism to \texttt{fold} is that \textbf{it is not tail-recursive}, however it can be rewritten as:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+int tail_fold (int init, int(*op)(int,int), List l){
+    if (l == Nil)
+        return init;
+    return tail_fold(op(head(l),init),op,tail(l));
+}
+
+\end{tcblisting}
+
+
+However, \texttt{fold} and \texttt{tail\_fold} are not different only with respect to efficiency. They also have different behaviours. Consider the call: 
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+fold(i, op, [a,b,c])
+op (a, fold(i,op, [b,c]))
+op (a, op (b, fold (i, op, [c])))
+op (a, op (b, op (c, fold (i, op, []))))
+op (a, op (b, op (c, i)))
+a op (b op (c op i))
+
+\end{tcblisting}
+
+
+versus:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+tail_fold(i, op, [a,b,c])
+tail_fold(op(a,i),op, [b,c])
+tail_fold(op(b,op(a,i)),op, [c])
+tail_fold(op(c,op(b,op(a,i))),op,[])
+c op (b op (a op i)) 
+
+\end{tcblisting}
+
+
+The two fold implementations are only the same if 'op' is commutative (addition and product happen to be commutative).
+
+\subsubsection*{ Question }
+How can \texttt{sum} be implemented using \texttt{fold} ?
+
+\subsection*{ Programming with higher-order functions is difficult in C }
+
+One criticism to the \texttt{fold}/\texttt{tail\_fold} implementations is that they only work for operations over integers. 
+There are many situations where folding may be useful of operations of other types. Consider the following implementation for list concatenation, which cannot be supported by our fold implementations:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+List append (List l1, List l2) {return fold(l2,append_op,l1);}
+
+List append_op(int e, List l2) {return cons(e,l2);}
+
+\end{tcblisting}
+
+
+For instance, \texttt{append([1,2,3], [4,5,6])} will produce:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+fold([4,5,6], append_op, [1,2,3])
+cons(1, fold([4,5,6], append_op, [2,3]))
+cons(1, cons(2, fold([4,5,6], append_op, [3])))
+cons(1, cons(2, cons(3, fold([4,5,6], append_op, []))))
+cons(1, cons(2, cons(3, [4,5,6])))
+[1,2,3,4,5,6]
+
+\end{tcblisting}
+
+
+The above implementation of append cannot rely on our fold, since the type of op supported by \texttt{fold} is: \texttt{int(*op)(int,int)}, while \texttt{append\_op} has type \texttt{List(*op)(int,List)}. There are possible fixes to this issue (e.g. implementing another fold to support such operation types, or using void pointers) however none are clear/natural enough to actually be used in real code.
+
+\subsection*{ Introduction to Haskell }
+
+Haskell is a \textbf{purely-functional} programming language. In short the term \textbf{pure} refers to the fact that \textbf{side-effects are not permitted by design}. Thus, expressions of the form:
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+x = expr
+
+\end{tcblisting}
+
+do not produce side-effects. They create a variable \texttt{x} which is \textbf{permanently bound} to the expression \texttt{expr} for the entire program execution. The variable \texttt{x} is \textbf{immutable}: \textbf{it cannot be modified}.
+
+Haskell also \textbf{supports higher-order functions}. The implementation of \texttt{fold} is as follows:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+fold op acc l = if empty(l) then acc else op x (fold op acc xs)
+
+\end{tcblisting}
+
+
+However, function definitions in Haskell allow specifying \textit{conditional behaviour} depending on how \textbf{objects are constructed} (i.e. base constructors). This is called \textbf{pattern-matching} and deserves a more elaborate discussion (which will be done in a future lecture). Here, we merely state that \texttt{[]} and \texttt{:} (cons) are the base constructors for lists. The code using pattern matching becomes:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+foldr op acc [] = acc
+foldr op acc (x:xs) = op x (foldr op acc xs)
+
+\end{tcblisting}
+
+
+The name (foldr) suggests the order in which the operation \texttt{op} is applied (to the \textbf{r}ight). We also note that \texttt{foldr}, although is not tail-recursive, is actually \textbf{efficient} in Haskell. This is related to the evaluation order, which will be discussed in detail in a future lecture.
+
+In Haskell, \texttt{tail\_fold} is called \texttt{foldl} (to the \textbf{l}eft), and is implemented slightly different:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+foldl op acc [] = acc
+foldl op acc (x:xs) = foldl op (op x acc) xs
+
+\end{tcblisting}
+
+
+The Haskell implementation calls \texttt{(op x acc)} instead of \texttt{(op acc x)} and there is no particular reason for (or against) this choice. Remember that is only holds in Haskell. Other fold functions implemented in other languages may work differently.
+
+The functions \texttt{foldr} and \texttt{foldl} are implemented by-default in Haskell, and can be directly used to define addition, product, or the size of a list:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+sum = foldr (+) 0
+prod = foldr (*) 1
+size = foldr (1+) 0
+
+\end{tcblisting}
+
+
+as well as other functions on lists:
+
+
+\begin{tcblisting}{ arc=0pt, outer arc=0pt, listing only, breakable}
+reverse l = foldl (:) [] l
+append l1 l2 = foldr (:) l2 l1
+
+\end{tcblisting}
+
